@@ -1,4 +1,14 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
 .App {
+  text-align: left;
+}
+
+.App-login {
   text-align: center;
 }
 
@@ -8,14 +18,15 @@
 }
 
 .App-header {
-  background-color: #5fa8e8;
-  height: 150px;
+#  background-color: #5fa8e8;
+  background-color: white;
+  height: 240px;
   padding: 20px;
   color: black;
 }
 
 .App-title {
-  font-size: 1.5em;
+  font-size: 4em;
   font-family: copperplate;
 }
 

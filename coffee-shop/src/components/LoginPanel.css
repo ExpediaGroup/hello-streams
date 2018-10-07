@@ -1,0 +1,22 @@
+.loginPanel {
+  font-size: large;
+  display: flex;
+  padding: 10px;
+  justify-content: center;
+}
+
+.loginForm {
+  text-align: left;
+}
+
+*::placeholder {
+  font-style: italic;
+}
+
+.loginPanel > div {
+  margin: 10px;
+}
+
+.loginPanel-image {
+  height: 300px;
+}

@@ -1,0 +1,48 @@
+.header {
+  display: grid;
+  grid-template-columns: auto auto;
+  padding: 10px;
+}
+
+.left {
+  font-family: copperplate;
+  font-size: 2em;
+  margin-left: 10px;
+}
+
+.right {
+  text-align: right;
+  font-size: 18px;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.logout-label {
+  padding-right: 10px;
+}
+
+.top {
+  min-height: 320px;
+  margin: 10px;
+  outline: 1px solid black;
+}
+
+.top-left {
+  width:50%;
+  display: inline-block;
+  margin: 10px;
+  outline: 1px solid black;
+}
+
+.bottom {
+  min-height: 320px;
+  margin: 0px 10px 10px;
+  outline: 1px solid black;
+}
+
+.bottom-left {
+  width:50%;
+  display: inline-block;
+  margin: 10px;
+  outline: 1px solid black;
+}
