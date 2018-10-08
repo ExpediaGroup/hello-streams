@@ -1,3 +1,104 @@
 import React from 'react';
 
+import Button from '@material-ui/core/Button';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import BrewedCoffeeIcon from '../images/Brewed Coffee.svg';
+import EspressoIcon from '../images/Espresso.svg';
+import LatteIcon from '../images/Latte.svg';
+import IceCoffeeIcon from '../images/Ice Coffee.svg';
+
 import './CoffeeCounter.css'
+
+class CoffeeCounter extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {selectedIndex: undefined};
+
+    this.menuItems = [{
+        component: BrewedCoffeeIcon,
+        altText: 'brewed-coffee',
+        text: 'Brewed Coffee',
+        requiredBeans: 5
+      },{
+        component: EspressoIcon,
+        altText: 'espresso',
+        text: 'Espresso',
+        requiredBeans: 8
+      },{
+        component: LatteIcon,
+        altText: 'latte',
+        text: 'Latte',
+        requiredBeans: 7
+      },{
+        component: IceCoffeeIcon,
+        altText: 'espresso',
+        text: 'IceCoffeeIcon',
+        requiredBeans: 4
+      }
+    ];
+
+    this.handleListItemClick = this.handleListItemClick.bind(this);
+    this.handlePlaceOrder = this.handlePlaceOrder.bind(this);
+  }
+
+  handleListItemClick(event, index) {
+    console.log("[INFO] " + index + " item selected");
+    this.setState({ selectedIndex: index });
+  }
+
+  uuidv4() {
+    return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
+      // eslint-disable-next-line no-mixed-operators
+      (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+    );
+  }
+
+  handlePlaceOrder(event) {
+    let selectedItem = this.menuItems[this.state.selectedIndex];
+    let orderPlaced = {
+      id : this.uuidv4(),
+      sku : selectedItem.text,
+      requiredBeans : selectedItem.requiredBeans
+    };
+    console.log("[INFO] ORDER_PLACED = "+ JSON.stringify(orderPlaced));
+  }
+
+  renderListItems() {
+    let items = [];
+    for(let len=this.menuItems.length, i=0; i<len; ++i) {
+      items.push(
+        <ListItem button selected={this.state.selectedIndex === i} onClick={event => this.handleListItemClick(event,i)} key={i}>
+          <ListItemIcon><img className="order-item" src={this.menuItems[i].component} alt={this.menuItems[i].altText}/></ListItemIcon>
+          <ListItemText primary={this.menuItems[i].text}/>
+        </ListItem>
+      );
+    }
+    return items;
+  }
+
+  render() {
+    return (
+      <div>
+        <div className="counter-header">
+          <strong>Coffee Counter</strong>
+        </div>
+        <div className="counter-grid">
+          <div className="conter-menu">
+            <div className="counter-title">Place Order:</div>
+            <List component="nav" dense={true}>
+              {this.renderListItems()}
+            </List>
+          </div>
+          <div className="action-div">
+            <div className="action-button"><Button variant="contained" disabled={this.state.selectedIndex === undefined} color="primary" onClick={this.handlePlaceOrder}>Place Order</Button></div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
+
+export default CoffeeCounter;

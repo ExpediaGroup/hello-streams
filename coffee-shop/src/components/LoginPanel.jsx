@@ -21,7 +21,7 @@ class LoginPanel extends React.Component {
   }
 
   handleLogin(event){
-    console.log('Login submitted. username = ' + this.tmpusername);
+    console.log('[INFO] Login submitted. username = ' + this.tmpusername);
     this.setState({
       username: this.tmpusername,
       submitted: true

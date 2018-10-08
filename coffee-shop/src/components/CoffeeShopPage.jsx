@@ -2,6 +2,7 @@ import React from 'react';
 
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
+import CoffeeCounter from './CoffeeCounter';
 import './CoffeeShopPage.css'
 
 class CoffeeShopPage extends React.Component {
@@ -21,7 +22,7 @@ class CoffeeShopPage extends React.Component {
         </div>
         <div className="top">
           <div className="top-left">
-            &nbsp;
+            <CoffeeCounter/>
           </div>
         </div>
         <div className="bottom">

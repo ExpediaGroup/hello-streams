@@ -22,27 +22,21 @@
 }
 
 .top {
-  min-height: 320px;
-  margin: 10px;
-  outline: 1px solid black;
+  margin: 0px 10px 10px;
 }
 
 .top-left {
   width:50%;
-  display: inline-block;
-  margin: 10px;
-  outline: 1px solid black;
-}
-
-.bottom {
-  min-height: 320px;
   margin: 0px 10px 10px;
   outline: 1px solid black;
 }
 
+.bottom {
+  margin: 0px 10px 10px;
+}
+
 .bottom-left {
   width:50%;
-  display: inline-block;
   margin: 10px;
   outline: 1px solid black;
 }
