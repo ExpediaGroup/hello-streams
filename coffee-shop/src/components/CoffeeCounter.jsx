@@ -1,5 +1,6 @@
 import React from 'react';
 
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -15,33 +16,25 @@ import './CoffeeCounter.css'
 class CoffeeCounter extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {selectedIndex: undefined};
+    this.state = {
+      username: props.username,
+      selectedIndex: undefined
+    };
 
-    this.menuItems = [{
-        component: BrewedCoffeeIcon,
-        altText: 'brewed-coffee',
-        text: 'Brewed Coffee',
-        requiredBeans: 5
-      },{
-        component: EspressoIcon,
-        altText: 'espresso',
-        text: 'Espresso',
-        requiredBeans: 8
-      },{
-        component: LatteIcon,
-        altText: 'latte',
-        text: 'Latte',
-        requiredBeans: 7
-      },{
-        component: IceCoffeeIcon,
-        altText: 'espresso',
-        text: 'IceCoffeeIcon',
-        requiredBeans: 4
-      }
+    this.menuItems = [
+      this.createItem(BrewedCoffeeIcon, 'brewed-coffee', 'Brewed Coffee', 5),
+      this.createItem(EspressoIcon, 'espresso', 'Espresso', 8),
+      this.createItem(LatteIcon, 'latte', 'Latte', 7),
+      this.createItem(IceCoffeeIcon, 'ice coffee', 'Ice Coffee', 7)
     ];
 
     this.handleListItemClick = this.handleListItemClick.bind(this);
     this.handlePlaceOrder = this.handlePlaceOrder.bind(this);
+    this.handleClearOrder = this.handleClearOrder.bind(this);
+  }
+
+  createItem(component,altText,text,requiredBeans) {
+    return {component,altText,text,requiredBeans};
   }
 
   handleListItemClick(event, index) {
@@ -56,14 +49,19 @@ class CoffeeCounter extends React.Component {
     );
   }
 
+  createOrder(id, customerId, sku, requiredBeans) {
+    return {id, customerId, sku, requiredBeans};
+  }
+
   handlePlaceOrder(event) {
     let selectedItem = this.menuItems[this.state.selectedIndex];
-    let orderPlaced = {
-      id : this.uuidv4(),
-      sku : selectedItem.text,
-      requiredBeans : selectedItem.requiredBeans
-    };
+    let orderPlaced = this.createOrder(this.uuidv4(), this.state.username, selectedItem.text, selectedItem.requiredBeans);
     console.log("[INFO] ORDER_PLACED = "+ JSON.stringify(orderPlaced));
+    this.setState( {selectedIndex:undefined} );
+  }
+
+  handleClearOrder(event) {
+    this.setState({ selectedIndex: undefined });
   }
 
   renderListItems() {
@@ -81,22 +79,24 @@ class CoffeeCounter extends React.Component {
 
   render() {
     return (
-      <div>
-        <div className="counter-header">
-          <strong>Coffee Counter</strong>
-        </div>
-        <div className="counter-grid">
-          <div className="conter-menu">
-            <div className="counter-title">Place Order:</div>
-            <List component="nav" dense={true}>
-              {this.renderListItems()}
-            </List>
+        <div>
+          <div className="counter-header">
+            <strong>Coffee Counter</strong>
           </div>
-          <div className="action-div">
-            <div className="action-button"><Button variant="contained" disabled={this.state.selectedIndex === undefined} color="primary" onClick={this.handlePlaceOrder}>Place Order</Button></div>
+          <div className="counter-grid">
+            <div className="conter-menu">
+              <div className="counter-title">Place Order:</div>
+              <ClickAwayListener onClickAway={this.handleClearOrder}>
+                <List component="nav" dense={true}>
+                  {this.renderListItems()}
+                </List>
+              </ClickAwayListener>
+            </div>
+            <div className="action-div">
+              <div className="action-button"><Button variant="contained" disabled={this.state.selectedIndex === undefined} color="primary" onClick={this.handlePlaceOrder}>Place Order</Button></div>
+            </div>
           </div>
         </div>
-      </div>
     );
   }
 }

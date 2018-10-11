@@ -22,21 +22,35 @@
 }
 
 .top {
+  display: flex;
   margin: 0px 10px 10px;
 }
 
 .top-left {
-  width:50%;
-  margin: 0px 10px 10px;
-  outline: 1px solid black;
+  width: 50%;
+  border: 1px solid black;
+}
+
+.top-right {
+  width: 50%;
+  border-top: 1px solid black;
+  border-right: 1px solid black;
+  border-bottom: 1px solid black;
 }
 
 .bottom {
+  display: flex;
   margin: 0px 10px 10px;
 }
 
 .bottom-left {
-  width:50%;
-  margin: 10px;
-  outline: 1px solid black;
+  width: 75%;
+  border: 1px solid black;
+}
+
+.bottom-right {
+  width: 25%;
+  border-top: 1px solid black;
+  border-right: 1px solid black;
+  border-bottom: 1px solid black;
 }

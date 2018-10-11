@@ -3,6 +3,7 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
 import CoffeeCounter from './CoffeeCounter';
+import CustomerOrderDisplay from './CustomerOrderDisplay';
 import './CoffeeShopPage.css'
 
 class CoffeeShopPage extends React.Component {
@@ -22,11 +23,17 @@ class CoffeeShopPage extends React.Component {
         </div>
         <div className="top">
           <div className="top-left">
-            <CoffeeCounter/>
+            <CoffeeCounter username={this.state.username}/>
+          </div>
+          <div className="top-right">
+            <CustomerOrderDisplay/>
           </div>
         </div>
         <div className="bottom">
           <div className="bottom-left">
+            &nbsp;
+          </div>
+          <div className="bottom-right">
             &nbsp;
           </div>
         </div>
