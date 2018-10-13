@@ -3,7 +3,8 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
 import CoffeeCounter from './CoffeeCounter';
-import CustomerOrderDisplay from './CustomerOrderDisplay';
+import CustomerOrderPanel from './CustomerOrderPanel';
+import BaristaPanel from './BaristaPanel';
 import './CoffeeShopPage.css'
 
 class CoffeeShopPage extends React.Component {
@@ -15,9 +16,9 @@ class CoffeeShopPage extends React.Component {
     return (
       <div>
         <div className="App header">
-          <div className="left">Streamable Coffee Shop</div>
-          <div className="right">
-            <span className="logout-label">Hello <em>{this.state.username}</em>!&nbsp;</span>
+          <div className="logout-left">Streamable Coffee Shop</div>
+          <div className="logout-right">
+            <span className="logout-label">Hello, <em>{this.state.username}</em> !&nbsp;</span>
             <Button component={Link} to="/" variant="outlined">Logout</Button>
           </div>
         </div>
@@ -26,12 +27,12 @@ class CoffeeShopPage extends React.Component {
             <CoffeeCounter username={this.state.username}/>
           </div>
           <div className="top-right">
-            <CustomerOrderDisplay/>
+            <CustomerOrderPanel />
           </div>
         </div>
         <div className="bottom">
           <div className="bottom-left">
-            &nbsp;
+            <BaristaPanel />
           </div>
           <div className="bottom-right">
             &nbsp;

@@ -1,0 +1,20 @@
+.barista-header {
+  display: block;
+  border-bottom: 1px black solid;
+  padding: 10px;
+  font-size: 1.5em;
+  background-color: #eee;
+}
+
+.barista-grid {
+  display: flex;
+  margin: 10px;
+}
+
+.barista-image {
+  height: 200px;
+}
+
+.barista-right {
+  width: 100%;
+}

@@ -38,8 +38,8 @@ class LoginPanel extends React.Component {
     }
     return (
       <div className="loginPanel">
-        <div className="left"><img src={barista} className="loginPanel-image" alt="barista pic"/></div>
-        <div className="right loginForm">
+        <div className="login-left"><img src={barista} className="loginPanel-image" alt="barista pic"/></div>
+        <div className="login-right loginForm">
           <form onSubmit={this.handleLogin}>
             <div>
               <label id="loginLabel" className="label-title">Username:</label>

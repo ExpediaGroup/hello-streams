@@ -7,8 +7,9 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import barista from '../images/Barista.svg';
 
-import './CustomerOrderDisplay.css'
+import './BaristaPanel.css'
 
 const CustomTableCell = withStyles(theme => ({
   head: {
@@ -19,6 +20,15 @@ const CustomTableCell = withStyles(theme => ({
     fontSize: 14,
   },
 }))(TableCell);
+
+const CustomTableRow = withStyles(theme => ({
+  root: {
+    height: '30px',
+  }
+}))(TableRow);
+
+const CustomTable = withStyles(theme => ({
+}))(Table);
 
 const styles = theme => ({
   root: {
@@ -36,7 +46,7 @@ const styles = theme => ({
   },
 });
 
-class CustomerOrderDisplay extends React.Component {
+class BaristaPanel extends React.Component {
   constructor(props) {
     super(props);
     this.classes = props.classes;
@@ -52,20 +62,22 @@ class CustomerOrderDisplay extends React.Component {
     this.idx = -1;
     this.state.data.push(this.createTestRow(
       "fade78f1-c7c1-47d7-952b-6cab8e386c6f",
+      "Bob",
       "Latte",
       "PLACED",
       new Date("October 10, 2018 15:00:00.123")));
     this.state.data.push(this.createTestRow(
       "b89428d9-e86c-40ff-9224-e9245a789e42",
+      "Bob",
       "Brewed Coffee",
       "PLACED",
       new Date("October 10, 2018 15:03:00.000")));
   }
 
-  createTestRow(id, item, state, updated) {
+  createTestRow(id, customerId, item, state, updated) {
     this.idx++;
     var idx=this.idx;
-    return {idx, id, item, state, updated};
+    return {idx, customerId, id, item, state, updated};
   }
 
   handleListItemClick(event, index) {
@@ -85,42 +97,51 @@ class CustomerOrderDisplay extends React.Component {
   render() {
     return (
       <div>
-        <div className="customer-header">
-          <strong>Your Orders</strong>
+        <div className="barista-header">
+          <strong>Barista Alice</strong>
         </div>
-        <div className="customer-grid">
-          <Table>
-            <TableHead>
-              <TableRow>
-                <CustomTableCell>Order Id</CustomTableCell>
-                <CustomTableCell>Item</CustomTableCell>
-                <CustomTableCell>Order State</CustomTableCell>
-                <CustomTableCell>Time Updated</CustomTableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {this.state.data.map(row =>{
-                return (
-                  <TableRow className={this.classes.row} key={row.idx}>
-                    <CustomTableCell component="th" scope="row">
-                      {row.id.slice(-8)}
-                    </CustomTableCell>
-                    <CustomTableCell>{row.item}</CustomTableCell>
-                    <CustomTableCell>{row.state}</CustomTableCell>
-                    <CustomTableCell>{row.updated.toISOString()}</CustomTableCell>
-                  </TableRow>
-                );
-              })}
-            </TableBody>
-          </Table>
+        <div className="barista-grid">
+          <div className="barista-left"><img src={barista} className="barista-image" alt="barista pic"/></div>
+          <div className="barista-right">
+            <CustomTable>
+              <TableHead>
+                <CustomTableRow>
+                  <CustomTableCell>Order Id</CustomTableCell>
+                  <CustomTableCell>Customer Id</CustomTableCell>
+                  <CustomTableCell>Item</CustomTableCell>
+                  <CustomTableCell>Order State</CustomTableCell>
+                  {/*
+                    <CustomTableCell>Time Updated</CustomTableCell>
+                  */}
+                </CustomTableRow>
+              </TableHead>
+              <TableBody>
+                {this.state.data.map(row =>{
+                  return (
+                    <CustomTableRow className={this.classes.row} key={row.idx}>
+                      <CustomTableCell component="th" scope="row">
+                        {row.id.slice(-8)}
+                      </CustomTableCell>
+                      <CustomTableCell>{row.customerId}</CustomTableCell>
+                      <CustomTableCell>{row.item}</CustomTableCell>
+                      <CustomTableCell>{row.state}</CustomTableCell>
+                      {/*
+                        <CustomTableCell>{row.updated.toISOString()}</CustomTableCell>
+                      */}
+                    </CustomTableRow>
+                  );
+                })}
+              </TableBody>
+            </CustomTable>
+          </div>
         </div>
       </div>
     );
   }
 }
 
-CustomerOrderDisplay.propTypes = {
+BaristaPanel.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(CustomerOrderDisplay);
+export default withStyles(styles)(BaristaPanel);

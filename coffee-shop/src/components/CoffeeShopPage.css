@@ -4,19 +4,6 @@
   padding: 10px;
 }
 
-.left {
-  font-family: copperplate;
-  font-size: 2em;
-  margin-left: 10px;
-}
-
-.right {
-  text-align: right;
-  font-size: 18px;
-  font-weight: bold;
-  margin-right: 10px;
-}
-
 .logout-label {
   padding-right: 10px;
 }
@@ -53,4 +40,19 @@
   border-top: 1px solid black;
   border-right: 1px solid black;
   border-bottom: 1px solid black;
+}
+
+.logout-left {
+  font-family: copperplate;
+  font-size: 2em;
+  margin-left: 10px;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.logout-right {
+  text-align: right;
+  font-size: 18px;
+  font-weight: bold;
+  margin-right: 10px;
 }

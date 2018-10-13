@@ -1,0 +1,11 @@
+.customer-header {
+  display: block;
+  border-bottom: 1px black solid;
+  padding: 10px;
+  font-size: 1.5em;
+  background-color: #eee;
+}
+
+.customer-grid {
+  margin: 10px;
+}
