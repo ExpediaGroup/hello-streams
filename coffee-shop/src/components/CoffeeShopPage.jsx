@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import CoffeeCounter from './CoffeeCounter';
 import CustomerOrderPanel from './CustomerOrderPanel';
 import BaristaPanel from './BaristaPanel';
+import BeanSupplyPanel from './BeanSupplyPanel';
 import './CoffeeShopPage.css'
 
 class CoffeeShopPage extends React.Component {
@@ -35,7 +36,7 @@ class CoffeeShopPage extends React.Component {
             <BaristaPanel />
           </div>
           <div className="bottom-right">
-            &nbsp;
+            <BeanSupplyPanel />
           </div>
         </div>
       </div>

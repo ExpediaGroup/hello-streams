@@ -1,0 +1,24 @@
+.supply-header {
+  display: block;
+  border-bottom: 1px black solid;
+  padding: 10px;
+  font-size: 1.1em;
+  background-color: #eee;
+}
+
+.supply-grid {
+  margin: 10px;
+}
+
+.supply-grid > div {
+  text-align: center;
+}
+
+.supply-image {
+  height: 100px;
+}
+
+div.supply-label {
+  font-size: 1.5em;
+  margin: 10px 0px 10px;
+}
