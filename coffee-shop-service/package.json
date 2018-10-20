@@ -1,0 +1,25 @@
+{
+  "name": "coffee-shop-service",
+  "version": "0.1.0",
+  "description": "Backend graphql service for coffee-shop UI.",
+  "author": "René X. Parra",
+  "license": "Apache-2.0",
+  "scripts": {
+    "build": "rimraf dist/ && npx babel src --out-dir dist",
+    "start": "rimraf dist/ && npx babel src --out-dir dist && node dist/index.js",
+    "test": "echo 'Error: no test specified' && exit 1"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.0.0",
+    "apollo-server": "^2.1.0",
+    "graphql": "^0.13.2",
+    "graphql-iso-date": "^3.6.1",
+    "uuid": "^3.3.2"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.1.2",
+    "@babel/core": "^7.1.2",
+    "@babel/preset-env": "^7.1.0",
+    "rimraf": "^2.6.2"
+  }
+}
