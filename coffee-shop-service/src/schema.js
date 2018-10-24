@@ -81,7 +81,7 @@ export const typeDefs = gql`
     "Query to retrieve all orders"
     orders: [Order!]!
 
-    "Query to look up customer"
+    "Query to look up customer. May be null"
     customer(
       "The customerId for this customer"
       id: ID!): Customer
