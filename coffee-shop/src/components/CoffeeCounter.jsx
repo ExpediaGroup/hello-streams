@@ -1,6 +1,5 @@
 import React from 'react';
 
-import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -10,8 +9,15 @@ import BrewedCoffeeIcon from '../images/Brewed Coffee.svg';
 import EspressoIcon from '../images/Espresso.svg';
 import LatteIcon from '../images/Latte.svg';
 import IceCoffeeIcon from '../images/Ice Coffee.svg';
+import { withStyles } from '@material-ui/core/styles';
 
 import './CoffeeCounter.css'
+
+const CustomListItemIcon = withStyles(theme => ({
+  root: {
+    'margin-right': '32px',
+  },
+}))(ListItemIcon);
 
 class CoffeeCounter extends React.Component {
   constructor(props) {
@@ -69,7 +75,7 @@ class CoffeeCounter extends React.Component {
     for(let len=this.menuItems.length, i=0; i<len; ++i) {
       items.push(
         <ListItem button selected={this.state.selectedIndex === i} onClick={event => this.handleListItemClick(event,i)} key={i}>
-          <ListItemIcon><img className="order-item" src={this.menuItems[i].component} alt={this.menuItems[i].altText}/></ListItemIcon>
+          <CustomListItemIcon><img className="order-item" src={this.menuItems[i].component} alt={this.menuItems[i].altText}/></CustomListItemIcon>
           <ListItemText primary={this.menuItems[i].text}/>
         </ListItem>
       );
@@ -86,11 +92,9 @@ class CoffeeCounter extends React.Component {
           <div className="counter-grid">
             <div className="conter-menu">
               <div className="counter-title">Place Order:</div>
-              <ClickAwayListener onClickAway={this.handleClearOrder}>
-                <List component="nav" dense={true}>
-                  {this.renderListItems()}
-                </List>
-              </ClickAwayListener>
+              <List component="nav" dense={true}>
+                {this.renderListItems()}
+              </List>
             </div>
             <div className="action-div">
               <div className="action-button"><Button variant="contained" disabled={this.state.selectedIndex === undefined} color="primary" onClick={this.handlePlaceOrder}>Place Order</Button></div>
