@@ -1,11 +1,12 @@
-import { ApolloServer } from 'apollo-server';
-import { v4 as uuidv4 } from 'uuid/v4';
+import {ApolloServer} from 'apollo-server';
+// noinspection ES6CheckImport
+import {v4 as uuidv4} from 'uuid/v4';
 
-import { typeDefs } from './schema';
+import {typeDefs} from './schema';
 
-var customers = {};
-var orders = {};
-var availableBeans = 50;
+let customers = {};
+let orders = {};
+let availableBeans = 50;
 
 function createDate() {
   return new Date().toISOString();
@@ -35,14 +36,6 @@ function createOrder(customerId, item) {
   return { id, customerId, item, state: "PLACED",
   created: createDate(), updated: createDate() };
 }
-
-function lookupOrder(orderId) {
-  if (!orders[orderId]) {
-    return null;
-  }
-  return orders[orderId];
-}
-
 function createOrderPlaced(customerId, item) {
   const id = uuidv4();
   const order = createOrder(customerId, item);
@@ -58,8 +51,10 @@ function createBeansSupplied(numBeansAdded) {
 
 function placeOrder(_, {customerId, item}) {
   const customer = lookupCustomer(customerId);
-  const event = createOrderPlaced(customerId, item);
-  return event;
+  if (customer === undefined) {
+    return undefined;
+  }
+  return createOrderPlaced(customerId, item);
 }
 
 function supplyBeans(_, {numBeans}) {
@@ -95,7 +90,7 @@ const resolvers = {
   },
   Customer: {
     orders(customer) {
-      return getOrders().filter( order => order.customerId==customer.id)
+      return getOrders().filter( order => order.customerId===customer.id)
     },
   },
   Query: {
@@ -111,7 +106,7 @@ const resolvers = {
     placeOrder: placeOrder,
     supplyBeans: supplyBeans,
   },
-}
+};
 
 const server = new ApolloServer({ typeDefs : [typeDefs], resolvers });
 
