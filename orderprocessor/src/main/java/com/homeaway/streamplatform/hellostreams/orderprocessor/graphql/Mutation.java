@@ -12,22 +12,22 @@ import org.springframework.stereotype.Component;
 @Component
 @SuppressWarnings("unused")
 public class Mutation implements GraphQLMutationResolver {
-  private final OrderService orderService;
-  private final SupplyService supplyService;
+    private final OrderService orderService;
+    private final SupplyService supplyService;
 
-  public Mutation(@Autowired OrderService orderService,
-                  @Autowired SupplyService supplyService) {
-    Preconditions.checkNotNull(orderService, "orderService cannot be null");
-    Preconditions.checkNotNull(supplyService, "supplyService cannobt be null");
-    this.orderService = orderService;
-    this.supplyService = supplyService;
-  }
+    public Mutation(@Autowired OrderService orderService,
+                    @Autowired SupplyService supplyService) {
+        Preconditions.checkNotNull(orderService, "orderService cannot be null");
+        Preconditions.checkNotNull(supplyService, "supplyService cannobt be null");
+        this.orderService = orderService;
+        this.supplyService = supplyService;
+    }
 
-  public OrderPlaced placeOrder(String customerId, String item) {
+    public OrderPlaced placeOrder(String customerId, String item) {
     return orderService.placeOrder(customerId, item);
   }
 
-  public BeansSupplied supplyBeans(int numBeans) {
+    public BeansSupplied supplyBeans(int numBeans) {
     return supplyService.supplyBeans(numBeans);
   }
 }
