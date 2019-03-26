@@ -28,7 +28,7 @@ class CoffeeShopPage extends React.Component {
             <CoffeeCounter username={this.state.username}/>
           </div>
           <div className="top-right">
-            <CustomerOrderPanel />
+            <CustomerOrderPanel username={this.state.username}/>
           </div>
         </div>
         <div className="bottom">

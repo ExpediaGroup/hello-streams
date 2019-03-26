@@ -51,7 +51,7 @@ export const typeDefs = gql`
   "The customer domain object"
   type Customer {
     "The unique id of the customer"
-    id: ID!
+    id: String!
     "The list of orders for this customer"
     orders: [Order]
     "The created datetime of this customer"
@@ -84,7 +84,7 @@ export const typeDefs = gql`
     "Query to look up customer. May be null"
     customer(
       "The customerId for this customer"
-      id: ID!): Customer
+      id: String!): Customer
 
     "Query to retrieve number of available beans"
     availableBeans: Int!

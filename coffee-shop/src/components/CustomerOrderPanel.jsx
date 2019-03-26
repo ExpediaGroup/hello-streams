@@ -7,8 +7,20 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import { Query } from "react-apollo";
+import gql from "graphql-tag";
 
 import './CustomerOrderPanel.css'
+
+const GET_CUSTOMER_ORDERS =  gql`query getCustomerOrders($customerId:String!) {
+  customer(id: $customerId) {
+    orders {
+      id
+      item
+      state
+      updated
+    }
+  }}`;
 
 const CustomTableCell = withStyles(theme => ({
   head: {
@@ -47,48 +59,54 @@ class CustomerOrderPanel extends React.Component {
     super(props);
     this.classes = props.classes;
     this.state = {
+      username: props.username,
       data: [],
     };
 
-    this.createTestRow = this.createTestRow.bind(this);
-    this.handleListItemClick = this.handleListItemClick.bind(this);
-    this.handlePlaceOrder = this.handlePlaceOrder.bind(this);
+    // this.getCustomerOrders = this.getCustomerOrders.bind(this);
+    this.renderRows = this.renderRows.bind(this);
+    this.createOrderRow = this.createOrderRow.bind(this);
+    this.createOrderRows = this.createOrderRows.bind(this);
 
-    // TODO remove this part when this is wired with GraphQL
-    this.idx = -1;
-    this.state.data.push(this.createTestRow(
-      "fade78f1-c7c1-47d7-952b-6cab8e386c6f",
-      "Latte",
-      "PLACED",
-      new Date("October 10, 2018 15:00:00.123")));
-    this.state.data.push(this.createTestRow(
-      "b89428d9-e86c-40ff-9224-e9245a789e42",
-      "Brewed Coffee",
-      "PLACED",
-      new Date("October 10, 2018 15:03:00.000")));
+    // this.getCustomerOrders();
+  }
+  /*
+  getCustomerOrders() {
+    client.watchQuery({
+      query: GET_CUSTOMER_ORDERS,
+      variables: {
+        customerId: this.state.username
+      },
+      pollInterval: 1000
+    })
+    .subscribe({
+      next: this.renderRows
+    });
+  }
+  */
+
+  renderRows({data}) {
+    this.setState({data: this.createOrderRows(data.customer)});
   }
 
-  createTestRow(id, item, state, updated) {
+  createOrderRows(customer) {
+    if (customer===undefined || customer===null || customer.orders===null) {
+      return [];
+    }
+    this.idx = -1;
+    return customer.orders.map(function(x){
+      return this.createOrderRow(x.id, x.item, x.state, x.updated);
+    }.bind(this));
+  }
+
+  createOrderRow(id, item, state, updated) {
     this.idx++;
     var idx=this.idx;
     return {idx, id, item, state, updated};
   }
 
-  handleListItemClick(event, index) {
-    console.log("[INFO] " + index + " item selected");
-    this.setState({ selectedIndex: index });
-  }
-
-  handlePlaceOrder(event) {
-    let selectedItem = this.menuItems[this.state.selectedIndex];
-    let orderPlaced = {
-      sku : selectedItem.text,
-      requiredBeans : selectedItem.requiredBeans
-    };
-    console.log("[INFO] ORDER_PLACED = "+ JSON.stringify(orderPlaced));
-  }
-
   render() {
+    var customerId = this.state.username;
     return (
       <div>
         <div className="customer-header">
@@ -101,26 +119,26 @@ class CustomerOrderPanel extends React.Component {
                 <CustomTableCell>Order Id</CustomTableCell>
                 <CustomTableCell>Item</CustomTableCell>
                 <CustomTableCell>Order State</CustomTableCell>
-                {/*
-                  <CustomTableCell>Time Updated</CustomTableCell>
-                */}
+                <CustomTableCell>Time Updated</CustomTableCell>
               </CustomTableRow>
             </TableHead>
             <TableBody>
-              {this.state.data.map(row =>{
-                return (
-                  <CustomTableRow className={this.classes.row} key={row.idx}>
-                    <CustomTableCell component="th" scope="row">
-                      {row.id.slice(-8)}
-                    </CustomTableCell>
-                    <CustomTableCell>{row.item}</CustomTableCell>
-                    <CustomTableCell>{row.state}</CustomTableCell>
-                    {/*
-                      <CustomTableCell>{row.updated.toISOString()}</CustomTableCell>
-                    */}
-                  </CustomTableRow>
-                );
-              })}
+              <Query query={GET_CUSTOMER_ORDERS} variables={{ customerId }} pollInterval={500}>
+                {({ data }) => {
+                  // Remove when customer is set even at the beginning (when loging is there)
+                  var rows = this.createOrderRows(data.customer);
+                  return rows.map(row => (
+                    <CustomTableRow className={this.classes.row} key={row.idx}>
+                      <CustomTableCell component="th" scope="row">
+                        {row.id.slice(-8)}
+                      </CustomTableCell>
+                      <CustomTableCell>{row.item}</CustomTableCell>
+                      <CustomTableCell>{row.state}</CustomTableCell>
+                      <CustomTableCell>{row.updated}</CustomTableCell>
+                    </CustomTableRow>
+                  ));
+                }}
+              </Query>
             </TableBody>
           </Table>
         </div>

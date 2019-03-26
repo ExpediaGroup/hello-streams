@@ -2,24 +2,22 @@
 # yarn lockfile v1
 
 
-"@apollographql/apollo-upload-server@^5.0.3":
-  version "5.0.3"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@apollographql/apollo-upload-server/-/apollo-upload-server-5.0.3.tgz#8558c378ff6457de82147e5072c96a6b242773b7"
-  integrity sha1-hVjDeP9kV96CFH5QcslqayQnc7c=
+"@apollographql/apollo-tools@^0.3.3":
+  version "0.3.5"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@apollographql/apollo-tools/-/apollo-tools-0.3.5.tgz#d4e860ca2300f90d183084390e2f1516cf775bf6"
+  integrity sha1-1OhgyiMA+Q0YMIQ5Di8VFs93W/Y=
   dependencies:
-    "@babel/runtime-corejs2" "^7.0.0-rc.1"
-    busboy "^0.2.14"
-    object-path "^0.11.4"
+    apollo-env "0.4.0"
 
-"@apollographql/graphql-playground-html@^1.6.0":
-  version "1.6.0"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@apollographql/graphql-playground-html/-/graphql-playground-html-1.6.0.tgz#15e1a042b97d6834e6d70b17cc73e1514fde9027"
-  integrity sha1-FeGgQrl9aDTm1wsXzHPhUU/ekCc=
+"@apollographql/graphql-playground-html@^1.6.6":
+  version "1.6.6"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@apollographql/graphql-playground-html/-/graphql-playground-html-1.6.6.tgz#022209e28a2b547dcde15b219f0c50f47aa5beb3"
+  integrity sha1-AiIJ4oorVH3N4VshnwxQ9HqlvrM=
 
 "@babel/cli@^7.1.2":
-  version "7.1.2"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/cli/-/cli-7.1.2.tgz#fc2853ae96824b3779ca85de4fd025ce3cf62a5e"
-  integrity sha1-/ChTrpaCSzd5yoXeT9Alzjz2Kl4=
+  version "7.2.3"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/cli/-/cli-7.2.3.tgz#1b262e42a3e959d28ab3d205ba2718e1923cfee6"
+  integrity sha1-GyYuQqPpWdKKs9IFuicY4ZI8/uY=
   dependencies:
     commander "^2.8.1"
     convert-source-map "^1.1.0"
@@ -41,33 +39,33 @@
     "@babel/highlight" "^7.0.0"
 
 "@babel/core@^7.1.2":
-  version "7.1.2"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/core/-/core-7.1.2.tgz#f8d2a9ceb6832887329a7b60f9d035791400ba4e"
-  integrity sha1-+NKpzraDKIcymntg+dA1eRQAuk4=
+  version "7.4.0"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/core/-/core-7.4.0.tgz#248fd6874b7d755010bfe61f557461d4f446d9e9"
+  integrity sha1-JI/Wh0t9dVAQv+YfVXRh1PRG2ek=
   dependencies:
     "@babel/code-frame" "^7.0.0"
-    "@babel/generator" "^7.1.2"
-    "@babel/helpers" "^7.1.2"
-    "@babel/parser" "^7.1.2"
-    "@babel/template" "^7.1.2"
-    "@babel/traverse" "^7.1.0"
-    "@babel/types" "^7.1.2"
+    "@babel/generator" "^7.4.0"
+    "@babel/helpers" "^7.4.0"
+    "@babel/parser" "^7.4.0"
+    "@babel/template" "^7.4.0"
+    "@babel/traverse" "^7.4.0"
+    "@babel/types" "^7.4.0"
     convert-source-map "^1.1.0"
-    debug "^3.1.0"
-    json5 "^0.5.0"
-    lodash "^4.17.10"
+    debug "^4.1.0"
+    json5 "^2.1.0"
+    lodash "^4.17.11"
     resolve "^1.3.2"
     semver "^5.4.1"
     source-map "^0.5.0"
 
-"@babel/generator@^7.1.2", "@babel/generator@^7.1.3":
-  version "7.1.3"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/generator/-/generator-7.1.3.tgz#2103ec9c42d9bdad9190a6ad5ff2d456fd7b8673"
-  integrity sha1-IQPsnELZva2RkKatX/LUVv17hnM=
+"@babel/generator@^7.4.0":
+  version "7.4.0"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/generator/-/generator-7.4.0.tgz#c230e79589ae7a729fd4631b9ded4dc220418196"
+  integrity sha1-wjDnlYmuenKf1GMbne1NwiBBgZY=
   dependencies:
-    "@babel/types" "^7.1.3"
+    "@babel/types" "^7.4.0"
     jsesc "^2.5.1"
-    lodash "^4.17.10"
+    lodash "^4.17.11"
     source-map "^0.5.0"
     trim-right "^1.0.1"
 
@@ -86,23 +84,23 @@
     "@babel/helper-explode-assignable-expression" "^7.1.0"
     "@babel/types" "^7.0.0"
 
-"@babel/helper-call-delegate@^7.1.0":
-  version "7.1.0"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/helper-call-delegate/-/helper-call-delegate-7.1.0.tgz#6a957f105f37755e8645343d3038a22e1449cc4a"
-  integrity sha1-apV/EF83dV6GRTQ9MDiiLhRJzEo=
+"@babel/helper-call-delegate@^7.4.0":
+  version "7.4.0"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/helper-call-delegate/-/helper-call-delegate-7.4.0.tgz#f308eabe0d44f451217853aedf4dea5f6fe3294f"
+  integrity sha1-8wjqvg1E9FEheFOu303qX2/jKU8=
   dependencies:
-    "@babel/helper-hoist-variables" "^7.0.0"
-    "@babel/traverse" "^7.1.0"
-    "@babel/types" "^7.0.0"
+    "@babel/helper-hoist-variables" "^7.4.0"
+    "@babel/traverse" "^7.4.0"
+    "@babel/types" "^7.4.0"
 
-"@babel/helper-define-map@^7.1.0":
-  version "7.1.0"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/helper-define-map/-/helper-define-map-7.1.0.tgz#3b74caec329b3c80c116290887c0dd9ae468c20c"
-  integrity sha1-O3TK7DKbPIDBFikIh8DdmuRowgw=
+"@babel/helper-define-map@^7.4.0":
+  version "7.4.0"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/helper-define-map/-/helper-define-map-7.4.0.tgz#cbfd8c1b2f12708e262c26f600cd16ed6a3bc6c9"
+  integrity sha1-y/2MGy8ScI4mLCb2AM0W7Wo7xsk=
   dependencies:
     "@babel/helper-function-name" "^7.1.0"
-    "@babel/types" "^7.0.0"
-    lodash "^4.17.10"
+    "@babel/types" "^7.4.0"
+    lodash "^4.17.11"
 
 "@babel/helper-explode-assignable-expression@^7.1.0":
   version "7.1.0"
@@ -128,12 +126,12 @@
   dependencies:
     "@babel/types" "^7.0.0"
 
-"@babel/helper-hoist-variables@^7.0.0":
-  version "7.0.0"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/helper-hoist-variables/-/helper-hoist-variables-7.0.0.tgz#46adc4c5e758645ae7a45deb92bab0918c23bb88"
-  integrity sha1-Rq3ExedYZFrnpF3rkrqwkYwju4g=
+"@babel/helper-hoist-variables@^7.4.0":
+  version "7.4.0"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/helper-hoist-variables/-/helper-hoist-variables-7.4.0.tgz#25b621399ae229869329730a62015bbeb0a6fbd6"
+  integrity sha1-JbYhOZriKYaTKXMKYgFbvrCm+9Y=
   dependencies:
-    "@babel/types" "^7.0.0"
+    "@babel/types" "^7.4.0"
 
 "@babel/helper-member-expression-to-functions@^7.0.0":
   version "7.0.0"
@@ -150,15 +148,15 @@
     "@babel/types" "^7.0.0"
 
 "@babel/helper-module-transforms@^7.1.0":
-  version "7.1.0"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/helper-module-transforms/-/helper-module-transforms-7.1.0.tgz#470d4f9676d9fad50b324cdcce5fbabbc3da5787"
-  integrity sha1-Rw1PlnbZ+tULMkzczl+6u8PaV4c=
+  version "7.2.2"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/helper-module-transforms/-/helper-module-transforms-7.2.2.tgz#ab2f8e8d231409f8370c883d20c335190284b963"
+  integrity sha1-qy+OjSMUCfg3DIg9IMM1GQKEuWM=
   dependencies:
     "@babel/helper-module-imports" "^7.0.0"
     "@babel/helper-simple-access" "^7.1.0"
     "@babel/helper-split-export-declaration" "^7.0.0"
-    "@babel/template" "^7.1.0"
-    "@babel/types" "^7.0.0"
+    "@babel/template" "^7.2.2"
+    "@babel/types" "^7.2.2"
     lodash "^4.17.10"
 
 "@babel/helper-optimise-call-expression@^7.0.0":
@@ -191,15 +189,15 @@
     "@babel/traverse" "^7.1.0"
     "@babel/types" "^7.0.0"
 
-"@babel/helper-replace-supers@^7.1.0":
-  version "7.1.0"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/helper-replace-supers/-/helper-replace-supers-7.1.0.tgz#5fc31de522ec0ef0899dc9b3e7cf6a5dd655f362"
-  integrity sha1-X8Md5SLsDvCJncmz589qXdZV82I=
+"@babel/helper-replace-supers@^7.1.0", "@babel/helper-replace-supers@^7.4.0":
+  version "7.4.0"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/helper-replace-supers/-/helper-replace-supers-7.4.0.tgz#4f56adb6aedcd449d2da9399c2dcf0545463b64c"
+  integrity sha1-T1attq7c1EnS2pOZwtzwVFRjtkw=
   dependencies:
     "@babel/helper-member-expression-to-functions" "^7.0.0"
     "@babel/helper-optimise-call-expression" "^7.0.0"
-    "@babel/traverse" "^7.1.0"
-    "@babel/types" "^7.0.0"
+    "@babel/traverse" "^7.4.0"
+    "@babel/types" "^7.4.0"
 
 "@babel/helper-simple-access@^7.1.0":
   version "7.1.0"
@@ -209,31 +207,31 @@
     "@babel/template" "^7.1.0"
     "@babel/types" "^7.0.0"
 
-"@babel/helper-split-export-declaration@^7.0.0":
-  version "7.0.0"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/helper-split-export-declaration/-/helper-split-export-declaration-7.0.0.tgz#3aae285c0311c2ab095d997b8c9a94cad547d813"
-  integrity sha1-Oq4oXAMRwqsJXZl7jJqUytVH2BM=
+"@babel/helper-split-export-declaration@^7.0.0", "@babel/helper-split-export-declaration@^7.4.0":
+  version "7.4.0"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/helper-split-export-declaration/-/helper-split-export-declaration-7.4.0.tgz#571bfd52701f492920d63b7f735030e9a3e10b55"
+  integrity sha1-Vxv9UnAfSSkg1jt/c1Aw6aPhC1U=
   dependencies:
-    "@babel/types" "^7.0.0"
+    "@babel/types" "^7.4.0"
 
 "@babel/helper-wrap-function@^7.1.0":
-  version "7.1.0"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/helper-wrap-function/-/helper-wrap-function-7.1.0.tgz#8cf54e9190706067f016af8f75cb3df829cc8c66"
-  integrity sha1-jPVOkZBwYGfwFq+Pdcs9+CnMjGY=
+  version "7.2.0"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/helper-wrap-function/-/helper-wrap-function-7.2.0.tgz#c4e0012445769e2815b55296ead43a958549f6fa"
+  integrity sha1-xOABJEV2nigVtVKW6tQ6lYVJ9vo=
   dependencies:
     "@babel/helper-function-name" "^7.1.0"
     "@babel/template" "^7.1.0"
     "@babel/traverse" "^7.1.0"
-    "@babel/types" "^7.0.0"
+    "@babel/types" "^7.2.0"
 
-"@babel/helpers@^7.1.2":
-  version "7.1.2"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/helpers/-/helpers-7.1.2.tgz#ab752e8c35ef7d39987df4e8586c63b8846234b5"
-  integrity sha1-q3UujDXvfTmYffToWGxjuIRiNLU=
+"@babel/helpers@^7.4.0":
+  version "7.4.2"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/helpers/-/helpers-7.4.2.tgz#3bdfa46a552ca77ef5a0f8551be5f0845ae989be"
+  integrity sha1-O9+kalUsp371oPhVG+XwhFrpib4=
   dependencies:
-    "@babel/template" "^7.1.2"
-    "@babel/traverse" "^7.1.0"
-    "@babel/types" "^7.1.2"
+    "@babel/template" "^7.4.0"
+    "@babel/traverse" "^7.4.0"
+    "@babel/types" "^7.4.0"
 
 "@babel/highlight@^7.0.0":
   version "7.0.0"
@@ -244,390 +242,393 @@
     esutils "^2.0.2"
     js-tokens "^4.0.0"
 
-"@babel/parser@^7.1.2", "@babel/parser@^7.1.3":
-  version "7.1.3"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/parser/-/parser-7.1.3.tgz#2c92469bac2b7fbff810b67fca07bd138b48af77"
-  integrity sha1-LJJGm6wrf7/4ELZ/yge9E4tIr3c=
+"@babel/parser@^7.4.0":
+  version "7.4.2"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/parser/-/parser-7.4.2.tgz#b4521a400cb5a871eab3890787b4bc1326d38d91"
+  integrity sha1-tFIaQAy1qHHqs4kHh7S8EybTjZE=
 
-"@babel/plugin-proposal-async-generator-functions@^7.1.0":
-  version "7.1.0"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/plugin-proposal-async-generator-functions/-/plugin-proposal-async-generator-functions-7.1.0.tgz#41c1a702e10081456e23a7b74d891922dd1bb6ce"
-  integrity sha1-QcGnAuEAgUVuI6e3TYkZIt0bts4=
+"@babel/plugin-proposal-async-generator-functions@^7.2.0":
+  version "7.2.0"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/plugin-proposal-async-generator-functions/-/plugin-proposal-async-generator-functions-7.2.0.tgz#b289b306669dce4ad20b0252889a15768c9d417e"
+  integrity sha1-somzBmadzkrSCwJSiJoVdoydQX4=
   dependencies:
     "@babel/helper-plugin-utils" "^7.0.0"
     "@babel/helper-remap-async-to-generator" "^7.1.0"
-    "@babel/plugin-syntax-async-generators" "^7.0.0"
+    "@babel/plugin-syntax-async-generators" "^7.2.0"
 
-"@babel/plugin-proposal-json-strings@^7.0.0":
-  version "7.0.0"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/plugin-proposal-json-strings/-/plugin-proposal-json-strings-7.0.0.tgz#3b4d7b5cf51e1f2e70f52351d28d44fc2970d01e"
-  integrity sha1-O017XPUeHy5w9SNR0o1E/Clw0B4=
+"@babel/plugin-proposal-json-strings@^7.2.0":
+  version "7.2.0"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/plugin-proposal-json-strings/-/plugin-proposal-json-strings-7.2.0.tgz#568ecc446c6148ae6b267f02551130891e29f317"
+  integrity sha1-Vo7MRGxhSK5rJn8CVREwiR4p8xc=
   dependencies:
     "@babel/helper-plugin-utils" "^7.0.0"
-    "@babel/plugin-syntax-json-strings" "^7.0.0"
+    "@babel/plugin-syntax-json-strings" "^7.2.0"
 
-"@babel/plugin-proposal-object-rest-spread@^7.0.0":
-  version "7.0.0"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/plugin-proposal-object-rest-spread/-/plugin-proposal-object-rest-spread-7.0.0.tgz#9a17b547f64d0676b6c9cecd4edf74a82ab85e7e"
-  integrity sha1-mhe1R/ZNBna2yc7NTt90qCq4Xn4=
+"@babel/plugin-proposal-object-rest-spread@^7.4.0":
+  version "7.4.0"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/plugin-proposal-object-rest-spread/-/plugin-proposal-object-rest-spread-7.4.0.tgz#e4960575205eadf2a1ab4e0c79f9504d5b82a97f"
+  integrity sha1-5JYFdSBerfKhq04MeflQTVuCqX8=
   dependencies:
     "@babel/helper-plugin-utils" "^7.0.0"
-    "@babel/plugin-syntax-object-rest-spread" "^7.0.0"
+    "@babel/plugin-syntax-object-rest-spread" "^7.2.0"
 
-"@babel/plugin-proposal-optional-catch-binding@^7.0.0":
-  version "7.0.0"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/plugin-proposal-optional-catch-binding/-/plugin-proposal-optional-catch-binding-7.0.0.tgz#b610d928fe551ff7117d42c8bb410eec312a6425"
-  integrity sha1-thDZKP5VH/cRfULIu0EO7DEqZCU=
+"@babel/plugin-proposal-optional-catch-binding@^7.2.0":
+  version "7.2.0"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/plugin-proposal-optional-catch-binding/-/plugin-proposal-optional-catch-binding-7.2.0.tgz#135d81edb68a081e55e56ec48541ece8065c38f5"
+  integrity sha1-E12B7baKCB5V5W7EhUHs6AZcOPU=
   dependencies:
     "@babel/helper-plugin-utils" "^7.0.0"
-    "@babel/plugin-syntax-optional-catch-binding" "^7.0.0"
+    "@babel/plugin-syntax-optional-catch-binding" "^7.2.0"
 
-"@babel/plugin-proposal-unicode-property-regex@^7.0.0":
-  version "7.0.0"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/plugin-proposal-unicode-property-regex/-/plugin-proposal-unicode-property-regex-7.0.0.tgz#498b39cd72536cd7c4b26177d030226eba08cd33"
-  integrity sha1-SYs5zXJTbNfEsmF30DAibroIzTM=
+"@babel/plugin-proposal-unicode-property-regex@^7.4.0":
+  version "7.4.0"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/plugin-proposal-unicode-property-regex/-/plugin-proposal-unicode-property-regex-7.4.0.tgz#202d91ee977d760ef83f4f416b280d568be84623"
+  integrity sha1-IC2R7pd9dg74P09BaygNVovoRiM=
   dependencies:
     "@babel/helper-plugin-utils" "^7.0.0"
     "@babel/helper-regex" "^7.0.0"
-    regexpu-core "^4.2.0"
+    regexpu-core "^4.5.4"
 
-"@babel/plugin-syntax-async-generators@^7.0.0":
-  version "7.0.0"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/plugin-syntax-async-generators/-/plugin-syntax-async-generators-7.0.0.tgz#bf0891dcdbf59558359d0c626fdc9490e20bc13c"
-  integrity sha1-vwiR3Nv1lVg1nQxib9yUkOILwTw=
+"@babel/plugin-syntax-async-generators@^7.2.0":
+  version "7.2.0"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/plugin-syntax-async-generators/-/plugin-syntax-async-generators-7.2.0.tgz#69e1f0db34c6f5a0cf7e2b3323bf159a76c8cb7f"
+  integrity sha1-aeHw2zTG9aDPfiszI78VmnbIy38=
   dependencies:
     "@babel/helper-plugin-utils" "^7.0.0"
 
-"@babel/plugin-syntax-json-strings@^7.0.0":
-  version "7.0.0"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/plugin-syntax-json-strings/-/plugin-syntax-json-strings-7.0.0.tgz#0d259a68090e15b383ce3710e01d5b23f3770cbd"
-  integrity sha1-DSWaaAkOFbODzjcQ4B1bI/N3DL0=
+"@babel/plugin-syntax-json-strings@^7.2.0":
+  version "7.2.0"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/plugin-syntax-json-strings/-/plugin-syntax-json-strings-7.2.0.tgz#72bd13f6ffe1d25938129d2a186b11fd62951470"
+  integrity sha1-cr0T9v/h0lk4Ep0qGGsR/WKVFHA=
   dependencies:
     "@babel/helper-plugin-utils" "^7.0.0"
 
-"@babel/plugin-syntax-object-rest-spread@^7.0.0":
-  version "7.0.0"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/plugin-syntax-object-rest-spread/-/plugin-syntax-object-rest-spread-7.0.0.tgz#37d8fbcaf216bd658ea1aebbeb8b75e88ebc549b"
-  integrity sha1-N9j7yvIWvWWOoa6764t16I68VJs=
+"@babel/plugin-syntax-object-rest-spread@^7.2.0":
+  version "7.2.0"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/plugin-syntax-object-rest-spread/-/plugin-syntax-object-rest-spread-7.2.0.tgz#3b7a3e733510c57e820b9142a6579ac8b0dfad2e"
+  integrity sha1-O3o+czUQxX6CC5FCpleayLDfrS4=
   dependencies:
     "@babel/helper-plugin-utils" "^7.0.0"
 
-"@babel/plugin-syntax-optional-catch-binding@^7.0.0":
-  version "7.0.0"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/plugin-syntax-optional-catch-binding/-/plugin-syntax-optional-catch-binding-7.0.0.tgz#886f72008b3a8b185977f7cb70713b45e51ee475"
-  integrity sha1-iG9yAIs6ixhZd/fLcHE7ReUe5HU=
+"@babel/plugin-syntax-optional-catch-binding@^7.2.0":
+  version "7.2.0"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/plugin-syntax-optional-catch-binding/-/plugin-syntax-optional-catch-binding-7.2.0.tgz#a94013d6eda8908dfe6a477e7f9eda85656ecf5c"
+  integrity sha1-qUAT1u2okI3+akd+f57ahWVuz1w=
   dependencies:
     "@babel/helper-plugin-utils" "^7.0.0"
 
-"@babel/plugin-transform-arrow-functions@^7.0.0":
-  version "7.0.0"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/plugin-transform-arrow-functions/-/plugin-transform-arrow-functions-7.0.0.tgz#a6c14875848c68a3b4b3163a486535ef25c7e749"
-  integrity sha1-psFIdYSMaKO0sxY6SGU17yXH50k=
+"@babel/plugin-transform-arrow-functions@^7.2.0":
+  version "7.2.0"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/plugin-transform-arrow-functions/-/plugin-transform-arrow-functions-7.2.0.tgz#9aeafbe4d6ffc6563bf8f8372091628f00779550"
+  integrity sha1-mur75Nb/xlY7+Pg3IJFijwB3lVA=
   dependencies:
     "@babel/helper-plugin-utils" "^7.0.0"
 
-"@babel/plugin-transform-async-to-generator@^7.1.0":
-  version "7.1.0"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/plugin-transform-async-to-generator/-/plugin-transform-async-to-generator-7.1.0.tgz#109e036496c51dd65857e16acab3bafdf3c57811"
-  integrity sha1-EJ4DZJbFHdZYV+FqyrO6/fPFeBE=
+"@babel/plugin-transform-async-to-generator@^7.4.0":
+  version "7.4.0"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/plugin-transform-async-to-generator/-/plugin-transform-async-to-generator-7.4.0.tgz#234fe3e458dce95865c0d152d256119b237834b0"
+  integrity sha1-I0/j5Fjc6VhlwNFS0lYRmyN4NLA=
   dependencies:
     "@babel/helper-module-imports" "^7.0.0"
     "@babel/helper-plugin-utils" "^7.0.0"
     "@babel/helper-remap-async-to-generator" "^7.1.0"
 
-"@babel/plugin-transform-block-scoped-functions@^7.0.0":
-  version "7.0.0"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/plugin-transform-block-scoped-functions/-/plugin-transform-block-scoped-functions-7.0.0.tgz#482b3f75103927e37288b3b67b65f848e2aa0d07"
-  integrity sha1-SCs/dRA5J+NyiLO2e2X4SOKqDQc=
+"@babel/plugin-transform-block-scoped-functions@^7.2.0":
+  version "7.2.0"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/plugin-transform-block-scoped-functions/-/plugin-transform-block-scoped-functions-7.2.0.tgz#5d3cc11e8d5ddd752aa64c9148d0db6cb79fd190"
+  integrity sha1-XTzBHo1d3XUqpkyRSNDbbLef0ZA=
   dependencies:
     "@babel/helper-plugin-utils" "^7.0.0"
 
-"@babel/plugin-transform-block-scoping@^7.0.0":
-  version "7.0.0"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/plugin-transform-block-scoping/-/plugin-transform-block-scoping-7.0.0.tgz#1745075edffd7cdaf69fab2fb6f9694424b7e9bc"
-  integrity sha1-F0UHXt/9fNr2n6svtvlpRCS36bw=
+"@babel/plugin-transform-block-scoping@^7.4.0":
+  version "7.4.0"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/plugin-transform-block-scoping/-/plugin-transform-block-scoping-7.4.0.tgz#164df3bb41e3deb954c4ca32ffa9fcaa56d30bcb"
+  integrity sha1-Fk3zu0Hj3rlUxMoy/6n8qlbTC8s=
   dependencies:
     "@babel/helper-plugin-utils" "^7.0.0"
-    lodash "^4.17.10"
+    lodash "^4.17.11"
 
-"@babel/plugin-transform-classes@^7.1.0":
-  version "7.1.0"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/plugin-transform-classes/-/plugin-transform-classes-7.1.0.tgz#ab3f8a564361800cbc8ab1ca6f21108038432249"
-  integrity sha1-qz+KVkNhgAy8irHKbyEQgDhDIkk=
+"@babel/plugin-transform-classes@^7.4.0":
+  version "7.4.0"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/plugin-transform-classes/-/plugin-transform-classes-7.4.0.tgz#e3428d3c8a3d01f33b10c529b998ba1707043d4d"
+  integrity sha1-40KNPIo9AfM7EMUpuZi6FwcEPU0=
   dependencies:
     "@babel/helper-annotate-as-pure" "^7.0.0"
-    "@babel/helper-define-map" "^7.1.0"
+    "@babel/helper-define-map" "^7.4.0"
     "@babel/helper-function-name" "^7.1.0"
     "@babel/helper-optimise-call-expression" "^7.0.0"
     "@babel/helper-plugin-utils" "^7.0.0"
-    "@babel/helper-replace-supers" "^7.1.0"
-    "@babel/helper-split-export-declaration" "^7.0.0"
+    "@babel/helper-replace-supers" "^7.4.0"
+    "@babel/helper-split-export-declaration" "^7.4.0"
     globals "^11.1.0"
 
-"@babel/plugin-transform-computed-properties@^7.0.0":
-  version "7.0.0"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/plugin-transform-computed-properties/-/plugin-transform-computed-properties-7.0.0.tgz#2fbb8900cd3e8258f2a2ede909b90e7556185e31"
-  integrity sha1-L7uJAM0+gljyou3pCbkOdVYYXjE=
+"@babel/plugin-transform-computed-properties@^7.2.0":
+  version "7.2.0"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/plugin-transform-computed-properties/-/plugin-transform-computed-properties-7.2.0.tgz#83a7df6a658865b1c8f641d510c6f3af220216da"
+  integrity sha1-g6ffamWIZbHI9kHVEMbzryICFto=
   dependencies:
     "@babel/helper-plugin-utils" "^7.0.0"
 
-"@babel/plugin-transform-destructuring@^7.0.0":
-  version "7.1.3"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/plugin-transform-destructuring/-/plugin-transform-destructuring-7.1.3.tgz#e69ff50ca01fac6cb72863c544e516c2b193012f"
-  integrity sha1-5p/1DKAfrGy3KGPFROUWwrGTAS8=
+"@babel/plugin-transform-destructuring@^7.4.0":
+  version "7.4.0"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/plugin-transform-destructuring/-/plugin-transform-destructuring-7.4.0.tgz#acbb9b2418d290107db333f4d6cd8aa6aea00343"
+  integrity sha1-rLubJBjSkBB9szP01s2Kpq6gA0M=
   dependencies:
     "@babel/helper-plugin-utils" "^7.0.0"
 
-"@babel/plugin-transform-dotall-regex@^7.0.0":
-  version "7.0.0"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/plugin-transform-dotall-regex/-/plugin-transform-dotall-regex-7.0.0.tgz#73a24da69bc3c370251f43a3d048198546115e58"
-  integrity sha1-c6JNppvDw3AlH0Oj0EgZhUYRXlg=
+"@babel/plugin-transform-dotall-regex@^7.2.0":
+  version "7.2.0"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/plugin-transform-dotall-regex/-/plugin-transform-dotall-regex-7.2.0.tgz#f0aabb93d120a8ac61e925ea0ba440812dbe0e49"
+  integrity sha1-8Kq7k9EgqKxh6SXqC6RAgS2+Dkk=
   dependencies:
     "@babel/helper-plugin-utils" "^7.0.0"
     "@babel/helper-regex" "^7.0.0"
     regexpu-core "^4.1.3"
 
-"@babel/plugin-transform-duplicate-keys@^7.0.0":
-  version "7.0.0"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/plugin-transform-duplicate-keys/-/plugin-transform-duplicate-keys-7.0.0.tgz#a0601e580991e7cace080e4cf919cfd58da74e86"
-  integrity sha1-oGAeWAmR58rOCA5M+RnP1Y2nToY=
+"@babel/plugin-transform-duplicate-keys@^7.2.0":
+  version "7.2.0"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/plugin-transform-duplicate-keys/-/plugin-transform-duplicate-keys-7.2.0.tgz#d952c4930f312a4dbfff18f0b2914e60c35530b3"
+  integrity sha1-2VLEkw8xKk2//xjwspFOYMNVMLM=
   dependencies:
     "@babel/helper-plugin-utils" "^7.0.0"
 
-"@babel/plugin-transform-exponentiation-operator@^7.1.0":
-  version "7.1.0"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/plugin-transform-exponentiation-operator/-/plugin-transform-exponentiation-operator-7.1.0.tgz#9c34c2ee7fd77e02779cfa37e403a2e1003ccc73"
-  integrity sha1-nDTC7n/XfgJ3nPo35AOi4QA8zHM=
+"@babel/plugin-transform-exponentiation-operator@^7.2.0":
+  version "7.2.0"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/plugin-transform-exponentiation-operator/-/plugin-transform-exponentiation-operator-7.2.0.tgz#a63868289e5b4007f7054d46491af51435766008"
+  integrity sha1-pjhoKJ5bQAf3BU1GSRr1FDV2YAg=
   dependencies:
     "@babel/helper-builder-binary-assignment-operator-visitor" "^7.1.0"
     "@babel/helper-plugin-utils" "^7.0.0"
 
-"@babel/plugin-transform-for-of@^7.0.0":
-  version "7.0.0"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/plugin-transform-for-of/-/plugin-transform-for-of-7.0.0.tgz#f2ba4eadb83bd17dc3c7e9b30f4707365e1c3e39"
-  integrity sha1-8rpOrbg70X3Dx+mzD0cHNl4cPjk=
+"@babel/plugin-transform-for-of@^7.4.0":
+  version "7.4.0"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/plugin-transform-for-of/-/plugin-transform-for-of-7.4.0.tgz#56c8c36677f5d4a16b80b12f7b768de064aaeb5f"
+  integrity sha1-VsjDZnf11KFrgLEve3aN4GSq618=
   dependencies:
     "@babel/helper-plugin-utils" "^7.0.0"
 
-"@babel/plugin-transform-function-name@^7.1.0":
-  version "7.1.0"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/plugin-transform-function-name/-/plugin-transform-function-name-7.1.0.tgz#29c5550d5c46208e7f730516d41eeddd4affadbb"
-  integrity sha1-KcVVDVxGII5/cwUW1B7t3Ur/rbs=
+"@babel/plugin-transform-function-name@^7.2.0":
+  version "7.2.0"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/plugin-transform-function-name/-/plugin-transform-function-name-7.2.0.tgz#f7930362829ff99a3174c39f0afcc024ef59731a"
+  integrity sha1-95MDYoKf+ZoxdMOfCvzAJO9Zcxo=
   dependencies:
     "@babel/helper-function-name" "^7.1.0"
     "@babel/helper-plugin-utils" "^7.0.0"
 
-"@babel/plugin-transform-literals@^7.0.0":
-  version "7.0.0"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/plugin-transform-literals/-/plugin-transform-literals-7.0.0.tgz#2aec1d29cdd24c407359c930cdd89e914ee8ff86"
-  integrity sha1-KuwdKc3STEBzWckwzdiekU7o/4Y=
+"@babel/plugin-transform-literals@^7.2.0":
+  version "7.2.0"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/plugin-transform-literals/-/plugin-transform-literals-7.2.0.tgz#690353e81f9267dad4fd8cfd77eafa86aba53ea1"
+  integrity sha1-aQNT6B+SZ9rU/Yz9d+r6hqulPqE=
   dependencies:
     "@babel/helper-plugin-utils" "^7.0.0"
 
-"@babel/plugin-transform-modules-amd@^7.1.0":
-  version "7.1.0"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/plugin-transform-modules-amd/-/plugin-transform-modules-amd-7.1.0.tgz#f9e0a7072c12e296079b5a59f408ff5b97bf86a8"
-  integrity sha1-+eCnBywS4pYHm1pZ9Aj/W5e/hqg=
+"@babel/plugin-transform-modules-amd@^7.2.0":
+  version "7.2.0"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/plugin-transform-modules-amd/-/plugin-transform-modules-amd-7.2.0.tgz#82a9bce45b95441f617a24011dc89d12da7f4ee6"
+  integrity sha1-gqm85FuVRB9heiQBHcidEtp/TuY=
   dependencies:
     "@babel/helper-module-transforms" "^7.1.0"
     "@babel/helper-plugin-utils" "^7.0.0"
 
-"@babel/plugin-transform-modules-commonjs@^7.1.0":
-  version "7.1.0"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/plugin-transform-modules-commonjs/-/plugin-transform-modules-commonjs-7.1.0.tgz#0a9d86451cbbfb29bd15186306897c67f6f9a05c"
-  integrity sha1-Cp2GRRy7+ym9FRhjBol8Z/b5oFw=
+"@babel/plugin-transform-modules-commonjs@^7.4.0":
+  version "7.4.0"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/plugin-transform-modules-commonjs/-/plugin-transform-modules-commonjs-7.4.0.tgz#3b8ec61714d3b75d20c5ccfa157f2c2e087fd4ca"
+  integrity sha1-O47GFxTTt10gxcz6FX8sLgh/1Mo=
   dependencies:
     "@babel/helper-module-transforms" "^7.1.0"
     "@babel/helper-plugin-utils" "^7.0.0"
     "@babel/helper-simple-access" "^7.1.0"
 
-"@babel/plugin-transform-modules-systemjs@^7.0.0":
-  version "7.1.3"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/plugin-transform-modules-systemjs/-/plugin-transform-modules-systemjs-7.1.3.tgz#2119a3e3db612fd74a19d88652efbfe9613a5db0"
-  integrity sha1-IRmj49thL9dKGdiGUu+/6WE6XbA=
+"@babel/plugin-transform-modules-systemjs@^7.4.0":
+  version "7.4.0"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/plugin-transform-modules-systemjs/-/plugin-transform-modules-systemjs-7.4.0.tgz#c2495e55528135797bc816f5d50f851698c586a1"
+  integrity sha1-wkleVVKBNXl7yBb11Q+FFpjFhqE=
   dependencies:
-    "@babel/helper-hoist-variables" "^7.0.0"
+    "@babel/helper-hoist-variables" "^7.4.0"
     "@babel/helper-plugin-utils" "^7.0.0"
 
-"@babel/plugin-transform-modules-umd@^7.1.0":
-  version "7.1.0"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/plugin-transform-modules-umd/-/plugin-transform-modules-umd-7.1.0.tgz#a29a7d85d6f28c3561c33964442257cc6a21f2a8"
-  integrity sha1-opp9hdbyjDVhwzlkRCJXzGoh8qg=
+"@babel/plugin-transform-modules-umd@^7.2.0":
+  version "7.2.0"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/plugin-transform-modules-umd/-/plugin-transform-modules-umd-7.2.0.tgz#7678ce75169f0877b8eb2235538c074268dd01ae"
+  integrity sha1-dnjOdRafCHe46yI1U4wHQmjdAa4=
   dependencies:
     "@babel/helper-module-transforms" "^7.1.0"
     "@babel/helper-plugin-utils" "^7.0.0"
 
-"@babel/plugin-transform-new-target@^7.0.0":
-  version "7.0.0"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/plugin-transform-new-target/-/plugin-transform-new-target-7.0.0.tgz#ae8fbd89517fa7892d20e6564e641e8770c3aa4a"
-  integrity sha1-ro+9iVF/p4ktIOZWTmQeh3DDqko=
+"@babel/plugin-transform-named-capturing-groups-regex@^7.4.2":
+  version "7.4.2"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/plugin-transform-named-capturing-groups-regex/-/plugin-transform-named-capturing-groups-regex-7.4.2.tgz#800391136d6cbcc80728dbdba3c1c6e46f86c12e"
+  integrity sha1-gAORE21svMgHKNvbo8HG5G+GwS4=
+  dependencies:
+    regexp-tree "^0.1.0"
+
+"@babel/plugin-transform-new-target@^7.4.0":
+  version "7.4.0"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/plugin-transform-new-target/-/plugin-transform-new-target-7.4.0.tgz#67658a1d944edb53c8d4fa3004473a0dd7838150"
+  integrity sha1-Z2WKHZRO21PI1PowBEc6DdeDgVA=
   dependencies:
     "@babel/helper-plugin-utils" "^7.0.0"
 
-"@babel/plugin-transform-object-super@^7.1.0":
-  version "7.1.0"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/plugin-transform-object-super/-/plugin-transform-object-super-7.1.0.tgz#b1ae194a054b826d8d4ba7ca91486d4ada0f91bb"
-  integrity sha1-sa4ZSgVLgm2NS6fKkUhtStoPkbs=
+"@babel/plugin-transform-object-super@^7.2.0":
+  version "7.2.0"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/plugin-transform-object-super/-/plugin-transform-object-super-7.2.0.tgz#b35d4c10f56bab5d650047dad0f1d8e8814b6598"
+  integrity sha1-s11MEPVrq11lAEfa0PHY6IFLZZg=
   dependencies:
     "@babel/helper-plugin-utils" "^7.0.0"
     "@babel/helper-replace-supers" "^7.1.0"
 
-"@babel/plugin-transform-parameters@^7.1.0":
-  version "7.1.0"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/plugin-transform-parameters/-/plugin-transform-parameters-7.1.0.tgz#44f492f9d618c9124026e62301c296bf606a7aed"
-  integrity sha1-RPSS+dYYyRJAJuYjAcKWv2Bqeu0=
+"@babel/plugin-transform-parameters@^7.4.0":
+  version "7.4.0"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/plugin-transform-parameters/-/plugin-transform-parameters-7.4.0.tgz#a1309426fac4eecd2a9439a4c8c35124a11a48a9"
+  integrity sha1-oTCUJvrE7s0qlDmkyMNRJKEaSKk=
   dependencies:
-    "@babel/helper-call-delegate" "^7.1.0"
+    "@babel/helper-call-delegate" "^7.4.0"
     "@babel/helper-get-function-arity" "^7.0.0"
     "@babel/helper-plugin-utils" "^7.0.0"
 
-"@babel/plugin-transform-regenerator@^7.0.0":
-  version "7.0.0"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/plugin-transform-regenerator/-/plugin-transform-regenerator-7.0.0.tgz#5b41686b4ed40bef874d7ed6a84bdd849c13e0c1"
-  integrity sha1-W0Foa07UC++HTX7WqEvdhJwT4ME=
+"@babel/plugin-transform-regenerator@^7.4.0":
+  version "7.4.0"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/plugin-transform-regenerator/-/plugin-transform-regenerator-7.4.0.tgz#0780e27ee458cc3fdbad18294d703e972ae1f6d1"
+  integrity sha1-B4DifuRYzD/brRgpTXA+lyrh9tE=
   dependencies:
-    regenerator-transform "^0.13.3"
+    regenerator-transform "^0.13.4"
 
-"@babel/plugin-transform-shorthand-properties@^7.0.0":
-  version "7.0.0"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/plugin-transform-shorthand-properties/-/plugin-transform-shorthand-properties-7.0.0.tgz#85f8af592dcc07647541a0350e8c95c7bf419d15"
-  integrity sha1-hfivWS3MB2R1QaA1DoyVx79BnRU=
-  dependencies:
-    "@babel/helper-plugin-utils" "^7.0.0"
-
-"@babel/plugin-transform-spread@^7.0.0":
-  version "7.0.0"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/plugin-transform-spread/-/plugin-transform-spread-7.0.0.tgz#93583ce48dd8c85e53f3a46056c856e4af30b49b"
-  integrity sha1-k1g85I3YyF5T86RgVshW5K8wtJs=
+"@babel/plugin-transform-shorthand-properties@^7.2.0":
+  version "7.2.0"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/plugin-transform-shorthand-properties/-/plugin-transform-shorthand-properties-7.2.0.tgz#6333aee2f8d6ee7e28615457298934a3b46198f0"
+  integrity sha1-YzOu4vjW7n4oYVRXKYk0o7RhmPA=
   dependencies:
     "@babel/helper-plugin-utils" "^7.0.0"
 
-"@babel/plugin-transform-sticky-regex@^7.0.0":
-  version "7.0.0"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/plugin-transform-sticky-regex/-/plugin-transform-sticky-regex-7.0.0.tgz#30a9d64ac2ab46eec087b8530535becd90e73366"
-  integrity sha1-MKnWSsKrRu7Ah7hTBTW+zZDnM2Y=
+"@babel/plugin-transform-spread@^7.2.0":
+  version "7.2.2"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/plugin-transform-spread/-/plugin-transform-spread-7.2.2.tgz#3103a9abe22f742b6d406ecd3cd49b774919b406"
+  integrity sha1-MQOpq+IvdCttQG7NPNSbd0kZtAY=
+  dependencies:
+    "@babel/helper-plugin-utils" "^7.0.0"
+
+"@babel/plugin-transform-sticky-regex@^7.2.0":
+  version "7.2.0"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/plugin-transform-sticky-regex/-/plugin-transform-sticky-regex-7.2.0.tgz#a1e454b5995560a9c1e0d537dfc15061fd2687e1"
+  integrity sha1-oeRUtZlVYKnB4NU338FQYf0mh+E=
   dependencies:
     "@babel/helper-plugin-utils" "^7.0.0"
     "@babel/helper-regex" "^7.0.0"
 
-"@babel/plugin-transform-template-literals@^7.0.0":
-  version "7.0.0"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/plugin-transform-template-literals/-/plugin-transform-template-literals-7.0.0.tgz#084f1952efe5b153ddae69eb8945f882c7a97c65"
-  integrity sha1-CE8ZUu/lsVPdrmnriUX4gsepfGU=
+"@babel/plugin-transform-template-literals@^7.2.0":
+  version "7.2.0"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/plugin-transform-template-literals/-/plugin-transform-template-literals-7.2.0.tgz#d87ed01b8eaac7a92473f608c97c089de2ba1e5b"
+  integrity sha1-2H7QG46qx6kkc/YIyXwIneK6Hls=
   dependencies:
     "@babel/helper-annotate-as-pure" "^7.0.0"
     "@babel/helper-plugin-utils" "^7.0.0"
 
-"@babel/plugin-transform-typeof-symbol@^7.0.0":
-  version "7.0.0"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/plugin-transform-typeof-symbol/-/plugin-transform-typeof-symbol-7.0.0.tgz#4dcf1e52e943e5267b7313bff347fdbe0f81cec9"
-  integrity sha1-Tc8eUulD5SZ7cxO/80f9vg+Bzsk=
+"@babel/plugin-transform-typeof-symbol@^7.2.0":
+  version "7.2.0"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/plugin-transform-typeof-symbol/-/plugin-transform-typeof-symbol-7.2.0.tgz#117d2bcec2fbf64b4b59d1f9819894682d29f2b2"
+  integrity sha1-EX0rzsL79ktLWdH5gZiUaC0p8rI=
   dependencies:
     "@babel/helper-plugin-utils" "^7.0.0"
 
-"@babel/plugin-transform-unicode-regex@^7.0.0":
-  version "7.0.0"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/plugin-transform-unicode-regex/-/plugin-transform-unicode-regex-7.0.0.tgz#c6780e5b1863a76fe792d90eded9fcd5b51d68fc"
-  integrity sha1-xngOWxhjp2/nktkO3tn81bUdaPw=
+"@babel/plugin-transform-unicode-regex@^7.2.0":
+  version "7.2.0"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/plugin-transform-unicode-regex/-/plugin-transform-unicode-regex-7.2.0.tgz#4eb8db16f972f8abb5062c161b8b115546ade08b"
+  integrity sha1-TrjbFvly+Ku1BiwWG4sRVUat4Is=
   dependencies:
     "@babel/helper-plugin-utils" "^7.0.0"
     "@babel/helper-regex" "^7.0.0"
     regexpu-core "^4.1.3"
 
 "@babel/polyfill@^7.0.0":
-  version "7.0.0"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/polyfill/-/polyfill-7.0.0.tgz#c8ff65c9ec3be6a1ba10113ebd40e8750fb90bff"
-  integrity sha1-yP9lyew75qG6EBE+vUDodQ+5C/8=
+  version "7.4.0"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/polyfill/-/polyfill-7.4.0.tgz#90f9d68ae34ac42ab4b4aa03151848f536960218"
+  integrity sha1-kPnWiuNKxCq0tKoDFRhI9TaWAhg=
   dependencies:
-    core-js "^2.5.7"
-    regenerator-runtime "^0.11.1"
+    core-js "^2.6.5"
+    regenerator-runtime "^0.13.2"
 
 "@babel/preset-env@^7.1.0":
-  version "7.1.0"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/preset-env/-/preset-env-7.1.0.tgz#e67ea5b0441cfeab1d6f41e9b5c79798800e8d11"
-  integrity sha1-5n6lsEQc/qsdb0HptceXmIAOjRE=
+  version "7.4.2"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/preset-env/-/preset-env-7.4.2.tgz#2f5ba1de2daefa9dcca653848f96c7ce2e406676"
+  integrity sha1-L1uh3i2u+p3MplOEj5bHzi5AZnY=
   dependencies:
     "@babel/helper-module-imports" "^7.0.0"
     "@babel/helper-plugin-utils" "^7.0.0"
-    "@babel/plugin-proposal-async-generator-functions" "^7.1.0"
-    "@babel/plugin-proposal-json-strings" "^7.0.0"
-    "@babel/plugin-proposal-object-rest-spread" "^7.0.0"
-    "@babel/plugin-proposal-optional-catch-binding" "^7.0.0"
-    "@babel/plugin-proposal-unicode-property-regex" "^7.0.0"
-    "@babel/plugin-syntax-async-generators" "^7.0.0"
-    "@babel/plugin-syntax-object-rest-spread" "^7.0.0"
-    "@babel/plugin-syntax-optional-catch-binding" "^7.0.0"
-    "@babel/plugin-transform-arrow-functions" "^7.0.0"
-    "@babel/plugin-transform-async-to-generator" "^7.1.0"
-    "@babel/plugin-transform-block-scoped-functions" "^7.0.0"
-    "@babel/plugin-transform-block-scoping" "^7.0.0"
-    "@babel/plugin-transform-classes" "^7.1.0"
-    "@babel/plugin-transform-computed-properties" "^7.0.0"
-    "@babel/plugin-transform-destructuring" "^7.0.0"
-    "@babel/plugin-transform-dotall-regex" "^7.0.0"
-    "@babel/plugin-transform-duplicate-keys" "^7.0.0"
-    "@babel/plugin-transform-exponentiation-operator" "^7.1.0"
-    "@babel/plugin-transform-for-of" "^7.0.0"
-    "@babel/plugin-transform-function-name" "^7.1.0"
-    "@babel/plugin-transform-literals" "^7.0.0"
-    "@babel/plugin-transform-modules-amd" "^7.1.0"
-    "@babel/plugin-transform-modules-commonjs" "^7.1.0"
-    "@babel/plugin-transform-modules-systemjs" "^7.0.0"
-    "@babel/plugin-transform-modules-umd" "^7.1.0"
-    "@babel/plugin-transform-new-target" "^7.0.0"
-    "@babel/plugin-transform-object-super" "^7.1.0"
-    "@babel/plugin-transform-parameters" "^7.1.0"
-    "@babel/plugin-transform-regenerator" "^7.0.0"
-    "@babel/plugin-transform-shorthand-properties" "^7.0.0"
-    "@babel/plugin-transform-spread" "^7.0.0"
-    "@babel/plugin-transform-sticky-regex" "^7.0.0"
-    "@babel/plugin-transform-template-literals" "^7.0.0"
-    "@babel/plugin-transform-typeof-symbol" "^7.0.0"
-    "@babel/plugin-transform-unicode-regex" "^7.0.0"
-    browserslist "^4.1.0"
+    "@babel/plugin-proposal-async-generator-functions" "^7.2.0"
+    "@babel/plugin-proposal-json-strings" "^7.2.0"
+    "@babel/plugin-proposal-object-rest-spread" "^7.4.0"
+    "@babel/plugin-proposal-optional-catch-binding" "^7.2.0"
+    "@babel/plugin-proposal-unicode-property-regex" "^7.4.0"
+    "@babel/plugin-syntax-async-generators" "^7.2.0"
+    "@babel/plugin-syntax-json-strings" "^7.2.0"
+    "@babel/plugin-syntax-object-rest-spread" "^7.2.0"
+    "@babel/plugin-syntax-optional-catch-binding" "^7.2.0"
+    "@babel/plugin-transform-arrow-functions" "^7.2.0"
+    "@babel/plugin-transform-async-to-generator" "^7.4.0"
+    "@babel/plugin-transform-block-scoped-functions" "^7.2.0"
+    "@babel/plugin-transform-block-scoping" "^7.4.0"
+    "@babel/plugin-transform-classes" "^7.4.0"
+    "@babel/plugin-transform-computed-properties" "^7.2.0"
+    "@babel/plugin-transform-destructuring" "^7.4.0"
+    "@babel/plugin-transform-dotall-regex" "^7.2.0"
+    "@babel/plugin-transform-duplicate-keys" "^7.2.0"
+    "@babel/plugin-transform-exponentiation-operator" "^7.2.0"
+    "@babel/plugin-transform-for-of" "^7.4.0"
+    "@babel/plugin-transform-function-name" "^7.2.0"
+    "@babel/plugin-transform-literals" "^7.2.0"
+    "@babel/plugin-transform-modules-amd" "^7.2.0"
+    "@babel/plugin-transform-modules-commonjs" "^7.4.0"
+    "@babel/plugin-transform-modules-systemjs" "^7.4.0"
+    "@babel/plugin-transform-modules-umd" "^7.2.0"
+    "@babel/plugin-transform-named-capturing-groups-regex" "^7.4.2"
+    "@babel/plugin-transform-new-target" "^7.4.0"
+    "@babel/plugin-transform-object-super" "^7.2.0"
+    "@babel/plugin-transform-parameters" "^7.4.0"
+    "@babel/plugin-transform-regenerator" "^7.4.0"
+    "@babel/plugin-transform-shorthand-properties" "^7.2.0"
+    "@babel/plugin-transform-spread" "^7.2.0"
+    "@babel/plugin-transform-sticky-regex" "^7.2.0"
+    "@babel/plugin-transform-template-literals" "^7.2.0"
+    "@babel/plugin-transform-typeof-symbol" "^7.2.0"
+    "@babel/plugin-transform-unicode-regex" "^7.2.0"
+    "@babel/types" "^7.4.0"
+    browserslist "^4.4.2"
+    core-js-compat "^3.0.0"
     invariant "^2.2.2"
     js-levenshtein "^1.1.3"
     semver "^5.3.0"
 
-"@babel/runtime-corejs2@^7.0.0-rc.1":
-  version "7.1.2"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/runtime-corejs2/-/runtime-corejs2-7.1.2.tgz#8695811a3fd8091f54f274b9320334e5e8c62200"
-  integrity sha1-hpWBGj/YCR9U8nS5MgM05ejGIgA=
-  dependencies:
-    core-js "^2.5.7"
-    regenerator-runtime "^0.12.0"
-
-"@babel/template@^7.1.0", "@babel/template@^7.1.2":
-  version "7.1.2"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/template/-/template-7.1.2.tgz#090484a574fef5a2d2d7726a674eceda5c5b5644"
-  integrity sha1-CQSEpXT+9aLS13JqZ07O2lxbVkQ=
+"@babel/template@^7.1.0", "@babel/template@^7.2.2", "@babel/template@^7.4.0":
+  version "7.4.0"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/template/-/template-7.4.0.tgz#12474e9c077bae585c5d835a95c0b0b790c25c8b"
+  integrity sha1-EkdOnAd7rlhcXYNalcCwt5DCXIs=
   dependencies:
     "@babel/code-frame" "^7.0.0"
-    "@babel/parser" "^7.1.2"
-    "@babel/types" "^7.1.2"
+    "@babel/parser" "^7.4.0"
+    "@babel/types" "^7.4.0"
 
-"@babel/traverse@^7.1.0":
-  version "7.1.4"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/traverse/-/traverse-7.1.4.tgz#f4f83b93d649b4b2c91121a9087fa2fa949ec2b4"
-  integrity sha1-9Pg7k9ZJtLLJESGpCH+i+pSewrQ=
+"@babel/traverse@^7.1.0", "@babel/traverse@^7.4.0":
+  version "7.4.0"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/traverse/-/traverse-7.4.0.tgz#14006967dd1d2b3494cdd650c686db9daf0ddada"
+  integrity sha1-FABpZ90dKzSUzdZQxobbna8N2to=
   dependencies:
     "@babel/code-frame" "^7.0.0"
-    "@babel/generator" "^7.1.3"
+    "@babel/generator" "^7.4.0"
     "@babel/helper-function-name" "^7.1.0"
-    "@babel/helper-split-export-declaration" "^7.0.0"
-    "@babel/parser" "^7.1.3"
-    "@babel/types" "^7.1.3"
-    debug "^3.1.0"
+    "@babel/helper-split-export-declaration" "^7.4.0"
+    "@babel/parser" "^7.4.0"
+    "@babel/types" "^7.4.0"
+    debug "^4.1.0"
     globals "^11.1.0"
-    lodash "^4.17.10"
+    lodash "^4.17.11"
 
-"@babel/types@^7.0.0", "@babel/types@^7.1.2", "@babel/types@^7.1.3":
-  version "7.1.3"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/types/-/types-7.1.3.tgz#3a767004567060c2f40fca49a304712c525ee37d"
-  integrity sha1-OnZwBFZwYML0D8pJowRxLFJe430=
+"@babel/types@^7.0.0", "@babel/types@^7.2.0", "@babel/types@^7.2.2", "@babel/types@^7.4.0":
+  version "7.4.0"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@babel/types/-/types-7.4.0.tgz#670724f77d24cce6cc7d8cf64599d511d164894c"
+  integrity sha1-Zwck930kzObMfYz2RZnVEdFkiUw=
   dependencies:
     esutils "^2.0.2"
-    lodash "^4.17.10"
+    lodash "^4.17.11"
     to-fast-properties "^2.0.0"
 
 "@protobufjs/aspromise@^1.1.1", "@protobufjs/aspromise@^1.1.2":
@@ -713,23 +714,22 @@
     "@types/express" "*"
 
 "@types/events@*":
-  version "1.2.0"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@types/events/-/events-1.2.0.tgz#81a6731ce4df43619e5c8c945383b3e62a89ea86"
-  integrity sha1-gaZzHOTfQ2GeXIyUU4Oz5iqJ6oY=
+  version "3.0.0"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@types/events/-/events-3.0.0.tgz#2862f3f58a9a7f7c3e78d79f130dd4d71c25c2a7"
+  integrity sha1-KGLz9Yqaf3w+eNefEw3U1xwlwqc=
 
 "@types/express-serve-static-core@*":
-  version "4.16.0"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@types/express-serve-static-core/-/express-serve-static-core-4.16.0.tgz#fdfe777594ddc1fe8eb8eccce52e261b496e43e7"
-  integrity sha1-/f53dZTdwf6OuOzM5S4mG0luQ+c=
+  version "4.16.2"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@types/express-serve-static-core/-/express-serve-static-core-4.16.2.tgz#5ee8a22e602005be6767df6b2cba9879df3f75aa"
+  integrity sha1-XuiiLmAgBb5nZ99rLLqYed8/dao=
   dependencies:
-    "@types/events" "*"
     "@types/node" "*"
     "@types/range-parser" "*"
 
-"@types/express@*", "@types/express@4.16.0":
-  version "4.16.0"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@types/express/-/express-4.16.0.tgz#6d8bc42ccaa6f35cf29a2b7c3333cb47b5a32a19"
-  integrity sha1-bYvELMqm81zymit8MzPLR7WjKhk=
+"@types/express@*", "@types/express@4.16.1":
+  version "4.16.1"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@types/express/-/express-4.16.1.tgz#d756bd1a85c34d87eaf44c888bad27ba8a4b7cf0"
+  integrity sha1-11a9GoXDTYfq9EyIi60nuopLfPA=
   dependencies:
     "@types/body-parser" "*"
     "@types/express-serve-static-core" "*"
@@ -741,19 +741,24 @@
   integrity sha1-cZVR0jUtMBrIuB23Mqy2vcKNve8=
 
 "@types/mime@*":
-  version "2.0.0"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@types/mime/-/mime-2.0.0.tgz#5a7306e367c539b9f6543499de8dd519fac37a8b"
-  integrity sha1-WnMG42fFObn2VDSZ3o3VGfrDeos=
+  version "2.0.1"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@types/mime/-/mime-2.0.1.tgz#dc488842312a7f075149312905b5e3c0b054c79d"
+  integrity sha1-3EiIQjEqfwdRSTEpBbXjwLBUx50=
 
-"@types/node@*", "@types/node@^10.1.0":
-  version "10.12.0"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@types/node/-/node-10.12.0.tgz#ea6dcbddbc5b584c83f06c60e82736d8fbb0c235"
-  integrity sha1-6m3L3bxbWEyD8Gxg6Cc22PuwwjU=
+"@types/node@*":
+  version "11.12.0"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@types/node/-/node-11.12.0.tgz#ec5594728811dc2797e42396cfcdf786f2052c12"
+  integrity sha1-7FWUcogR3CeX5COWz833hvIFLBI=
+
+"@types/node@^10.1.0":
+  version "10.14.4"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@types/node/-/node-10.14.4.tgz#1c586b991457cbb58fef51bc4e0cfcfa347714b5"
+  integrity sha1-HFhrmRRXy7WP71G8Tgz8+jR3FLU=
 
 "@types/range-parser@*":
-  version "1.2.2"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@types/range-parser/-/range-parser-1.2.2.tgz#fa8e1ad1d474688a757140c91de6dace6f4abc8d"
-  integrity sha1-+o4a0dR0aIp1cUDJHebazm9KvI0=
+  version "1.2.3"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@types/range-parser/-/range-parser-1.2.3.tgz#7ee330ba7caafb98090bece86a5ee44115904c2c"
+  integrity sha1-fuMwunyq+5gJC+zoal7kQRWQTCw=
 
 "@types/serve-static@*":
   version "1.13.2"
@@ -763,10 +768,10 @@
     "@types/express-serve-static-core" "*"
     "@types/mime" "*"
 
-"@types/ws@^5.1.2":
-  version "5.1.2"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@types/ws/-/ws-5.1.2.tgz#f02d3b1cd46db7686734f3ce83bdf46c49decd64"
-  integrity sha1-8C07HNRtt2hnNPPOg730bEnezWQ=
+"@types/ws@^6.0.0":
+  version "6.0.1"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/@types/ws/-/ws-6.0.1.tgz#ca7a3f3756aa12f62a0a62145ed14c6db25d5a28"
+  integrity sha1-yno/N1aqEvYqCmIUXtFMbbJdWig=
   dependencies:
     "@types/events" "*"
     "@types/node" "*"
@@ -809,136 +814,164 @@ anymatch@^2.0.0:
     micromatch "^3.1.4"
     normalize-path "^2.1.1"
 
-apollo-cache-control@^0.2.5:
-  version "0.2.5"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/apollo-cache-control/-/apollo-cache-control-0.2.5.tgz#0831ad796754a7beec858668f99e7517fe744a1e"
-  integrity sha1-CDGteWdUp77shYZo+Z51F/50Sh4=
+apollo-cache-control@0.5.2:
+  version "0.5.2"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/apollo-cache-control/-/apollo-cache-control-0.5.2.tgz#47931ede0b11c64d45429850c274b30d19322362"
+  integrity sha1-R5Me3gsRxk1FQphQwnSzDRkyI2I=
   dependencies:
-    apollo-server-env "^2.0.3"
-    graphql-extensions "^0.2.1"
+    apollo-server-env "2.2.0"
+    graphql-extensions "0.5.4"
 
-apollo-datasource@^0.1.3:
-  version "0.1.3"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/apollo-datasource/-/apollo-datasource-0.1.3.tgz#e7ae9d20f29a8a35f239b02f0c47169cfd78d70b"
-  integrity sha1-566dIPKaijXyObAvDEcWnP141ws=
+apollo-datasource@0.3.1:
+  version "0.3.1"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/apollo-datasource/-/apollo-datasource-0.3.1.tgz#4b7ec4c2dd7d08eb7edc865b95fd46b83a4679fd"
+  integrity sha1-S37Ewt19COt+3IZblf1GuDpGef0=
   dependencies:
-    apollo-server-caching "0.1.2"
-    apollo-server-env "2.0.3"
+    apollo-server-caching "0.3.1"
+    apollo-server-env "2.2.0"
 
-apollo-engine-reporting-protobuf@^0.0.1:
-  version "0.0.1"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/apollo-engine-reporting-protobuf/-/apollo-engine-reporting-protobuf-0.0.1.tgz#cd394f0f769c6f97d8621c4a7839095c84efcdb0"
-  integrity sha1-zTlPD3acb5fYYhxKeDkJXITvzbA=
+apollo-engine-reporting-protobuf@0.2.1:
+  version "0.2.1"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/apollo-engine-reporting-protobuf/-/apollo-engine-reporting-protobuf-0.2.1.tgz#8547efcb4078a501ddf606cbfe01a2e8c3ba1afd"
+  integrity sha1-hUfvy0B4pQHd9gbL/gGi6MO6Gv0=
   dependencies:
     protobufjs "^6.8.6"
 
-apollo-engine-reporting@^0.0.6:
-  version "0.0.6"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/apollo-engine-reporting/-/apollo-engine-reporting-0.0.6.tgz#c1a74dffce782525f8a3230e4e5228fbd05bbd59"
-  integrity sha1-wadN/854JSX4oyMOTlIo+9BbvVk=
+apollo-engine-reporting@1.0.7:
+  version "1.0.7"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/apollo-engine-reporting/-/apollo-engine-reporting-1.0.7.tgz#d326b51b12b1f71a40885b8189dbcd162171c953"
+  integrity sha1-0ya1GxKx9xpAiFuBidvNFiFxyVM=
   dependencies:
-    apollo-engine-reporting-protobuf "^0.0.1"
-    apollo-server-env "^2.0.3"
+    apollo-engine-reporting-protobuf "0.2.1"
+    apollo-graphql "^0.1.0"
+    apollo-server-core "2.4.8"
+    apollo-server-env "2.2.0"
     async-retry "^1.2.1"
-    graphql-extensions "^0.2.1"
-    lodash "^4.17.10"
+    graphql-extensions "0.5.7"
 
-apollo-link@^1.2.2:
-  version "1.2.3"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/apollo-link/-/apollo-link-1.2.3.tgz#9bd8d5fe1d88d31dc91dae9ecc22474d451fb70d"
-  integrity sha1-m9jV/h2I0x3JHa6ezCJHTUUftw0=
+apollo-env@0.4.0:
+  version "0.4.0"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/apollo-env/-/apollo-env-0.4.0.tgz#f26c8570cc66edc3606d0cf9b66dbc1770b99353"
+  integrity sha1-8myFcMxm7cNgbQz5tm28F3C5k1M=
   dependencies:
-    apollo-utilities "^1.0.0"
-    zen-observable-ts "^0.8.10"
+    core-js "3.0.0-beta.13"
+    node-fetch "^2.2.0"
+    sha.js "^2.4.11"
 
-apollo-server-caching@0.1.2, apollo-server-caching@^0.1.2:
-  version "0.1.2"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/apollo-server-caching/-/apollo-server-caching-0.1.2.tgz#f5b85701945110a5fca1956450e8553576635936"
-  integrity sha1-9bhXAZRREKX8oZVkUOhVNXZjWTY=
+apollo-graphql@^0.1.0:
+  version "0.1.3"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/apollo-graphql/-/apollo-graphql-0.1.3.tgz#98f9e6bb98ec08ae0dea6f125f640acf6de3f31f"
+  integrity sha1-mPnmu5jsCK4N6m8SX2QKz23j8x8=
   dependencies:
-    lru-cache "^4.1.3"
+    apollo-env "0.4.0"
+    lodash.sortby "^4.7.0"
 
-apollo-server-core@^2.1.0:
-  version "2.1.0"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/apollo-server-core/-/apollo-server-core-2.1.0.tgz#b56f9f1ddb948b257e738eb25c5fdfd2f2fb2e07"
-  integrity sha1-tW+fHduUiyV+c46yXF/f0vL7Lgc=
+apollo-link@^1.2.3:
+  version "1.2.11"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/apollo-link/-/apollo-link-1.2.11.tgz#493293b747ad3237114ccd22e9f559e5e24a194d"
+  integrity sha1-STKTt0etMjcRTM0i6fVZ5eJKGU0=
   dependencies:
-    "@apollographql/apollo-upload-server" "^5.0.3"
-    "@types/ws" "^5.1.2"
-    apollo-cache-control "^0.2.5"
-    apollo-datasource "^0.1.3"
-    apollo-engine-reporting "^0.0.6"
-    apollo-server-caching "^0.1.2"
-    apollo-server-env "^2.0.3"
-    apollo-server-errors "^2.0.2"
-    apollo-tracing "^0.2.5"
-    graphql-extensions "^0.2.1"
-    graphql-subscriptions "^0.5.8"
+    apollo-utilities "^1.2.1"
+    ts-invariant "^0.3.2"
+    tslib "^1.9.3"
+    zen-observable-ts "^0.8.18"
+
+apollo-server-caching@0.3.1:
+  version "0.3.1"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/apollo-server-caching/-/apollo-server-caching-0.3.1.tgz#63fcb2aaa176e1e101b36a8450e6b4c593d2767a"
+  integrity sha1-Y/yyqqF24eEBs2qEUOa0xZPSdno=
+  dependencies:
+    lru-cache "^5.0.0"
+
+apollo-server-core@2.4.8:
+  version "2.4.8"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/apollo-server-core/-/apollo-server-core-2.4.8.tgz#47e503a345e314222725597c889773e018d8c67a"
+  integrity sha1-R+UDo0XjFCInJVl8iJdz4BjYxno=
+  dependencies:
+    "@apollographql/apollo-tools" "^0.3.3"
+    "@apollographql/graphql-playground-html" "^1.6.6"
+    "@types/ws" "^6.0.0"
+    apollo-cache-control "0.5.2"
+    apollo-datasource "0.3.1"
+    apollo-engine-reporting "1.0.7"
+    apollo-server-caching "0.3.1"
+    apollo-server-env "2.2.0"
+    apollo-server-errors "2.2.1"
+    apollo-server-plugin-base "0.3.7"
+    apollo-tracing "0.5.2"
+    fast-json-stable-stringify "^2.0.0"
+    graphql-extensions "0.5.7"
+    graphql-subscriptions "^1.0.0"
     graphql-tag "^2.9.2"
-    graphql-tools "^3.0.4"
-    hash.js "^1.1.3"
-    lodash "^4.17.10"
+    graphql-tools "^4.0.0"
+    graphql-upload "^8.0.2"
+    sha.js "^2.4.11"
     subscriptions-transport-ws "^0.9.11"
-    ws "^5.2.0"
+    ws "^6.0.0"
 
-apollo-server-env@2.0.3, apollo-server-env@^2.0.3:
-  version "2.0.3"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/apollo-server-env/-/apollo-server-env-2.0.3.tgz#3c13552cd33f400160076cf8e1c9b24be4d27e13"
-  integrity sha1-PBNVLNM/QAFgB2z44cmyS+TSfhM=
+apollo-server-env@2.2.0:
+  version "2.2.0"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/apollo-server-env/-/apollo-server-env-2.2.0.tgz#5eec5dbf46581f663fd6692b2e05c7e8ae6d6034"
+  integrity sha1-Xuxdv0ZYH2Y/1mkrLgXH6K5tYDQ=
   dependencies:
     node-fetch "^2.1.2"
     util.promisify "^1.0.0"
 
-apollo-server-errors@^2.0.2:
-  version "2.0.2"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/apollo-server-errors/-/apollo-server-errors-2.0.2.tgz#e9cbb1b74d2cd78aed23cd886ca2d0c186323b2b"
-  integrity sha1-6cuxt00s14rtI82IbKLQwYYyOys=
+apollo-server-errors@2.2.1:
+  version "2.2.1"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/apollo-server-errors/-/apollo-server-errors-2.2.1.tgz#f68a3f845929768057da7e1c6d30517db5872205"
+  integrity sha1-9oo/hFkpdoBX2n4cbTBRfbWHIgU=
 
-apollo-server-express@^2.1.0:
-  version "2.1.0"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/apollo-server-express/-/apollo-server-express-2.1.0.tgz#b2d423c2c934df5c4e0a1b0d5f0088a9461f3c86"
-  integrity sha1-stQjwsk031xOChsNXwCIqUYfPIY=
+apollo-server-express@2.4.8:
+  version "2.4.8"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/apollo-server-express/-/apollo-server-express-2.4.8.tgz#ec9eb61a87324555d49097e9fade3c7d142eb6cb"
+  integrity sha1-7J62GocyRVXUkJfp+t48fRQutss=
   dependencies:
-    "@apollographql/apollo-upload-server" "^5.0.3"
-    "@apollographql/graphql-playground-html" "^1.6.0"
+    "@apollographql/graphql-playground-html" "^1.6.6"
     "@types/accepts" "^1.3.5"
     "@types/body-parser" "1.17.0"
     "@types/cors" "^2.8.4"
-    "@types/express" "4.16.0"
+    "@types/express" "4.16.1"
     accepts "^1.3.5"
-    apollo-server-core "^2.1.0"
+    apollo-server-core "2.4.8"
     body-parser "^1.18.3"
     cors "^2.8.4"
-    graphql-subscriptions "^0.5.8"
-    graphql-tools "^3.0.4"
+    graphql-subscriptions "^1.0.0"
+    graphql-tools "^4.0.0"
     type-is "^1.6.16"
 
+apollo-server-plugin-base@0.3.7:
+  version "0.3.7"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/apollo-server-plugin-base/-/apollo-server-plugin-base-0.3.7.tgz#bfa4932fc9481bb36221545578d311db464af5a6"
+  integrity sha1-v6STL8lIG7NiIVRVeNMR20ZK9aY=
+
 apollo-server@^2.1.0:
-  version "2.1.0"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/apollo-server/-/apollo-server-2.1.0.tgz#abec7853647c59f386087352cc7f06a4f1f8afe2"
-  integrity sha1-q+x4U2R8WfOGCHNSzH8GpPH4r+I=
+  version "2.4.8"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/apollo-server/-/apollo-server-2.4.8.tgz#b18ec24e6356dd2a191a6fa0f1429b07ef7c89e3"
+  integrity sha1-sY7CTmNW3SoZGm+g8UKbB+98ieM=
   dependencies:
-    apollo-server-core "^2.1.0"
-    apollo-server-express "^2.1.0"
+    apollo-server-core "2.4.8"
+    apollo-server-express "2.4.8"
     express "^4.0.0"
-    graphql-subscriptions "^0.5.8"
-    graphql-tools "^3.0.4"
+    graphql-subscriptions "^1.0.0"
+    graphql-tools "^4.0.0"
 
-apollo-tracing@^0.2.5:
-  version "0.2.5"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/apollo-tracing/-/apollo-tracing-0.2.5.tgz#15bb8d6f37efe8c1bb6351e8e21521dd4f14c5f2"
-  integrity sha1-FbuNbzfv6MG7Y1Ho4hUh3U8UxfI=
+apollo-tracing@0.5.2:
+  version "0.5.2"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/apollo-tracing/-/apollo-tracing-0.5.2.tgz#cc49936fb435fa98d19c841514cfe05237c85b33"
+  integrity sha1-zEmTb7Q1+pjRnIQVFM/gUjfIWzM=
   dependencies:
-    apollo-server-env "^2.0.3"
-    graphql-extensions "^0.2.1"
+    apollo-server-env "2.2.0"
+    graphql-extensions "0.5.4"
 
-apollo-utilities@^1.0.0, apollo-utilities@^1.0.1:
-  version "1.0.21"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/apollo-utilities/-/apollo-utilities-1.0.21.tgz#cb8b5779fe275850b16046ff8373f4af2de90765"
-  integrity sha1-y4tXef4nWFCxYEb/g3P0ry3pB2U=
+apollo-utilities@^1.0.1, apollo-utilities@^1.2.1:
+  version "1.2.1"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/apollo-utilities/-/apollo-utilities-1.2.1.tgz#1c3a1ebf5607d7c8efe7636daaf58e7463b41b3c"
+  integrity sha1-HDoev1YH18jv52NtqvWOdGO0Gzw=
   dependencies:
     fast-json-stable-stringify "^2.0.0"
-    fclone "^1.0.11"
+    ts-invariant "^0.2.1"
+    tslib "^1.9.3"
 
 aproba@^1.0.3:
   version "1.2.0"
@@ -983,10 +1016,10 @@ assign-symbols@^1.0.0:
   resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/assign-symbols/-/assign-symbols-1.0.0.tgz#59667f41fadd4f20ccbc2bb96b8d4f7f78ec0367"
   integrity sha1-WWZ/QfrdTyDMvCu5a41Pf3jsA2c=
 
-async-each@^1.0.0:
-  version "1.0.1"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/async-each/-/async-each-1.0.1.tgz#19d386a1d9edc6e7c1c85d388aedbcc56d33602d"
-  integrity sha1-GdOGodntxufByF04iu28xW0zYC0=
+async-each@^1.0.1:
+  version "1.0.2"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/async-each/-/async-each-1.0.2.tgz#8b8a7ca2a658f927e9f307d6d1a42f4199f0f735"
+  integrity sha1-i4p8oqZY+Sfp8wfW0aQvQZnw9zU=
 
 async-limiter@~1.0.0:
   version "1.0.0"
@@ -1029,9 +1062,9 @@ base@^0.11.1:
     pascalcase "^0.1.1"
 
 binary-extensions@^1.0.0:
-  version "1.12.0"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/binary-extensions/-/binary-extensions-1.12.0.tgz#c2d780f53d45bba8317a8902d4ceeaf3a6385b14"
-  integrity sha1-wteA9T1Fu6gxeokC1M7q86Y4WxQ=
+  version "1.13.0"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/binary-extensions/-/binary-extensions-1.13.0.tgz#9523e001306a32444b907423f1de2164222f6ab1"
+  integrity sha1-lSPgATBqMkRLkHQj8d4hZCIvarE=
 
 body-parser@1.18.3, body-parser@^1.18.3:
   version "1.18.3"
@@ -1057,7 +1090,7 @@ brace-expansion@^1.1.7:
     balanced-match "^1.0.0"
     concat-map "0.0.1"
 
-braces@^2.3.0, braces@^2.3.1:
+braces@^2.3.1, braces@^2.3.2:
   version "2.3.2"
   resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/braces/-/braces-2.3.2.tgz#5979fd3f14cd531565e5fa2df1abfff1dfaee729"
   integrity sha1-WXn9PxTNUxVl5fot8av/8d+u5yk=
@@ -1073,22 +1106,21 @@ braces@^2.3.0, braces@^2.3.1:
     split-string "^3.0.2"
     to-regex "^3.0.1"
 
-browserslist@^4.1.0:
-  version "4.2.1"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/browserslist/-/browserslist-4.2.1.tgz#257a24c879d1cd4016348eee5c25de683260b21d"
-  integrity sha1-JXokyHnRzUAWNI7uXCXeaDJgsh0=
+browserslist@^4.4.2, browserslist@^4.5.1:
+  version "4.5.2"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/browserslist/-/browserslist-4.5.2.tgz#36ad281f040af684555a23c780f5c2081c752df0"
+  integrity sha1-Nq0oHwQK9oRVWiPHgPXCCBx1LfA=
   dependencies:
-    caniuse-lite "^1.0.30000890"
-    electron-to-chromium "^1.3.79"
-    node-releases "^1.0.0-alpha.14"
+    caniuse-lite "^1.0.30000951"
+    electron-to-chromium "^1.3.116"
+    node-releases "^1.1.11"
 
-busboy@^0.2.14:
-  version "0.2.14"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/busboy/-/busboy-0.2.14.tgz#6c2a622efcf47c57bbbe1e2a9c37ad36c7925453"
-  integrity sha1-bCpiLvz0fFe7vh4qnDetNseSVFM=
+busboy@^0.3.0:
+  version "0.3.0"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/busboy/-/busboy-0.3.0.tgz#6ee3cb1c844fc1f691d8f9d824f70128b3b5e485"
+  integrity sha1-buPLHIRPwfaR2PnYJPcBKLO15IU=
   dependencies:
-    dicer "0.2.5"
-    readable-stream "1.1.x"
+    dicer "0.3.0"
 
 bytes@3.0.0:
   version "3.0.0"
@@ -1110,41 +1142,40 @@ cache-base@^1.0.1:
     union-value "^1.0.0"
     unset-value "^1.0.0"
 
-caniuse-lite@^1.0.30000890:
-  version "1.0.30000893"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/caniuse-lite/-/caniuse-lite-1.0.30000893.tgz#284b20932bd41b93e21626975f2050cb01561986"
-  integrity sha1-KEsgkyvUG5PiFiaXXyBQywFWGYY=
+caniuse-lite@^1.0.30000951:
+  version "1.0.30000953"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/caniuse-lite/-/caniuse-lite-1.0.30000953.tgz#8054c4e5c4aa69dc3269353a4a5e102909759dbb"
+  integrity sha1-gFTE5cSqadwyaTU6Sl4QKQl1nbs=
 
 chalk@^2.0.0:
-  version "2.4.1"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/chalk/-/chalk-2.4.1.tgz#18c49ab16a037b6eb0152cc83e3471338215b66e"
-  integrity sha1-GMSasWoDe26wFSzIPjRxM4IVtm4=
+  version "2.4.2"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/chalk/-/chalk-2.4.2.tgz#cd42541677a54333cf541a49108c1432b44c9424"
+  integrity sha1-zUJUFnelQzPPVBpJEIwUMrRMlCQ=
   dependencies:
     ansi-styles "^3.2.1"
     escape-string-regexp "^1.0.5"
     supports-color "^5.3.0"
 
 chokidar@^2.0.3:
-  version "2.0.4"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/chokidar/-/chokidar-2.0.4.tgz#356ff4e2b0e8e43e322d18a372460bbcf3accd26"
-  integrity sha1-NW/04rDo5D4yLRijckYLvPOszSY=
+  version "2.1.5"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/chokidar/-/chokidar-2.1.5.tgz#0ae8434d962281a5f56c72869e79cb6d9d86ad4d"
+  integrity sha1-CuhDTZYigaX1bHKGnnnLbZ2GrU0=
   dependencies:
     anymatch "^2.0.0"
-    async-each "^1.0.0"
-    braces "^2.3.0"
+    async-each "^1.0.1"
+    braces "^2.3.2"
     glob-parent "^3.1.0"
-    inherits "^2.0.1"
+    inherits "^2.0.3"
     is-binary-path "^1.0.0"
     is-glob "^4.0.0"
-    lodash.debounce "^4.0.8"
-    normalize-path "^2.1.1"
+    normalize-path "^3.0.0"
     path-is-absolute "^1.0.0"
-    readdirp "^2.0.0"
-    upath "^1.0.5"
+    readdirp "^2.2.1"
+    upath "^1.1.1"
   optionalDependencies:
-    fsevents "^1.2.2"
+    fsevents "^1.2.7"
 
-chownr@^1.0.1:
+chownr@^1.1.1:
   version "1.1.1"
   resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/chownr/-/chownr-1.1.1.tgz#54726b8b8fff4df053c42187e801fb4412df1494"
   integrity sha1-VHJri4//TfBTxCGH6AH7RBLfFJQ=
@@ -1236,10 +1267,35 @@ copy-descriptor@^0.1.0:
   resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/copy-descriptor/-/copy-descriptor-0.1.1.tgz#676f6eb3c39997c2ee1ac3a924fd6124748f578d"
   integrity sha1-Z29us8OZl8LuGsOpJP1hJHSPV40=
 
-core-js@^2.5.7:
-  version "2.5.7"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/core-js/-/core-js-2.5.7.tgz#f972608ff0cead68b841a16a932d0b183791814e"
-  integrity sha1-+XJgj/DOrWi4QaFqky0LGDeRgU4=
+core-js-compat@^3.0.0:
+  version "3.0.0"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/core-js-compat/-/core-js-compat-3.0.0.tgz#cd9810b8000742535a4a43773866185e310bd4f7"
+  integrity sha1-zZgQuAAHQlNaSkN3OGYYXjEL1Pc=
+  dependencies:
+    browserslist "^4.5.1"
+    core-js "3.0.0"
+    core-js-pure "3.0.0"
+    semver "^5.6.0"
+
+core-js-pure@3.0.0:
+  version "3.0.0"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/core-js-pure/-/core-js-pure-3.0.0.tgz#a5679adb4875427c8c0488afc93e6f5b7125859b"
+  integrity sha1-pWea20h1QnyMBIivyT5vW3ElhZs=
+
+core-js@3.0.0:
+  version "3.0.0"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/core-js/-/core-js-3.0.0.tgz#a8dbfa978d29bfc263bfb66c556d0ca924c28957"
+  integrity sha1-qNv6l40pv8Jjv7ZsVW0MqSTCiVc=
+
+core-js@3.0.0-beta.13:
+  version "3.0.0-beta.13"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/core-js/-/core-js-3.0.0-beta.13.tgz#7732c69be5e4758887917235fe7c0352c4cb42a1"
+  integrity sha1-dzLGm+XkdYiHkXI1/nwDUsTLQqE=
+
+core-js@^2.6.5:
+  version "2.6.5"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/core-js/-/core-js-2.6.5.tgz#44bc8d249e7fb2ff5d00e0341a7ffb94fbf67895"
+  integrity sha1-RLyNJJ5/sv9dAOA0Gn/7lPv2eJU=
 
 core-util-is@~1.0.0:
   version "1.0.2"
@@ -1247,9 +1303,9 @@ core-util-is@~1.0.0:
   integrity sha1-tf1UIgqivFq1eqtxQMlAdUUDwac=
 
 cors@^2.8.4:
-  version "2.8.4"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/cors/-/cors-2.8.4.tgz#2bd381f2eb201020105cd50ea59da63090694686"
-  integrity sha1-K9OB8usgECAQXNUOpZ2mMJBpRoY=
+  version "2.8.5"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/cors/-/cors-2.8.5.tgz#eac11da51592dd86b9f06f6e7ac293b3df875d29"
+  integrity sha1-6sEdpRWS3Ya58G9uesKTs9+HXSk=
   dependencies:
     object-assign "^4"
     vary "^1"
@@ -1261,10 +1317,10 @@ debug@2.6.9, debug@^2.1.2, debug@^2.2.0, debug@^2.3.3:
   dependencies:
     ms "2.0.0"
 
-debug@^3.1.0:
-  version "3.2.6"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/debug/-/debug-3.2.6.tgz#e83d17de16d8a7efb7717edbe5fb10135eee629b"
-  integrity sha1-6D0X3hbYp++3cX7b5fsQE17uYps=
+debug@^4.1.0:
+  version "4.1.1"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/debug/-/debug-4.1.1.tgz#3b72260255109c6b589cee050f1d516139664791"
+  integrity sha1-O3ImAlUQnGtYnO4FDx1RYTlmR5E=
   dependencies:
     ms "^2.1.1"
 
@@ -1332,12 +1388,11 @@ detect-libc@^1.0.2:
   resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/detect-libc/-/detect-libc-1.0.3.tgz#fa137c4bd698edf55cd5cd02ac559f91a4c4ba9b"
   integrity sha1-+hN8S9aY7fVc1c0CrFWfkaTEups=
 
-dicer@0.2.5:
-  version "0.2.5"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/dicer/-/dicer-0.2.5.tgz#5996c086bb33218c812c090bddc09cd12facb70f"
-  integrity sha1-WZbAhrszIYyBLAkL3cCc0S+stw8=
+dicer@0.3.0:
+  version "0.3.0"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/dicer/-/dicer-0.3.0.tgz#eacd98b3bfbf92e8ab5c2fdb71aaac44bb06b872"
+  integrity sha1-6s2Ys7+/kuirXC/bcaqsRLsGuHI=
   dependencies:
-    readable-stream "1.1.x"
     streamsearch "0.1.2"
 
 ee-first@1.1.1:
@@ -1345,10 +1400,10 @@ ee-first@1.1.1:
   resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/ee-first/-/ee-first-1.1.1.tgz#590c61156b0ae2f4f0255732a158b266bc56b21d"
   integrity sha1-WQxhFWsK4vTwJVcyoViyZrxWsh0=
 
-electron-to-chromium@^1.3.79:
-  version "1.3.80"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/electron-to-chromium/-/electron-to-chromium-1.3.80.tgz#e99ec7efe64c2c6a269d3885ff411ea88852fa53"
-  integrity sha1-6Z7H7+ZMLGomnTiF/0EeqIhS+lM=
+electron-to-chromium@^1.3.116:
+  version "1.3.119"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/electron-to-chromium/-/electron-to-chromium-1.3.119.tgz#9a7770da667252aeb81f667853f67c2b26e00197"
+  integrity sha1-mndw2mZyUq64H2Z4U/Z8KybgAZc=
 
 encodeurl@~1.0.2:
   version "1.0.2"
@@ -1356,17 +1411,18 @@ encodeurl@~1.0.2:
   integrity sha1-rT/0yG7C0CkyL1oCw6mmBslbP1k=
 
 es-abstract@^1.5.1:
-  version "1.12.0"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/es-abstract/-/es-abstract-1.12.0.tgz#9dbbdd27c6856f0001421ca18782d786bf8a6165"
-  integrity sha1-nbvdJ8aFbwABQhyhh4LXhr+KYWU=
+  version "1.13.0"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/es-abstract/-/es-abstract-1.13.0.tgz#ac86145fdd5099d8dd49558ccba2eaf9b88e24e9"
+  integrity sha1-rIYUX91QmdjdSVWMy6Lq+biOJOk=
   dependencies:
-    es-to-primitive "^1.1.1"
+    es-to-primitive "^1.2.0"
     function-bind "^1.1.1"
-    has "^1.0.1"
-    is-callable "^1.1.3"
+    has "^1.0.3"
+    is-callable "^1.1.4"
     is-regex "^1.0.4"
+    object-keys "^1.0.12"
 
-es-to-primitive@^1.1.1:
+es-to-primitive@^1.2.0:
   version "1.2.0"
   resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/es-to-primitive/-/es-to-primitive-1.2.0.tgz#edf72478033456e8dda8ef09e00ad9650707f377"
   integrity sha1-7fckeAM0VujdqO8J4ArZZQcH83c=
@@ -1483,11 +1539,6 @@ fast-json-stable-stringify@^2.0.0:
   resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/fast-json-stable-stringify/-/fast-json-stable-stringify-2.0.0.tgz#d5142c0caee6b1189f87d3a76111064f86c8bbf2"
   integrity sha1-1RQsDK7msRifh9OnYREGT4bIu/I=
 
-fclone@^1.0.11:
-  version "1.0.11"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/fclone/-/fclone-1.0.11.tgz#10e85da38bfea7fc599341c296ee1d77266ee640"
-  integrity sha1-EOhdo4v+p/xZk0HClu4ddyZu5kA=
-
 fill-range@^4.0.0:
   version "4.0.0"
   resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/fill-range/-/fill-range-4.0.0.tgz#d544811d428f98eb06a63dc402d2403c328c38f7"
@@ -1533,6 +1584,11 @@ fresh@0.5.2:
   resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/fresh/-/fresh-0.5.2.tgz#3d8cadd90d976569fa835ab1f8e4b23a105605a7"
   integrity sha1-PYyt2Q2XZWn6g1qx+OSyOhBWBac=
 
+fs-capacitor@^2.0.0:
+  version "2.0.1"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/fs-capacitor/-/fs-capacitor-2.0.1.tgz#8b27ce79979a4ed2427e7bb6bf3d781344f7ea56"
+  integrity sha1-iyfOeZeaTtJCfnu2vz14E0T36lY=
+
 fs-minipass@^1.2.5:
   version "1.2.5"
   resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/fs-minipass/-/fs-minipass-1.2.5.tgz#06c277218454ec288df77ada54a03b8702aacb9d"
@@ -1550,10 +1606,10 @@ fs.realpath@^1.0.0:
   resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/fs.realpath/-/fs.realpath-1.0.0.tgz#1504ad2523158caa40db4a2787cb01411994ea4f"
   integrity sha1-FQStJSMVjKpA20onh8sBQRmU6k8=
 
-fsevents@^1.2.2:
-  version "1.2.4"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/fsevents/-/fsevents-1.2.4.tgz#f41dcb1af2582af3692da36fc55cbd8e1041c426"
-  integrity sha1-9B3LGvJYKvNpLaNvxVy9jhBBxCY=
+fsevents@^1.2.7:
+  version "1.2.7"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/fsevents/-/fsevents-1.2.7.tgz#4851b664a3783e52003b3c66eb0eee1074933aa4"
+  integrity sha1-SFG2ZKN4PlIAOzxm6w7uEHSTOqQ=
   dependencies:
     nan "^2.9.2"
     node-pre-gyp "^0.10.0"
@@ -1590,7 +1646,7 @@ glob-parent@^3.1.0:
     is-glob "^3.1.0"
     path-dirname "^1.0.0"
 
-glob@^7.0.0, glob@^7.0.5:
+glob@^7.0.0, glob@^7.1.3:
   version "7.1.3"
   resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/glob/-/glob-7.1.3.tgz#3960832d3f1574108342dafd3a67b332c0969df1"
   integrity sha1-OWCDLT8VdBCDQtr9OmezMsCWnfE=
@@ -1603,49 +1659,66 @@ glob@^7.0.0, glob@^7.0.5:
     path-is-absolute "^1.0.0"
 
 globals@^11.1.0:
-  version "11.8.0"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/globals/-/globals-11.8.0.tgz#c1ef45ee9bed6badf0663c5cb90e8d1adec1321d"
-  integrity sha1-we9F7pvta63wZjxcuQ6NGt7BMh0=
+  version "11.11.0"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/globals/-/globals-11.11.0.tgz#dcf93757fa2de5486fbeed7118538adf789e9c2e"
+  integrity sha1-3Pk3V/ot5Uhvvu1xGFOK33ienC4=
 
 graceful-fs@^4.1.11:
-  version "4.1.11"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/graceful-fs/-/graceful-fs-4.1.11.tgz#0e8bdfe4d1ddb8854d64e04ea7c00e2a026e5658"
-  integrity sha1-Dovf5NHduIVNZOBOp8AOKgJuVlg=
+  version "4.1.15"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/graceful-fs/-/graceful-fs-4.1.15.tgz#ffb703e1066e8a0eeaa4c8b80ba9253eeefbfb00"
+  integrity sha1-/7cD4QZuig7qpMi4C6klPu77+wA=
 
-graphql-extensions@^0.2.1:
-  version "0.2.1"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/graphql-extensions/-/graphql-extensions-0.2.1.tgz#7697e0fcea2e622afe9e24dd31fc84f533e84c70"
-  integrity sha1-dpfg/OouYir+niTdMfyE9TPoTHA=
+graphql-extensions@0.5.4:
+  version "0.5.4"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/graphql-extensions/-/graphql-extensions-0.5.4.tgz#18a9674f9adb11aa6c0737485887ea8877914cff"
+  integrity sha1-GKlnT5rbEapsBzdIWIfqiHeRTP8=
   dependencies:
-    apollo-server-env "^2.0.3"
+    "@apollographql/apollo-tools" "^0.3.3"
+
+graphql-extensions@0.5.7:
+  version "0.5.7"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/graphql-extensions/-/graphql-extensions-0.5.7.tgz#2b647e4e36997dc85b7f58ebd64324a5250fb2cf"
+  integrity sha1-K2R+TjaZfchbf1jr1kMkpSUPss8=
+  dependencies:
+    "@apollographql/apollo-tools" "^0.3.3"
 
 graphql-iso-date@^3.6.1:
   version "3.6.1"
   resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/graphql-iso-date/-/graphql-iso-date-3.6.1.tgz#bd2d0dc886e0f954cbbbc496bbf1d480b57ffa96"
   integrity sha1-vS0NyIbg+VTLu8SWu/HUgLV/+pY=
 
-graphql-subscriptions@^0.5.8:
-  version "0.5.8"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/graphql-subscriptions/-/graphql-subscriptions-0.5.8.tgz#13a6143c546bce390404657dc73ca501def30aa7"
-  integrity sha1-E6YUPFRrzjkEBGV9xzylAd7zCqc=
+graphql-subscriptions@^1.0.0:
+  version "1.0.0"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/graphql-subscriptions/-/graphql-subscriptions-1.0.0.tgz#475267694b3bd465af6477dbab4263a3f62702b8"
+  integrity sha1-R1JnaUs71GWvZHfbq0Jjo/YnArg=
   dependencies:
     iterall "^1.2.1"
 
 graphql-tag@^2.9.2:
-  version "2.10.0"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/graphql-tag/-/graphql-tag-2.10.0.tgz#87da024be863e357551b2b8700e496ee2d4353ae"
-  integrity sha1-h9oCS+hj41dVGyuHAOSW7i1DU64=
+  version "2.10.1"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/graphql-tag/-/graphql-tag-2.10.1.tgz#10aa41f1cd8fae5373eaf11f1f67260a3cad5e02"
+  integrity sha1-EKpB8c2PrlNz6vEfH2cmCjytXgI=
 
-graphql-tools@^3.0.4:
-  version "3.1.1"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/graphql-tools/-/graphql-tools-3.1.1.tgz#d593358f01e7c8b1671a17b70ddb034dea9dbc50"
-  integrity sha1-1ZM1jwHnyLFnGhe3DdsDTeqdvFA=
+graphql-tools@^4.0.0:
+  version "4.0.4"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/graphql-tools/-/graphql-tools-4.0.4.tgz#ca08a63454221fdde825fe45fbd315eb2a6d566b"
+  integrity sha1-ygimNFQiH93oJf5F+9MV6yptVms=
   dependencies:
-    apollo-link "^1.2.2"
+    apollo-link "^1.2.3"
     apollo-utilities "^1.0.1"
     deprecated-decorator "^0.1.6"
     iterall "^1.1.3"
     uuid "^3.1.0"
+
+graphql-upload@^8.0.2:
+  version "8.0.4"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/graphql-upload/-/graphql-upload-8.0.4.tgz#ed7cbde883b5cca493de77e39f95cddf40dfd514"
+  integrity sha1-7Xy96IO1zKST3nfjn5XN30Df1RQ=
+  dependencies:
+    busboy "^0.3.0"
+    fs-capacitor "^2.0.0"
+    http-errors "^1.7.1"
+    object-path "^0.11.4"
 
 graphql@^0.13.2:
   version "0.13.2"
@@ -1700,20 +1773,12 @@ has-values@^1.0.0:
     is-number "^3.0.0"
     kind-of "^4.0.0"
 
-has@^1.0.1:
+has@^1.0.1, has@^1.0.3:
   version "1.0.3"
   resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/has/-/has-1.0.3.tgz#722d7cbfc1f6aa8241f16dd814e011e1f41e8796"
   integrity sha1-ci18v8H2qoJB8W3YFOAR4fQeh5Y=
   dependencies:
     function-bind "^1.1.1"
-
-hash.js@^1.1.3:
-  version "1.1.5"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/hash.js/-/hash.js-1.1.5.tgz#e38ab4b85dfb1e0c40fe9265c0e9b54854c23812"
-  integrity sha1-44q0uF37HgxA/pJlwOm1SFTCOBI=
-  dependencies:
-    inherits "^2.0.3"
-    minimalistic-assert "^1.0.1"
 
 http-errors@1.6.3, http-errors@~1.6.2, http-errors@~1.6.3:
   version "1.6.3"
@@ -1724,6 +1789,17 @@ http-errors@1.6.3, http-errors@~1.6.2, http-errors@~1.6.3:
     inherits "2.0.3"
     setprototypeof "1.1.0"
     statuses ">= 1.4.0 < 2"
+
+http-errors@^1.7.1:
+  version "1.7.2"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/http-errors/-/http-errors-1.7.2.tgz#4f5029cf13239f31036e5b2e55292bcfbcc85c8f"
+  integrity sha1-T1ApzxMjnzEDblsuVSkrz7zIXI8=
+  dependencies:
+    depd "~1.1.2"
+    inherits "2.0.3"
+    setprototypeof "1.1.1"
+    statuses ">= 1.5.0 < 2"
+    toidentifier "1.0.0"
 
 iconv-lite@0.4.23:
   version "0.4.23"
@@ -1754,7 +1830,7 @@ inflight@^1.0.4:
     once "^1.3.0"
     wrappy "1"
 
-inherits@2, inherits@2.0.3, inherits@^2.0.1, inherits@^2.0.3, inherits@~2.0.1, inherits@~2.0.3:
+inherits@2, inherits@2.0.3, inherits@^2.0.1, inherits@^2.0.3, inherits@~2.0.3:
   version "2.0.3"
   resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/inherits/-/inherits-2.0.3.tgz#633c2c83e3da42a502f52466022480f4208261de"
   integrity sha1-Yzwsg+PaQqUC9SRmAiSA9CCCYd4=
@@ -1802,7 +1878,7 @@ is-buffer@^1.1.5:
   resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/is-buffer/-/is-buffer-1.1.6.tgz#efaa2ea9daa0d7ab2ea13a97b2b8ad51fefbe8be"
   integrity sha1-76ouqdqg16suoTqXsritUf776L4=
 
-is-callable@^1.1.3, is-callable@^1.1.4:
+is-callable@^1.1.4:
   version "1.1.4"
   resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/is-callable/-/is-callable-1.1.4.tgz#1e1adf219e1eeb684d691f9d6a05ff0d30a24d75"
   integrity sha1-HhrfIZ4e62hNaR+dagX/DTCiTXU=
@@ -1925,11 +2001,6 @@ is-windows@^1.0.2:
   resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/is-windows/-/is-windows-1.0.2.tgz#d1850eb9791ecd18e6182ce12a30f396634bb19d"
   integrity sha1-0YUOuXkezRjmGCzhKjDzlmNLsZ0=
 
-isarray@0.0.1:
-  version "0.0.1"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/isarray/-/isarray-0.0.1.tgz#8a18acfca9a8f4177e09abfc6038939b05d1eedf"
-  integrity sha1-ihis/Kmo9Bd+Cav8YDiTmwXR7t8=
-
 isarray@1.0.0, isarray@~1.0.0:
   version "1.0.0"
   resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/isarray/-/isarray-1.0.0.tgz#bb935d48582cba168c06834957a54a3e07124f11"
@@ -1953,9 +2024,9 @@ iterall@^1.1.3, iterall@^1.2.1:
   integrity sha1-ktcN64Ao4MOf8xZP2/TYsIgTDNc=
 
 js-levenshtein@^1.1.3:
-  version "1.1.4"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/js-levenshtein/-/js-levenshtein-1.1.4.tgz#3a56e3cbf589ca0081eb22cd9ba0b1290a16d26e"
-  integrity sha1-Olbjy/WJygCB6yLNm6CxKQoW0m4=
+  version "1.1.6"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/js-levenshtein/-/js-levenshtein-1.1.6.tgz#c6cee58eb3550372df8deb85fad5ce66ce01d59d"
+  integrity sha1-xs7ljrNVA3LfjeuF+tXOZs4B1Z0=
 
 "js-tokens@^3.0.0 || ^4.0.0", js-tokens@^4.0.0:
   version "4.0.0"
@@ -1963,19 +2034,21 @@ js-levenshtein@^1.1.3:
   integrity sha1-GSA/tZmR35jjoocFDUZHzerzJJk=
 
 jsesc@^2.5.1:
-  version "2.5.1"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/jsesc/-/jsesc-2.5.1.tgz#e421a2a8e20d6b0819df28908f782526b96dd1fe"
-  integrity sha1-5CGiqOINawgZ3yiQj3glJrlt0f4=
+  version "2.5.2"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/jsesc/-/jsesc-2.5.2.tgz#80564d2e483dacf6e8ef209650a67df3f0c283a4"
+  integrity sha1-gFZNLkg9rPbo7yCWUKZ98/DCg6Q=
 
 jsesc@~0.5.0:
   version "0.5.0"
   resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/jsesc/-/jsesc-0.5.0.tgz#e7dee66e35d6fc16f710fe91d5cf69f70f08911d"
   integrity sha1-597mbjXW/Bb3EP6R1c9p9w8IkR0=
 
-json5@^0.5.0:
-  version "0.5.1"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/json5/-/json5-0.5.1.tgz#1eade7acc012034ad84e2396767ead9fa5495821"
-  integrity sha1-Hq3nrMASA0rYTiOWdn6tn6VJWCE=
+json5@^2.1.0:
+  version "2.1.0"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/json5/-/json5-2.1.0.tgz#e7a0c62c48285c628d20a10b85c89bb807c32850"
+  integrity sha1-56DGLEgoXGKNIKELhcibuAfDKFA=
+  dependencies:
+    minimist "^1.2.0"
 
 kind-of@^3.0.2, kind-of@^3.0.3, kind-of@^3.2.0:
   version "3.2.2"
@@ -2001,12 +2074,12 @@ kind-of@^6.0.0, kind-of@^6.0.2:
   resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/kind-of/-/kind-of-6.0.2.tgz#01146b36a6218e64e58f3a8d66de5d7fc6f6d051"
   integrity sha1-ARRrNqYhjmTljzqNZt5df8b20FE=
 
-lodash.debounce@^4.0.8:
-  version "4.0.8"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/lodash.debounce/-/lodash.debounce-4.0.8.tgz#82d79bff30a67c4005ffd5e2515300ad9ca4d7af"
-  integrity sha1-gteb/zCmfEAF/9XiUVMArZyk168=
+lodash.sortby@^4.7.0:
+  version "4.7.0"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/lodash.sortby/-/lodash.sortby-4.7.0.tgz#edd14c824e2cc9c1e0b0a1b42bb5210516a42438"
+  integrity sha1-7dFMgk4sycHgsKG0K7UhBRakJDg=
 
-lodash@^4.17.10:
+lodash@^4.17.10, lodash@^4.17.11:
   version "4.17.11"
   resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/lodash/-/lodash-4.17.11.tgz#b39ea6229ef607ecd89e2c8df12536891cac9b8d"
   integrity sha1-s56mIp72B+zYniyN8SU2iRysm40=
@@ -2023,13 +2096,12 @@ loose-envify@^1.0.0:
   dependencies:
     js-tokens "^3.0.0 || ^4.0.0"
 
-lru-cache@^4.1.3:
-  version "4.1.3"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/lru-cache/-/lru-cache-4.1.3.tgz#a1175cf3496dfc8436c156c334b4955992bce69c"
-  integrity sha1-oRdc80lt/IQ2wVbDNLSVWZK85pw=
+lru-cache@^5.0.0:
+  version "5.1.1"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/lru-cache/-/lru-cache-5.1.1.tgz#1da27e6710271947695daf6848e847f01d84b920"
+  integrity sha1-HaJ+ZxAnGUdpXa9oSOhH8B2EuSA=
   dependencies:
-    pseudomap "^1.0.2"
-    yallist "^2.1.2"
+    yallist "^3.0.2"
 
 map-cache@^0.2.2:
   version "0.2.2"
@@ -2077,27 +2149,22 @@ micromatch@^3.1.10, micromatch@^3.1.4:
     snapdragon "^0.8.1"
     to-regex "^3.0.2"
 
-mime-db@~1.36.0:
-  version "1.36.0"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/mime-db/-/mime-db-1.36.0.tgz#5020478db3c7fe93aad7bbcc4dcf869c43363397"
-  integrity sha1-UCBHjbPH/pOq17vMTc+GnEM2M5c=
+mime-db@~1.38.0:
+  version "1.38.0"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/mime-db/-/mime-db-1.38.0.tgz#1a2aab16da9eb167b49c6e4df2d9c68d63d8e2ad"
+  integrity sha1-GiqrFtqesWe0nG5N8tnGjWPY4q0=
 
 mime-types@~2.1.18:
-  version "2.1.20"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/mime-types/-/mime-types-2.1.20.tgz#930cb719d571e903738520f8470911548ca2cc19"
-  integrity sha1-kwy3GdVx6QNzhSD4RwkRVIyizBk=
+  version "2.1.22"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/mime-types/-/mime-types-2.1.22.tgz#fe6b355a190926ab7698c9a0556a11199b2199bd"
+  integrity sha1-/ms1WhkJJqt2mMmgVWoRGZshmb0=
   dependencies:
-    mime-db "~1.36.0"
+    mime-db "~1.38.0"
 
 mime@1.4.1:
   version "1.4.1"
   resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/mime/-/mime-1.4.1.tgz#121f9ebc49e3766f311a76e1fa1c8003c4b03aa6"
   integrity sha1-Eh+evEnjdm8xGnbh+hyAA8SwOqY=
-
-minimalistic-assert@^1.0.1:
-  version "1.0.1"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/minimalistic-assert/-/minimalistic-assert-1.0.1.tgz#2e194de044626d4a10e7f7fbc00ce73e83e4d5c7"
-  integrity sha1-LhlN4ERibUoQ5/f7wAznPoPk1cc=
 
 minimatch@^3.0.4:
   version "3.0.4"
@@ -2116,18 +2183,18 @@ minimist@^1.2.0:
   resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/minimist/-/minimist-1.2.0.tgz#a35008b20f41383eec1fb914f4cd5df79a264284"
   integrity sha1-o1AIsg9BOD7sH7kU9M1d95omQoQ=
 
-minipass@^2.2.1, minipass@^2.3.3:
-  version "2.3.4"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/minipass/-/minipass-2.3.4.tgz#4768d7605ed6194d6d576169b9e12ef71e9d9957"
-  integrity sha1-R2jXYF7WGU1tV2FpueEu9x6dmVc=
+minipass@^2.2.1, minipass@^2.3.4:
+  version "2.3.5"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/minipass/-/minipass-2.3.5.tgz#cacebe492022497f656b0f0f51e2682a9ed2d848"
+  integrity sha1-ys6+SSAiSX9law8PUeJoKp7S2Eg=
   dependencies:
     safe-buffer "^5.1.2"
     yallist "^3.0.0"
 
-minizlib@^1.1.0:
-  version "1.1.1"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/minizlib/-/minizlib-1.1.1.tgz#6734acc045a46e61d596a43bb9d9cd326e19cc42"
-  integrity sha1-ZzSswEWkbmHVlqQ7udnNMm4ZzEI=
+minizlib@^1.1.1:
+  version "1.2.1"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/minizlib/-/minizlib-1.2.1.tgz#dd27ea6136243c7c880684e8672bb3a45fd9b614"
+  integrity sha1-3SfqYTYkPHyIBoToZyuzpF/ZthQ=
   dependencies:
     minipass "^2.2.1"
 
@@ -2157,9 +2224,9 @@ ms@^2.1.1:
   integrity sha1-MKWGTrPrsKZvLr5tcnrwagnYbgo=
 
 nan@^2.9.2:
-  version "2.11.1"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/nan/-/nan-2.11.1.tgz#90e22bccb8ca57ea4cd37cc83d3819b52eea6766"
-  integrity sha1-kOIrzLjKV+pM03zIPTgZtS7qZ2Y=
+  version "2.13.2"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/nan/-/nan-2.13.2.tgz#f51dc7ae66ba7d5d55e1e6d4d8092e802c9aefe7"
+  integrity sha1-9R3Hrma6fV1V4ebU2AkugCya7+c=
 
 nanomatch@^1.2.9:
   version "1.2.13"
@@ -2192,10 +2259,10 @@ negotiator@0.6.1:
   resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/negotiator/-/negotiator-0.6.1.tgz#2b327184e8992101177b28563fb5e7102acd0ca9"
   integrity sha1-KzJxhOiZIQEXeyhWP7XnECrNDKk=
 
-node-fetch@^2.1.2:
-  version "2.2.0"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/node-fetch/-/node-fetch-2.2.0.tgz#4ee79bde909262f9775f731e3656d0db55ced5b5"
-  integrity sha1-Tueb3pCSYvl3X3MeNlbQ21XO1bU=
+node-fetch@^2.1.2, node-fetch@^2.2.0:
+  version "2.3.0"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/node-fetch/-/node-fetch-2.3.0.tgz#1a1d940bbfb916a1d3e0219f037e89e71f8c5fa5"
+  integrity sha1-Gh2UC7+5FqHT4CGfA36J5x+MX6U=
 
 node-pre-gyp@^0.10.0:
   version "0.10.3"
@@ -2213,10 +2280,10 @@ node-pre-gyp@^0.10.0:
     semver "^5.3.0"
     tar "^4"
 
-node-releases@^1.0.0-alpha.14:
-  version "1.0.0-alpha.14"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/node-releases/-/node-releases-1.0.0-alpha.14.tgz#da9e2780add4bbb59ad890af9e2018a1d9c0034b"
-  integrity sha1-2p4ngK3Uu7Wa2JCvniAYodnAA0s=
+node-releases@^1.1.11:
+  version "1.1.11"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/node-releases/-/node-releases-1.1.11.tgz#9a0841a4b0d92b7d5141ed179e764f42ad22724a"
+  integrity sha1-mghBpLDZK31RQe0XnnZPQq0icko=
   dependencies:
     semver "^5.3.0"
 
@@ -2235,15 +2302,20 @@ normalize-path@^2.1.1:
   dependencies:
     remove-trailing-separator "^1.0.1"
 
+normalize-path@^3.0.0:
+  version "3.0.0"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/normalize-path/-/normalize-path-3.0.0.tgz#0dcd69ff23a1c9b11fd0978316644a0388216a65"
+  integrity sha1-Dc1p/yOhybEf0JeDFmRKA4ghamU=
+
 npm-bundled@^1.0.1:
-  version "1.0.5"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/npm-bundled/-/npm-bundled-1.0.5.tgz#3c1732b7ba936b3a10325aef616467c0ccbcc979"
-  integrity sha1-PBcyt7qTazoQMlrvYWRnwMy8yXk=
+  version "1.0.6"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/npm-bundled/-/npm-bundled-1.0.6.tgz#e7ba9aadcef962bb61248f91721cd932b3fe6bdd"
+  integrity sha1-57qarc75YrthJI+RchzZMrP+a90=
 
 npm-packlist@^1.1.6:
-  version "1.1.12"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/npm-packlist/-/npm-packlist-1.1.12.tgz#22bde2ebc12e72ca482abd67afc51eb49377243a"
-  integrity sha1-Ir3i68EucspIKr1nr8UetJN3JDo=
+  version "1.4.1"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/npm-packlist/-/npm-packlist-1.4.1.tgz#19064cdf988da80ea3cee45533879d90192bbfbc"
+  integrity sha1-GQZM35iNqA6jzuRVM4edkBkrv7w=
   dependencies:
     ignore-walk "^3.0.1"
     npm-bundled "^1.0.1"
@@ -2278,9 +2350,9 @@ object-copy@^0.1.0:
     kind-of "^3.0.3"
 
 object-keys@^1.0.12:
-  version "1.0.12"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/object-keys/-/object-keys-1.0.12.tgz#09c53855377575310cca62f55bb334abff7b3ed2"
-  integrity sha1-CcU4VTd1dTEMymL1W7M0q/97PtI=
+  version "1.1.0"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/object-keys/-/object-keys-1.1.0.tgz#11bd22348dd2e096a045ab06f6c85bcc340fa032"
+  integrity sha1-Eb0iNI3S4JagRasG9shbzDQPoDI=
 
 object-path@^0.11.4:
   version "0.11.4"
@@ -2370,7 +2442,7 @@ path-is-absolute@^1.0.0:
   resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/path-is-absolute/-/path-is-absolute-1.0.1.tgz#174b9268735534ffbc7ace6bf53a5a9e1b5c5f5f"
   integrity sha1-F0uSaHNVNP+8es5r9TpanhtcX18=
 
-path-parse@^1.0.5:
+path-parse@^1.0.6:
   version "1.0.6"
   resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/path-parse/-/path-parse-1.0.6.tgz#d62dbb5679405d72c4737ec58600e9ddcf06d24c"
   integrity sha1-1i27VnlAXXLEc37FhgDp3c8G0kw=
@@ -2422,11 +2494,6 @@ proxy-addr@~2.0.4:
     forwarded "~0.1.2"
     ipaddr.js "1.8.0"
 
-pseudomap@^1.0.2:
-  version "1.0.2"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/pseudomap/-/pseudomap-1.0.2.tgz#f052a28da70e618917ef0a8ac34c1ae5a68286b3"
-  integrity sha1-8FKijacOYYkX7wqKw0wa5aaChrM=
-
 qs@6.5.2:
   version "6.5.2"
   resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/qs/-/qs-6.5.2.tgz#cb3ae806e8740444584ef154ce8ee98d403f3e36"
@@ -2457,16 +2524,6 @@ rc@^1.2.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-readable-stream@1.1.x:
-  version "1.1.14"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/readable-stream/-/readable-stream-1.1.14.tgz#7cf4c54ef648e3813084c636dd2079e166c081d9"
-  integrity sha1-fPTFTvZI44EwhMY23SB54WbAgdk=
-  dependencies:
-    core-util-is "~1.0.0"
-    inherits "~2.0.1"
-    isarray "0.0.1"
-    string_decoder "~0.10.x"
-
 readable-stream@^2.0.2, readable-stream@^2.0.6:
   version "2.3.6"
   resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/readable-stream/-/readable-stream-2.3.6.tgz#b11c27d88b8ff1fbe070643cf94b0c79ae1b0aaf"
@@ -2480,7 +2537,7 @@ readable-stream@^2.0.2, readable-stream@^2.0.6:
     string_decoder "~1.1.1"
     util-deprecate "~1.0.1"
 
-readdirp@^2.0.0:
+readdirp@^2.2.1:
   version "2.2.1"
   resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/readdirp/-/readdirp-2.2.1.tgz#0e87622a3325aa33e892285caf8b4e846529a525"
   integrity sha1-DodiKjMlqjPokihcr4tOhGUppSU=
@@ -2489,10 +2546,10 @@ readdirp@^2.0.0:
     micromatch "^3.1.10"
     readable-stream "^2.0.2"
 
-regenerate-unicode-properties@^7.0.0:
-  version "7.0.0"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/regenerate-unicode-properties/-/regenerate-unicode-properties-7.0.0.tgz#107405afcc4a190ec5ed450ecaa00ed0cafa7a4c"
-  integrity sha1-EHQFr8xKGQ7F7UUOyqAO0Mr6ekw=
+regenerate-unicode-properties@^8.0.2:
+  version "8.0.2"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/regenerate-unicode-properties/-/regenerate-unicode-properties-8.0.2.tgz#7b38faa296252376d363558cfbda90c9ce709662"
+  integrity sha1-ezj6opYlI3bTY1WM+9qQyc5wlmI=
   dependencies:
     regenerate "^1.4.0"
 
@@ -2501,20 +2558,15 @@ regenerate@^1.4.0:
   resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/regenerate/-/regenerate-1.4.0.tgz#4a856ec4b56e4077c557589cae85e7a4c8869a11"
   integrity sha1-SoVuxLVuQHfFV1icroXnpMiGmhE=
 
-regenerator-runtime@^0.11.1:
-  version "0.11.1"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/regenerator-runtime/-/regenerator-runtime-0.11.1.tgz#be05ad7f9bf7d22e056f9726cee5017fbf19e2e9"
-  integrity sha1-vgWtf5v30i4Fb5cmzuUBf78Z4uk=
+regenerator-runtime@^0.13.2:
+  version "0.13.2"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/regenerator-runtime/-/regenerator-runtime-0.13.2.tgz#32e59c9a6fb9b1a4aff09b4930ca2d4477343447"
+  integrity sha1-MuWcmm+5saSv8JtJMMotRHc0NEc=
 
-regenerator-runtime@^0.12.0:
-  version "0.12.1"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/regenerator-runtime/-/regenerator-runtime-0.12.1.tgz#fa1a71544764c036f8c49b13a08b2594c9f8a0de"
-  integrity sha1-+hpxVEdkwDb4xJsToIsllMn4oN4=
-
-regenerator-transform@^0.13.3:
-  version "0.13.3"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/regenerator-transform/-/regenerator-transform-0.13.3.tgz#264bd9ff38a8ce24b06e0636496b2c856b57bcbb"
-  integrity sha1-JkvZ/zioziSwbgY2SWsshWtXvLs=
+regenerator-transform@^0.13.4:
+  version "0.13.4"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/regenerator-transform/-/regenerator-transform-0.13.4.tgz#18f6763cf1382c69c36df76c6ce122cc694284fb"
+  integrity sha1-GPZ2PPE4LGnDbfdsbOEizGlChPs=
   dependencies:
     private "^0.1.6"
 
@@ -2526,27 +2578,32 @@ regex-not@^1.0.0, regex-not@^1.0.2:
     extend-shallow "^3.0.2"
     safe-regex "^1.1.0"
 
-regexpu-core@^4.1.3, regexpu-core@^4.2.0:
-  version "4.2.0"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/regexpu-core/-/regexpu-core-4.2.0.tgz#a3744fa03806cffe146dea4421a3e73bdcc47b1d"
-  integrity sha1-o3RPoDgGz/4UbepEIaPnO9zEex0=
+regexp-tree@^0.1.0:
+  version "0.1.5"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/regexp-tree/-/regexp-tree-0.1.5.tgz#7cd71fca17198d04b4176efd79713f2998009397"
+  integrity sha1-fNcfyhcZjQS0F279eXE/KZgAk5c=
+
+regexpu-core@^4.1.3, regexpu-core@^4.5.4:
+  version "4.5.4"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/regexpu-core/-/regexpu-core-4.5.4.tgz#080d9d02289aa87fe1667a4f5136bc98a6aebaae"
+  integrity sha1-CA2dAiiaqH/hZnpPUTa8mKauuq4=
   dependencies:
     regenerate "^1.4.0"
-    regenerate-unicode-properties "^7.0.0"
-    regjsgen "^0.4.0"
-    regjsparser "^0.3.0"
+    regenerate-unicode-properties "^8.0.2"
+    regjsgen "^0.5.0"
+    regjsparser "^0.6.0"
     unicode-match-property-ecmascript "^1.0.4"
-    unicode-match-property-value-ecmascript "^1.0.2"
+    unicode-match-property-value-ecmascript "^1.1.0"
 
-regjsgen@^0.4.0:
-  version "0.4.0"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/regjsgen/-/regjsgen-0.4.0.tgz#c1eb4c89a209263f8717c782591523913ede2561"
-  integrity sha1-wetMiaIJJj+HF8eCWRUjkT7eJWE=
+regjsgen@^0.5.0:
+  version "0.5.0"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/regjsgen/-/regjsgen-0.5.0.tgz#a7634dc08f89209c2049adda3525711fb97265dd"
+  integrity sha1-p2NNwI+JIJwgSa3aNSVxH7lyZd0=
 
-regjsparser@^0.3.0:
-  version "0.3.0"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/regjsparser/-/regjsparser-0.3.0.tgz#3c326da7fcfd69fa0d332575a41c8c0cdf588c96"
-  integrity sha1-PDJtp/z9afoNMyV1pByMDN9YjJY=
+regjsparser@^0.6.0:
+  version "0.6.0"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/regjsparser/-/regjsparser-0.6.0.tgz#f1e6ae8b7da2bae96c99399b868cd6c933a2ba9c"
+  integrity sha1-8eaui32iuulsmTmbhozWyTOiupw=
   dependencies:
     jsesc "~0.5.0"
 
@@ -2571,11 +2628,11 @@ resolve-url@^0.2.1:
   integrity sha1-LGN/53yJOv0qZj/iGqkIAGjiBSo=
 
 resolve@^1.3.2:
-  version "1.8.1"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/resolve/-/resolve-1.8.1.tgz#82f1ec19a423ac1fbd080b0bab06ba36e84a7a26"
-  integrity sha1-gvHsGaQjrB+9CAsLqwa6NuhKeiY=
+  version "1.10.0"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/resolve/-/resolve-1.10.0.tgz#3bdaaeaf45cc07f375656dfd2e54ed0810b101ba"
+  integrity sha1-O9qur0XMB/N1ZW39LlTtCBCxAbo=
   dependencies:
-    path-parse "^1.0.5"
+    path-parse "^1.0.6"
 
 ret@~0.1.10:
   version "0.1.15"
@@ -2588,13 +2645,13 @@ retry@0.12.0:
   integrity sha1-G0KmJmoh8HQh0bC1S33BZ7AcATs=
 
 rimraf@^2.6.1, rimraf@^2.6.2:
-  version "2.6.2"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/rimraf/-/rimraf-2.6.2.tgz#2ed8150d24a16ea8651e6d6ef0f47c4158ce7a36"
-  integrity sha1-LtgVDSShbqhlHm1u8PR8QVjOejY=
+  version "2.6.3"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/rimraf/-/rimraf-2.6.3.tgz#b2d104fe0d8fb27cf9e0a1cda8262dd3833c6cab"
+  integrity sha1-stEE/g2Psnz54KHNqCYt04M8bKs=
   dependencies:
-    glob "^7.0.5"
+    glob "^7.1.3"
 
-safe-buffer@5.1.2, safe-buffer@^5.1.2, safe-buffer@~5.1.0, safe-buffer@~5.1.1:
+safe-buffer@5.1.2, safe-buffer@^5.0.1, safe-buffer@^5.1.2, safe-buffer@~5.1.0, safe-buffer@~5.1.1:
   version "5.1.2"
   resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/safe-buffer/-/safe-buffer-5.1.2.tgz#991ec69d296e0313747d59bdfd2b745c35f8828d"
   integrity sha1-mR7GnSluAxN0fVm9/St0XDX4go0=
@@ -2616,7 +2673,7 @@ sax@^1.2.4:
   resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/sax/-/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9"
   integrity sha1-KBYjTiN4vdxOU1T6tcqold9xANk=
 
-semver@^5.3.0, semver@^5.4.1:
+semver@^5.3.0, semver@^5.4.1, semver@^5.6.0:
   version "5.6.0"
   resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/semver/-/semver-5.6.0.tgz#7e74256fbaa49c75aa7c7a205cc22799cac80004"
   integrity sha1-fnQlb7qknHWqfHogXMInmcrIAAQ=
@@ -2679,6 +2736,19 @@ setprototypeof@1.1.0:
   version "1.1.0"
   resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/setprototypeof/-/setprototypeof-1.1.0.tgz#d0bd85536887b6fe7c0d818cb962d9d91c54e656"
   integrity sha1-0L2FU2iHtv58DYGMuWLZ2RxU5lY=
+
+setprototypeof@1.1.1:
+  version "1.1.1"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/setprototypeof/-/setprototypeof-1.1.1.tgz#7e95acb24aa92f5885e0abef5ba131330d4ae683"
+  integrity sha1-fpWsskqpL1iF4KvvW6ExMw1K5oM=
+
+sha.js@^2.4.11:
+  version "2.4.11"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/sha.js/-/sha.js-2.4.11.tgz#37a5cf0b81ecbc6943de109ba2960d1b26584ae7"
+  integrity sha1-N6XPC4HsvGlD3hCbopYNGyZYSuc=
+  dependencies:
+    inherits "^2.0.1"
+    safe-buffer "^5.0.1"
 
 signal-exit@^3.0.0:
   version "3.0.2"
@@ -2756,7 +2826,7 @@ static-extend@^0.1.1:
     define-property "^0.2.5"
     object-copy "^0.1.0"
 
-"statuses@>= 1.4.0 < 2":
+"statuses@>= 1.4.0 < 2", "statuses@>= 1.5.0 < 2":
   version "1.5.0"
   resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/statuses/-/statuses-1.5.0.tgz#161c7dac177659fd9811f43771fa99381478628c"
   integrity sha1-Fhx9rBd2Wf2YEfQ3cfqZOBR4Yow=
@@ -2788,11 +2858,6 @@ string-width@^1.0.1:
     is-fullwidth-code-point "^2.0.0"
     strip-ansi "^4.0.0"
 
-string_decoder@~0.10.x:
-  version "0.10.31"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/string_decoder/-/string_decoder-0.10.31.tgz#62e203bc41766c6c28c9fc84301dab1c5310fa94"
-  integrity sha1-YuIDvEF2bGwoyfyEMB2rHFMQ+pQ=
-
 string_decoder@~1.1.1:
   version "1.1.1"
   resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/string_decoder/-/string_decoder-1.1.1.tgz#9cf1611ba62685d7030ae9e4ba34149c3af03fc8"
@@ -2820,9 +2885,9 @@ strip-json-comments@~2.0.1:
   integrity sha1-PFMZQukIwml8DsNEhYwobHygpgo=
 
 subscriptions-transport-ws@^0.9.11:
-  version "0.9.15"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/subscriptions-transport-ws/-/subscriptions-transport-ws-0.9.15.tgz#68a8b7ba0037d8c489fb2f5a102d1494db297d0d"
-  integrity sha1-aKi3ugA32MSJ+y9aEC0UlNspfQ0=
+  version "0.9.16"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/subscriptions-transport-ws/-/subscriptions-transport-ws-0.9.16.tgz#90a422f0771d9c32069294c08608af2d47f596ec"
+  integrity sha1-kKQi8HcdnDIGkpTAhgivLUf1luw=
   dependencies:
     backo2 "^1.0.2"
     eventemitter3 "^3.1.0"
@@ -2843,14 +2908,14 @@ symbol-observable@^1.0.4:
   integrity sha1-wiaIrtTqs83C3+rLtWFmBWCgCAQ=
 
 tar@^4:
-  version "4.4.6"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/tar/-/tar-4.4.6.tgz#63110f09c00b4e60ac8bcfe1bf3c8660235fbc9b"
-  integrity sha1-YxEPCcALTmCsi8/hvzyGYCNfvJs=
+  version "4.4.8"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/tar/-/tar-4.4.8.tgz#b19eec3fde2a96e64666df9fdb40c5ca1bc3747d"
+  integrity sha1-sZ7sP94qluZGZt+f20DFyhvDdH0=
   dependencies:
-    chownr "^1.0.1"
+    chownr "^1.1.1"
     fs-minipass "^1.2.5"
-    minipass "^2.3.3"
-    minizlib "^1.1.0"
+    minipass "^2.3.4"
+    minizlib "^1.1.1"
     mkdirp "^0.5.0"
     safe-buffer "^5.1.2"
     yallist "^3.0.2"
@@ -2885,10 +2950,34 @@ to-regex@^3.0.1, to-regex@^3.0.2:
     regex-not "^1.0.2"
     safe-regex "^1.1.0"
 
+toidentifier@1.0.0:
+  version "1.0.0"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/toidentifier/-/toidentifier-1.0.0.tgz#7e1be3470f1e77948bc43d94a3c8f4d7752ba553"
+  integrity sha1-fhvjRw8ed5SLxD2Uo8j013UrpVM=
+
 trim-right@^1.0.1:
   version "1.0.1"
   resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/trim-right/-/trim-right-1.0.1.tgz#cb2e1203067e0c8de1f614094b9fe45704ea6003"
   integrity sha1-yy4SAwZ+DI3h9hQJS5/kVwTqYAM=
+
+ts-invariant@^0.2.1:
+  version "0.2.1"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/ts-invariant/-/ts-invariant-0.2.1.tgz#3d587f9d6e3bded97bf9ec17951dd9814d5a9d3f"
+  integrity sha1-PVh/nW473tl7+ewXlR3ZgU1anT8=
+  dependencies:
+    tslib "^1.9.3"
+
+ts-invariant@^0.3.2:
+  version "0.3.2"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/ts-invariant/-/ts-invariant-0.3.2.tgz#89a2ffeb70879b777258df1df1c59383c35209b0"
+  integrity sha1-iaL/63CHm3dyWN8d8cWTg8NSCbA=
+  dependencies:
+    tslib "^1.9.3"
+
+tslib@^1.9.3:
+  version "1.9.3"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/tslib/-/tslib-1.9.3.tgz#d7e4dd79245d85428c4d7e4822a79917954ca286"
+  integrity sha1-1+TdeSRdhUKMTX5IIqeZF5VMooY=
 
 type-is@^1.6.16, type-is@~1.6.16:
   version "1.6.16"
@@ -2911,15 +3000,15 @@ unicode-match-property-ecmascript@^1.0.4:
     unicode-canonical-property-names-ecmascript "^1.0.4"
     unicode-property-aliases-ecmascript "^1.0.4"
 
-unicode-match-property-value-ecmascript@^1.0.2:
-  version "1.0.2"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/unicode-match-property-value-ecmascript/-/unicode-match-property-value-ecmascript-1.0.2.tgz#9f1dc76926d6ccf452310564fd834ace059663d4"
-  integrity sha1-nx3HaSbWzPRSMQVk/YNKzgWWY9Q=
+unicode-match-property-value-ecmascript@^1.1.0:
+  version "1.1.0"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/unicode-match-property-value-ecmascript/-/unicode-match-property-value-ecmascript-1.1.0.tgz#5b4b426e08d13a80365e0d657ac7a6c1ec46a277"
+  integrity sha1-W0tCbgjROoA2Xg1lesemwexGonc=
 
 unicode-property-aliases-ecmascript@^1.0.4:
-  version "1.0.4"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/unicode-property-aliases-ecmascript/-/unicode-property-aliases-ecmascript-1.0.4.tgz#5a533f31b4317ea76f17d807fa0d116546111dd0"
-  integrity sha1-WlM/MbQxfqdvF9gH+g0RZUYRHdA=
+  version "1.0.5"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/unicode-property-aliases-ecmascript/-/unicode-property-aliases-ecmascript-1.0.5.tgz#a9cc6cc7ce63a0a3023fc99e341b94431d405a57"
+  integrity sha1-qcxsx85joKMCP8meNBuUQx1AWlc=
 
 union-value@^1.0.0:
   version "1.0.0"
@@ -2944,10 +3033,10 @@ unset-value@^1.0.0:
     has-value "^0.3.1"
     isobject "^3.0.0"
 
-upath@^1.0.5:
-  version "1.1.0"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/upath/-/upath-1.1.0.tgz#35256597e46a581db4793d0ce47fa9aebfc9fabd"
-  integrity sha1-NSVll+RqWB20eT0M5H+prr/J+r0=
+upath@^1.1.1:
+  version "1.1.2"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/upath/-/upath-1.1.2.tgz#3db658600edaeeccbe6db5e684d67ee8c2acd068"
+  integrity sha1-PbZYYA7a7sy+bbXmhNZ+6MKs0Gg=
 
 urix@^0.1.0:
   version "0.1.0"
@@ -3006,24 +3095,27 @@ ws@^5.2.0:
   dependencies:
     async-limiter "~1.0.0"
 
-yallist@^2.1.2:
-  version "2.1.2"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/yallist/-/yallist-2.1.2.tgz#1c11f9218f076089a47dd512f93c6699a6a81d52"
-  integrity sha1-HBH5IY8HYImkfdUS+TxmmaaoHVI=
+ws@^6.0.0:
+  version "6.2.0"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/ws/-/ws-6.2.0.tgz#13806d9913b2a5f3cbb9ba47b563c002cbc7c526"
+  integrity sha1-E4BtmROypfPLubpHtWPAAsvHxSY=
+  dependencies:
+    async-limiter "~1.0.0"
 
 yallist@^3.0.0, yallist@^3.0.2:
-  version "3.0.2"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/yallist/-/yallist-3.0.2.tgz#8452b4bb7e83c7c188d8041c1a837c773d6d8bb9"
-  integrity sha1-hFK0u36Dx8GI2AQcGoN8dz1ti7k=
+  version "3.0.3"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/yallist/-/yallist-3.0.3.tgz#b4b049e314be545e3ce802236d6cd22cd91c3de9"
+  integrity sha1-tLBJ4xS+VF486AIjbWzSLNkcPek=
 
-zen-observable-ts@^0.8.10:
-  version "0.8.10"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/zen-observable-ts/-/zen-observable-ts-0.8.10.tgz#18e2ce1c89fe026e9621fd83cc05168228fce829"
-  integrity sha1-GOLOHIn+Am6WIf2DzAUWgij86Ck=
+zen-observable-ts@^0.8.18:
+  version "0.8.18"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/zen-observable-ts/-/zen-observable-ts-0.8.18.tgz#ade44b1060cc4a800627856ec10b9c67f5f639c8"
+  integrity sha1-reRLEGDMSoAGJ4VuwQucZ/X2Ocg=
   dependencies:
+    tslib "^1.9.3"
     zen-observable "^0.8.0"
 
 zen-observable@^0.8.0:
-  version "0.8.9"
-  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/zen-observable/-/zen-observable-0.8.9.tgz#0475c760ff0eda046bbdfa4dc3f95d392807ac53"
-  integrity sha1-BHXHYP8O2gRrvfpNw/ldOSgHrFM=
+  version "0.8.13"
+  resolved "https://artifactory.homeawaycorp.com/artifactory/api/npm/npm/zen-observable/-/zen-observable-0.8.13.tgz#a9f1b9dbdfd2d60a08761ceac6a861427d44ae2e"
+  integrity sha1-qfG529/S1goIdhzqxqhhQn1Eri4=
