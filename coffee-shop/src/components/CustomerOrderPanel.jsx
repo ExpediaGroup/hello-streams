@@ -63,30 +63,8 @@ class CustomerOrderPanel extends React.Component {
       data: [],
     };
 
-    // this.getCustomerOrders = this.getCustomerOrders.bind(this);
-    this.renderRows = this.renderRows.bind(this);
     this.createOrderRow = this.createOrderRow.bind(this);
     this.createOrderRows = this.createOrderRows.bind(this);
-
-    // this.getCustomerOrders();
-  }
-  /*
-  getCustomerOrders() {
-    client.watchQuery({
-      query: GET_CUSTOMER_ORDERS,
-      variables: {
-        customerId: this.state.username
-      },
-      pollInterval: 1000
-    })
-    .subscribe({
-      next: this.renderRows
-    });
-  }
-  */
-
-  renderRows({data}) {
-    this.setState({data: this.createOrderRows(data.customer)});
   }
 
   createOrderRows(customer) {
@@ -94,9 +72,7 @@ class CustomerOrderPanel extends React.Component {
       return [];
     }
     this.idx = -1;
-    return customer.orders.map(function(x){
-      return this.createOrderRow(x.id, x.item, x.state, x.updated);
-    }.bind(this));
+    return customer.orders.map(x => this.createOrderRow(x.id, x.item, x.state, x.updated) );
   }
 
   createOrderRow(id, item, state, updated) {

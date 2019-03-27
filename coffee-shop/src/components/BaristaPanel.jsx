@@ -7,9 +7,25 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import { Query } from "react-apollo";
+import gql from "graphql-tag";
 import barista from '../images/Barista.svg';
 
 import './BaristaPanel.css'
+
+const GET_ORDERS = gql`
+query getOrders {
+  orders {
+    id
+    customer {
+      id
+    }
+    item
+    state
+    updated
+  }
+}
+`
 
 const CustomTableCell = withStyles(theme => ({
   head: {
@@ -54,27 +70,22 @@ class BaristaPanel extends React.Component {
       data: [],
     };
 
-    this.createTestRow = this.createTestRow.bind(this);
+    this.idx = -1;
+    this.createRows = this.createRows.bind(this);
+    this.createRow = this.createRow.bind(this);
     this.handleListItemClick = this.handleListItemClick.bind(this);
     this.handlePlaceOrder = this.handlePlaceOrder.bind(this);
-
-    // TODO remove this part when this is wired with GraphQL
-    this.idx = -1;
-    this.state.data.push(this.createTestRow(
-      "fade78f1-c7c1-47d7-952b-6cab8e386c6f",
-      "Bob",
-      "Latte",
-      "PLACED",
-      new Date("October 10, 2018 15:00:00.123")));
-    this.state.data.push(this.createTestRow(
-      "b89428d9-e86c-40ff-9224-e9245a789e42",
-      "Bob",
-      "Brewed Coffee",
-      "PLACED",
-      new Date("October 10, 2018 15:03:00.000")));
   }
 
-  createTestRow(id, customerId, item, state, updated) {
+  createRows(orders) {
+    if (orders===undefined || orders===null) {
+      return [];
+    }
+    this.idx = -1;
+    return orders.map(x => this.createRow(x.id, x.customer.id, x.item, x.state, x.updated) );
+  }
+
+  createRow(id, customerId, item, state, updated) {
     this.idx++;
     var idx=this.idx;
     return {idx, customerId, id, item, state, updated};
@@ -110,27 +121,27 @@ class BaristaPanel extends React.Component {
                   <CustomTableCell>Customer Id</CustomTableCell>
                   <CustomTableCell>Item</CustomTableCell>
                   <CustomTableCell>Order State</CustomTableCell>
-                  {/*
-                    <CustomTableCell>Time Updated</CustomTableCell>
-                  */}
+                  <CustomTableCell>Time Updated</CustomTableCell>
                 </CustomTableRow>
               </TableHead>
               <TableBody>
-                {this.state.data.map(row =>{
-                  return (
-                    <CustomTableRow className={this.classes.row} key={row.idx}>
-                      <CustomTableCell component="th" scope="row">
-                        {row.id.slice(-8)}
-                      </CustomTableCell>
-                      <CustomTableCell>{row.customerId}</CustomTableCell>
-                      <CustomTableCell>{row.item}</CustomTableCell>
-                      <CustomTableCell>{row.state}</CustomTableCell>
-                      {/*
-                        <CustomTableCell>{row.updated.toISOString()}</CustomTableCell>
-                      */}
-                    </CustomTableRow>
-                  );
-                })}
+                <Query query={GET_ORDERS} pollInterval={750}>
+                  {({ data }) => {
+                    // Remove when customer is set even at the beginning (when loging is there)
+                    var rows = this.createRows(data.orders);
+                    return rows.map(row => (
+                      <CustomTableRow className={this.classes.row} key={row.idx}>
+                        <CustomTableCell component="th" scope="row">
+                          {row.id.slice(-8)}
+                        </CustomTableCell>
+                        <CustomTableCell>{row.customerId}</CustomTableCell>
+                        <CustomTableCell>{row.item}</CustomTableCell>
+                        <CustomTableCell>{row.state}</CustomTableCell>
+                        <CustomTableCell>{row.updated}</CustomTableCell>
+                      </CustomTableRow>
+                    ));
+                  }}
+                </Query>
               </TableBody>
             </CustomTable>
           </div>
@@ -139,7 +150,6 @@ class BaristaPanel extends React.Component {
     );
   }
 }
-
 BaristaPanel.propTypes = {
   classes: PropTypes.object.isRequired,
 };
