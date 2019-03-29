@@ -1,4 +1,4 @@
-package com.homeaway.streamplatform.hellostreams.orderprocessor.graphql;
+package com.homeaway.streamplatform.hellostreams.orderprocessor.resolvers.types;
 
 import graphql.schema.Coercing;
 import graphql.schema.CoercingParseLiteralException;

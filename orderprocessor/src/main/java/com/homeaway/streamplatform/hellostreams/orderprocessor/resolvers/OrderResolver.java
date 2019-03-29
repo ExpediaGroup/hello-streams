@@ -1,4 +1,4 @@
-package com.homeaway.streamplatform.hellostreams.orderprocessor.graphql;
+package com.homeaway.streamplatform.hellostreams.orderprocessor.resolvers;
 
 import com.coxautodev.graphql.tools.GraphQLResolver;
 import com.google.common.base.Preconditions;
