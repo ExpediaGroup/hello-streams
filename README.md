@@ -2,34 +2,13 @@
 
 ## What is this?
 
-`hello-streams` is an example application which attempts to prove out the benefits of a "streams-first" mindset.
+`hello-streams` is a demo application presented at [kafka-summit 2019](https://kafka-summit.org/sessions/hello-streams-introducing-stream-first-mindset/) entitled 'hello-streams :: Introducing the "streams-first" mindset'.
 
 ## Why make this
 
-To provide interested parties with a digestible first step at adopting a streams based architecture.
-
-## How do I use this?
-
-## As a user
-
-- _TBD_
-
-## As a Contributor
+To provide insight into an opinionated solution using NodeJS, Java, GraphQL, Kafka, and Kafka-Streams to implement an event-driven-design using event-sourcing, [domain events](https://medium.com/@ha_reneparra/https-medium-com-neoword-domain-events-45697ec0271f), [business events](https://medium.com/homeaway-tech-blog/business-events-in-a-world-of-independently-deployable-services-144daf6caa1a), and [command events](https://medium.com/homeaway-tech-blog/command-events-b8942e251824).
 
 ### Pre-Requisites:
 
-- Java Version _TBD_
-- Node Version _TBD_
-- Maven Version 
-- NPM Version _TBD_
-- Time
-- Positive Attitude
-
-### Development Process
-
-__Basic__
-
-- Pull or Fork project 
-- Make changes
-- Write or update tests
-- Create PR back into `master`
+- OpenJDK
+- Node + YARN
