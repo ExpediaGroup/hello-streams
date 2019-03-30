@@ -7,8 +7,10 @@ import ApolloClient from "apollo-boost";
 
 import "./App.css";
 
+const GRAPHQL_ADDRESS = 'http://localhost:5000/graphql/'
+
 const client = new ApolloClient({
-  uri: 'http://localhost:4000/',
+  uri: GRAPHQL_ADDRESS,
 });
 
 class App extends React.Component {
