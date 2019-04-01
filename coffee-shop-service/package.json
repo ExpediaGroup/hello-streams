@@ -11,9 +11,12 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.0.0",
+    "apollo-boost": "^0.3.1",
     "apollo-server": "^2.1.0",
-    "graphql": "^0.13.2",
+    "babel-polyfill": "^6.26.0",
+    "graphql": "^14.2.1",
     "graphql-iso-date": "^3.6.1",
+    "node-fetch": "^2.3.0",
     "uuid": "^3.3.2"
   },
   "devDependencies": {

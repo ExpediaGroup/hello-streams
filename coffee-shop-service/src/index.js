@@ -1,12 +1,33 @@
+import 'babel-polyfill';
 import {ApolloServer} from 'apollo-server';
 // noinspection ES6CheckImport
 import {v4 as uuidv4} from 'uuid/v4';
 
 import {typeDefs} from './schema';
 
+import ApolloClient from "apollo-boost";
+import fetch from "node-fetch";
+import gql from "graphql-tag";
+
+// setup global fetcher
+global.fetch = fetch;
+const client = new ApolloClient({
+  uri: "http://localhost:5000/graphql",
+});
+
 let customers = {};
 let orders = {};
 let availableBeans = 50;
+
+const PLACE_ORDER = gql`mutation placeOrder($customerId:String!, $item:String!) {
+  placeOrder(customerId: $customerId, item: $item) {
+    id
+    orderId
+    customerId
+    item
+    created
+  }
+}`;
 
 function createDate() {
   return new Date().toISOString();
@@ -36,11 +57,19 @@ function createOrder(customerId, item) {
   return { id, customerId, item, state: "PLACED",
   created: createDate(), updated: createDate() };
 }
-function createOrderPlaced(customerId, item) {
-  const id = uuidv4();
-  const order = createOrder(customerId, item);
-  orders[order.id] = order;
-  return {id, orderId: order.id, customerId, item, created: createDate() };
+
+async function createOrderPlaced(customerId, item) {
+  let vars = { customerId, item };
+  let result = await client.mutate({
+    mutation: PLACE_ORDER,
+    variables: vars
+  });
+  console.log("result="+JSON.stringify(result));
+
+  result=result.data.placeOrder;
+  const id = result.id;
+  const order = createOrder(result.customerId, result.item);
+  return { id: result.id, orderId: result.orderId, customerId: result.customerId, item: result.item, created: result.created };
 }
 
 function createBeansSupplied(numBeansAdded) {
