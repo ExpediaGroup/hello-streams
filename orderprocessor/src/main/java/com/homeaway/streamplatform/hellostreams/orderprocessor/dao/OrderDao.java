@@ -46,6 +46,7 @@ public class OrderDao {
     public OrderPlaced placeOrder(String customerId, String item) {
         Preconditions.checkNotNull(customerId, "customerId cannot be null");
         Preconditions.checkNotNull(item, "item cannot be null");
+
         // write to persistent location
         OrderPlaced orderPlaced = createOrderPlaced(customerId, item);
         return orderPlaced;
