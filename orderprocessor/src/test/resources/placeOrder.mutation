@@ -1,0 +1,10 @@
+mutation placeOrder($customerId:String!, $item:String!) {
+  placeOrder(customerId: $customerId, item: $item) {
+    id
+    orderId
+    customerId
+    item
+    created
+  }
+}
+

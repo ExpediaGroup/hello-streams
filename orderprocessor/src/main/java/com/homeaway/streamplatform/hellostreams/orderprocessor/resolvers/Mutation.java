@@ -24,10 +24,10 @@ public class Mutation implements GraphQLMutationResolver {
     }
 
     public OrderPlaced placeOrder(String customerId, String item) {
-    return orderService.placeOrder(customerId, item);
-  }
+        return orderService.placeOrder(customerId, item);
+    }
 
     public BeansSupplied supplyBeans(int numBeans) {
-    return supplyService.supplyBeans(numBeans);
-  }
+        return supplyService.supplyBeans(numBeans);
+    }
 }
