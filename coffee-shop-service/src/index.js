@@ -4,7 +4,7 @@ import {ApolloServer} from 'apollo-server';
 import {v4 as uuidv4} from 'uuid/v4';
 
 import {typeDefs} from './schema';
-
+import * as queries from './queries.js';
 import ApolloClient from "apollo-boost";
 import fetch from "node-fetch";
 import gql from "graphql-tag";
@@ -18,16 +18,6 @@ const client = new ApolloClient({
 let customers = {};
 let orders = {};
 let availableBeans = 50;
-
-const PLACE_ORDER = gql`mutation placeOrder($customerId:String!, $item:String!) {
-  placeOrder(customerId: $customerId, item: $item) {
-    id
-    orderId
-    customerId
-    item
-    created
-  }
-}`;
 
 function createDate() {
   return new Date().toISOString();
@@ -48,8 +38,23 @@ function lookupCustomer(customerId) {
   return customers[customerId];
 }
 
-function getOrders() {
-  return Object.values(orders);
+async function getOrders() {
+  let result = await client.query({
+    query: queries.GET_ORDERS
+  });
+
+  let orders = result.data.orders.map(order => {
+   return {
+      id: order.id,
+      customerId: order.customer.id,
+      item: order.item,
+      state: order.state,
+      updated: order.updated
+    }
+  });
+
+ return orders;
+
 }
 
 function createOrder(customerId, item) {
@@ -61,7 +66,7 @@ function createOrder(customerId, item) {
 async function createOrderPlaced(customerId, item) {
   let vars = { customerId, item };
   let result = await client.mutate({
-    mutation: PLACE_ORDER,
+    mutation: queries.PLACE_ORDER,
     variables: vars
   });
   console.log("result="+JSON.stringify(result));
