@@ -10,6 +10,20 @@ module.exports = {
             created
         }
     }`,
+    SUPPLY_BEAN: gql`mutation supplyBeans($numBeans:Int!) { supplyBeans(numBeans: $numBeans) {
+        id
+        numBeansAdded
+        created
+    }}`,
+    GET_CUSTOMER_ORDERS: gql`query getCustomerOrders($customerId:String!) {
+        customer(id: $customerId) {
+            orders {
+                id
+                item
+                state
+                updated
+            }
+        }}`,
     GET_ORDERS: gql`
         query getOrders {
             orders {
@@ -21,6 +35,6 @@ module.exports = {
                 state
                 updated
             }
-        }
-    `
+        }`,
+    GET_AVAILABLE_BEANS: gql`query getAvailableBeans { availableBeans }`
 }
