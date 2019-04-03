@@ -9,6 +9,6 @@ modify the `src/main/avro/OrderCommandEvents.avdl` file and re-run the maven bui
 
 Ensure [confluent stack is up](../confluent-stack/README.md).
 ```bash
-$ ./mvnw clean install  
+$ make build
 
 ```
