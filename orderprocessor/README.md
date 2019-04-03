@@ -12,7 +12,7 @@ $ ./mvnw clean install
 ```
 # from top level directory
 $ cd orderprocessor
-$ java -jar target/orderprocessor-0.0.1-SNAPSHOT.jar
+$ make run
 ```
 
 - Open a browser to http://localhost:5000/graphiql
