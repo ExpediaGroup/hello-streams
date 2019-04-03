@@ -22,7 +22,5 @@ public class OrderResolver implements GraphQLResolver<Order> {
         this.customerService = customerService;
     }
 
-    public Customer getCustomer(Order order) {
-        return customerService.getCustomer(order.getCustomerId());
-    }
+    public Customer getCustomer(Order order) {return customerService.getCustomer(order.getCustomerId()); }
 }

@@ -1,6 +1,5 @@
 package com.homeaway.streamplatform.hellostreams.orderprocessor;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.graphql.spring.boot.test.GraphQLResponse;
@@ -13,18 +12,18 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
-
 import java.io.IOException;
 
-import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.nullValue;
+import static org.junit.Assert.assertThat;
 
 @GraphQLTest
 @RunWith(SpringRunner.class)
 @Slf4j
 public class OrderProcessorTests {
 
-    private static final String INVALID_CUSTOMER_ID = "35442a6a-ad7a-4e72-8af9-5611254306a6";
+    private static final String NEW_CUSTOMER_ID = "35442a6a-ad7a-4e72-8af9-5611254306a6";
     @Resource
     private GraphQLTestTemplate graphQLTemplate;
 
@@ -43,16 +42,18 @@ public class OrderProcessorTests {
     }
 
     @Test
-    public void placeOrderInvalidCustomer() throws Exception {
+    public void placeOrderNewCustomer() throws Exception {
         // setup variables
-        ObjectNode vars = getPlaceOrderVars(INVALID_CUSTOMER_ID, "Latte");
+        ObjectNode vars = getPlaceOrderVars(NEW_CUSTOMER_ID, "Latte");
 
         // place Order
+        CustomerDao customerDao = new CustomerDao();
+        assertThat(customerDao.getCustomer(NEW_CUSTOMER_ID), is(nullValue()));
+
         GraphQLResponse response = perform("placeOrder.mutation", vars);
         assertThat(response.getStatusCode().value(), is(200));
-        assertThat(didGraphQLFail(response), is (true));
-        assertThat(response.get("errors[0].message", Object.class).toString(), containsString(INVALID_CUSTOMER_ID));
-        assertThat(response.get("errors[0].message", Object.class).toString(), containsString("is non-existent"));
+        assertThat(didGraphQLFail(response), is (false));
+        assertThat(response.get("data.placeOrder.customerId", String.class), is(NEW_CUSTOMER_ID));
     }
 
     public GraphQLResponse perform(String gqlResource, ObjectNode vars) throws IOException {

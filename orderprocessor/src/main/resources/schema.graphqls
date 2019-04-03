@@ -47,7 +47,7 @@ type BeansSupplied implements CommandEvent {
 # The customer domain object
 type Customer {
     # The unique id of the customer
-    id: ID!
+    id: String!
     # The username of the customer
     username: String!
     # The list of orders for this customer
@@ -83,7 +83,7 @@ type Query {
     # Query to look up customer. May be null
     customer(
     # The customerId for this customer
-    id: ID!): Customer
+    id: String!): Customer
 
     #Query to retrieve number of available beans
     availableBeans: Int!

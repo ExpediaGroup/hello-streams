@@ -32,9 +32,7 @@ public class Query implements GraphQLQueryResolver {
         this.supplyService = supplyService;
     }
 
-    public List<Order> getOrders() {
-        return orderService.getOrders();
-    }
+    public List<Order> getOrders() { return orderService.getOrders(); }
 
     public Optional<Customer> getCustomer(String customerId) {
         return Optional.ofNullable(customerService.getCustomer(customerId));
