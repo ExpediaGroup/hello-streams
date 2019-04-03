@@ -135,10 +135,8 @@ public class AvroSchemaCompatibilityTest {
             log.warn("Something REST-y happened with testing Schema compatibility for Subject {}. Returning 'incompatible': e={}", subject,
                 restClientException);
             return false;
-        } catch (Exception e) {
-            log.warn("Could not safely test compatibility of Schema on Subject. Returning 'compatible': {} {}", subject, schema.toString());
-            log.warn(e.getMessage());
-            return true;
+        } catch (Exception exception) {
+            throw new IllegalStateException(String.format("Could not safely test compatibility of Schema on Subject. Returning 'compatible': %s %s", subject, schema.toString()), exception);
         }
         return true;
     }
