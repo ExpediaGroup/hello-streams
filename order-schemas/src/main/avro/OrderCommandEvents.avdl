@@ -1,0 +1,12 @@
+
+@namespace("com.homeaway.streamplatform.hellostreams")
+protocol OrderCommandEvents {
+    /**
+     * Schema for OrderCommandEvents
+     */
+    record OrderCommandEvent {
+
+        // Add your domain-specific fields here
+
+    }
+}
