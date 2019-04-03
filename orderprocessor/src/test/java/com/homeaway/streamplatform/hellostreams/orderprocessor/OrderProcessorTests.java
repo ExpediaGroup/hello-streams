@@ -14,6 +14,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
 
+import java.io.IOException;
+
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
@@ -26,41 +28,45 @@ public class OrderProcessorTests {
     @Resource
     private GraphQLTestTemplate graphQLTemplate;
 
+    private ObjectMapper mapper = new ObjectMapper();
+
     @Test
     public void placeOrderValidCustomer() throws Exception {
         // setup variables
-        ObjectMapper mapper = new ObjectMapper();
-        ObjectNode varsNode = mapper.createObjectNode();
-        varsNode.put("customerId", CustomerDao.CUSTOMER_TEST_ID);
-        varsNode.put( "item", "Latte");
+        ObjectNode vars = getPlaceOrderVars(CustomerDao.CUSTOMER_TEST_ID, "Latte");
 
         // place Order
-        GraphQLResponse response = graphQLTemplate.perform("placeOrder.mutation", varsNode);
-        log.info("statusCode={}", response.getStatusCode());
-        JsonNode jsonNode = response.readTree();
+        GraphQLResponse response = perform("placeOrder.mutation", vars);
         assertThat(response.getStatusCode().value(), is(200));
-        assertThat(jsonNode.get("errors"), is(nullValue()));
-        assertThat(jsonNode.get("data"), is(notNullValue()));
-        assertThat(jsonNode.get("data").get("placeOrder"), is(notNullValue()));
+        assertThat(didGraphQLFail(response), is (false));
         assertThat(response.get("data.placeOrder.customerId", String.class), is(CustomerDao.CUSTOMER_TEST_ID));
     }
 
     @Test
     public void placeOrderInvalidCustomer() throws Exception {
         // setup variables
-        ObjectMapper mapper = new ObjectMapper();
-        ObjectNode varsNode = mapper.createObjectNode();
-        varsNode.put("customerId", INVALID_CUSTOMER_ID);
-        varsNode.put( "item", "Latte");
+        ObjectNode vars = getPlaceOrderVars(INVALID_CUSTOMER_ID, "Latte");
 
         // place Order
-        GraphQLResponse response = graphQLTemplate.perform("placeOrder.mutation", varsNode);
-        log.info("statusCode={}", response.getStatusCode());
-        JsonNode jsonNode = response.readTree();
+        GraphQLResponse response = perform("placeOrder.mutation", vars);
         assertThat(response.getStatusCode().value(), is(200));
-        assertThat(jsonNode.get("errors"), is(notNullValue()));
-        assertThat(jsonNode.get("data").isNull(), is(true));
+        assertThat(didGraphQLFail(response), is (true));
         assertThat(response.get("errors[0].message", Object.class).toString(), containsString(INVALID_CUSTOMER_ID));
         assertThat(response.get("errors[0].message", Object.class).toString(), containsString("is non-existent"));
+    }
+
+    public GraphQLResponse perform(String gqlResource, ObjectNode vars) throws IOException {
+        return graphQLTemplate.perform(gqlResource, vars);
+    }
+
+    public ObjectNode getPlaceOrderVars(String customerId, String item) {
+        ObjectNode vars = mapper.createObjectNode();
+        vars.put("customerId", customerId);
+        vars.put( "item", item);
+        return vars;
+    }
+
+    public boolean didGraphQLFail(GraphQLResponse response) throws IOException {
+        return response.readTree().get("errors") != null;
     }
 }
