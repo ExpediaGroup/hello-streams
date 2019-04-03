@@ -57,6 +57,14 @@ async function getOrders() {
 
 }
 
+async function getAvailableBeans() {
+  let result = await client.query({
+    query: queries.GET_AVAILABLE_BEANS
+  });
+
+  return result.data.availableBeans;
+}
+
 function createOrder(customerId, item) {
   const id = uuidv4();
   return { id, customerId, item, state: "PLACED",
@@ -69,7 +77,6 @@ async function createOrderPlaced(customerId, item) {
     mutation: queries.PLACE_ORDER,
     variables: vars
   });
-  console.log("result="+JSON.stringify(result));
 
   result=result.data.placeOrder;
   const id = result.id;
@@ -77,10 +84,16 @@ async function createOrderPlaced(customerId, item) {
   return { id: result.id, orderId: result.orderId, customerId: result.customerId, item: result.item, created: result.created };
 }
 
-function createBeansSupplied(numBeansAdded) {
-  const id = uuidv4();
-  const created = createDate();
-  return {id, numBeansAdded, created};
+async function createBeansSupplied(numBeans) {
+  let result = await client.mutate({
+    mutation: queries.SUPPLY_BEAN,
+    variables: {numBeans},
+    refetchQueries: [{
+      query: queries.GET_AVAILABLE_BEANS, // cache rules everything around me
+    }],
+  });
+
+  return result.data.supplyBeans
 }
 
 function placeOrder(_, {customerId, item}) {
@@ -92,10 +105,9 @@ function placeOrder(_, {customerId, item}) {
 }
 
 function supplyBeans(_, {numBeans}) {
-  const event = createBeansSupplied(numBeans);
-  availableBeans += numBeans;
-  return event;
+  return createBeansSupplied(numBeans);
 }
+
 
 const resolvers = {
   CommandEvent: {
@@ -129,12 +141,11 @@ const resolvers = {
   },
   Query: {
     orders: getOrders,
+    availableBeans: getAvailableBeans,
     customer(_, {id}) {
       return customers[id];
     },
-    availableBeans() {
-      return availableBeans;
-    }
+
   },
   Mutation: {
     placeOrder: placeOrder,
