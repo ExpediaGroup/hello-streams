@@ -5,6 +5,9 @@ import com.google.common.collect.Lists;
 import com.homeaway.streamplatform.hellostreams.orderprocessor.OrderProcessorUtils;
 import com.homeaway.streamplatform.hellostreams.orderprocessor.model.Order;
 import com.homeaway.streamplatform.hellostreams.orderprocessor.model.OrderPlaced;
+import org.apache.avro.specific.SpecificRecord;
+import org.apache.kafka.clients.producer.KafkaProducer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.time.ZonedDateTime;
@@ -17,8 +20,15 @@ public class OrderDao {
     private static final String FIRST_ORDER_ID = "fa7ea064-77f4-4191-ba8a-472fb0e98b03";
     private static final String SECOND_ORDER_ID = "6bed3d74-f56c-43b8-b099-d80425f2ea1c";
     private static final List<Order> TEST_ORDERS = Lists.newArrayList(
-            createOrder(FIRST_ORDER_ID, CustomerDao.CUSTOMER_TEST_ID, "coffee", "PLACED"),
-            createOrder(SECOND_ORDER_ID, CustomerDao.CUSTOMER_TEST_ID, "latte", "PLACED"));
+            createDummyOrder(FIRST_ORDER_ID, CustomerDao.CUSTOMER_TEST_ID, "coffee", "PLACED"),
+            createDummyOrder(SECOND_ORDER_ID, CustomerDao.CUSTOMER_TEST_ID, "latte", "PLACED"));
+
+    private KafkaProducer<String, SpecificRecord> kafkaOrderEventProducer;
+
+    public OrderDao(@Autowired KafkaProducer<String, SpecificRecord> kafkaOrderEventProducer) {
+        Preconditions.checkNotNull(kafkaOrderEventProducer, "kafkaOrderEventProducer cannot be null");
+        this.kafkaOrderEventProducer = kafkaOrderEventProducer;
+    }
 
     public List<Order> findOrderByCustomerId(String customerId) {
         Preconditions.checkNotNull(customerId, "customerId cannot be null");
@@ -29,18 +39,6 @@ public class OrderDao {
 
     public List<Order> findAllOrders() {
         return TEST_ORDERS;
-    }
-
-    private static Order createOrder(String orderId, String customerId, String item, String state) {
-        Order order = new Order();
-        order.setId(UUID.randomUUID().toString());
-        order.setOrderId(orderId);
-        order.setCustomerId(customerId);
-        order.setItem(item);
-        order.setState(state);
-        order.setUpdated(ZonedDateTime.now(OrderProcessorUtils.UTC_ZONE_ID));
-        order.setCreated(order.getUpdated());
-        return order;
     }
 
     public OrderPlaced placeOrder(String customerId, String item) {
@@ -63,5 +61,20 @@ public class OrderDao {
         orderPlaced.setItem(item);
         orderPlaced.setCreated(ZonedDateTime.now());
         return orderPlaced;
+    }
+
+    /**
+     * Used temporarily until we have persistence wired up
+     */
+    private static Order createDummyOrder(String orderId, String customerId, String item, String state) {
+        Order order = new Order();
+        order.setId(UUID.randomUUID().toString());
+        order.setOrderId(orderId);
+        order.setCustomerId(customerId);
+        order.setItem(item);
+        order.setState(state);
+        order.setUpdated(ZonedDateTime.now(OrderProcessorUtils.UTC_ZONE_ID));
+        order.setCreated(order.getUpdated());
+        return order;
     }
 }
