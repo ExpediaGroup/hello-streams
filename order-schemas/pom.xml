@@ -234,6 +234,24 @@
                                 </resources>
                             </configuration>
                         </execution>
+                        <execution>
+                            <id>deploy-node-avsc</id>
+                            <phase>install</phase>
+                            <goals>
+                                <goal>copy-resources</goal>
+                            </goals>
+                            <configuration>
+                                <outputDirectory>${project.build.directory}/../../coffee-shop-service/src</outputDirectory>
+                                <resources>
+                                    <resource>
+                                        <directory>${project.build.directory}/generated-sources</directory>
+                                        <includes>
+                                            <include>**/*.avsc</include>
+                                        </includes>
+                                    </resource>
+                                </resources>
+                            </configuration>
+                        </execution>
                     </executions>
                 </plugin>
                 <plugin>
@@ -276,35 +294,6 @@
                         </systemPropertyVariables>
                         <skipAfterFailureCount>1</skipAfterFailureCount>
                     </configuration>
-                </plugin>
-
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>build-helper-maven-plugin</artifactId>
-                    <version>3.0.0</version>
-                    <executions>
-                        <execution>
-                            <id>attach-avsc-avdl</id>
-                            <phase>none</phase>
-                            <goals>
-                                <goal>attach-artifact</goal>
-                            </goals>
-                            <configuration>
-                                <artifacts>
-                                    <artifact>
-                                        <file>${avro.schema.outputDirectory}/${stream-event-name}.avsc</file>
-                                        <classifier>${stream-event-name}</classifier>
-                                        <type>avsc</type>
-                                    </artifact>
-                                    <artifact>
-                                        <file>${project.basedir}/src/main/avro/${stream-event-name}s.avdl</file>
-                                        <classifier>${stream-event-name}</classifier>
-                                        <type>avdl</type>
-                                    </artifact>
-                                </artifacts>
-                            </configuration>
-                        </execution>
-                    </executions>
                 </plugin>
                 <!-- avro plugin generates java files for imported schemas, but this creates duplicates; remove them! -->
                 <plugin>

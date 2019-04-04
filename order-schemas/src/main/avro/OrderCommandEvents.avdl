@@ -1,12 +1,21 @@
 
 @namespace("com.homeaway.streamplatform.hellostreams")
 protocol OrderCommandEvents {
-    /**
-     * Schema for OrderCommandEvents
-     */
-    record OrderCommandEvent {
+    /** Order Placed events */
+    record OrderPlacedEvent {
+        /** the unique id of this command event */
+        string id;
 
-        // Add your domain-specific fields here
+        /** the unique orderId to be used for the order if it is created */
+        string orderId;
 
+        /** the id of the customer*/
+        string customerId;
+
+        /** the item that is to be ordered */
+        string item;
+
+        /** the timestamp that this order was placed */
+        timestamp_ms created;
     }
 }
