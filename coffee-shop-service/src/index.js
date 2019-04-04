@@ -7,16 +7,13 @@ import {typeDefs} from './schema';
 import * as queries from './queries.js';
 import ApolloClient from "apollo-boost";
 import fetch from "node-fetch";
-import gql from "graphql-tag";
 
-// setup global fetcher
-global.fetch = fetch;
+global.fetch =  fetch;
 const client = new ApolloClient({
   uri: "http://localhost:5000/graphql",
 });
 
 let customers = {};
-let orders = {};
 let availableBeans = 50;
 
 function createDate() {
@@ -38,7 +35,9 @@ function lookupCustomer(customerId) {
   return customers[customerId];
 }
 
+
 async function getOrders() {
+
   let result = await client.query({
     query: queries.GET_ORDERS
   });
@@ -54,7 +53,6 @@ async function getOrders() {
   });
 
  return orders;
-
 }
 
 async function getAvailableBeans() {
@@ -65,22 +63,17 @@ async function getAvailableBeans() {
   return result.data.availableBeans;
 }
 
-function createOrder(customerId, item) {
-  const id = uuidv4();
-  return { id, customerId, item, state: "PLACED",
-  created: createDate(), updated: createDate() };
-}
-
 async function createOrderPlaced(customerId, item) {
   let vars = { customerId, item };
   let result = await client.mutate({
     mutation: queries.PLACE_ORDER,
-    variables: vars
+    variables: vars,
+    refetchQueries: [{
+      query: queries.GET_ORDERS, // cache rules everything around me
+    }],
   });
 
   result=result.data.placeOrder;
-  const id = result.id;
-  const order = createOrder(result.customerId, result.item);
   return { id: result.id, orderId: result.orderId, customerId: result.customerId, item: result.item, created: result.created };
 }
 
@@ -97,17 +90,12 @@ async function createBeansSupplied(numBeans) {
 }
 
 function placeOrder(_, {customerId, item}) {
-  const customer = lookupCustomer(customerId);
-  if (customer === undefined) {
-    return undefined;
-  }
   return createOrderPlaced(customerId, item);
 }
 
 function supplyBeans(_, {numBeans}) {
   return createBeansSupplied(numBeans);
 }
-
 
 const resolvers = {
   CommandEvent: {
@@ -129,15 +117,16 @@ const resolvers = {
       return null;
     }
   },
-  Order: {
-    customer(order) {
-      return lookupCustomer(order.customerId)
+  Customer: {
+    async orders(customer) {
+       let orders = await getOrders()
+      return orders.filter( order => order.customerId===customer.id);
     },
   },
-  Customer: {
-    orders(customer) {
-      return getOrders().filter( order => order.customerId===customer.id)
-    },
+  Order: {
+    customer: (order) => {
+      return lookupCustomer(order.customerId);
+    }
   },
   Query: {
     orders: getOrders,
@@ -145,7 +134,6 @@ const resolvers = {
     customer(_, {id}) {
       return customers[id];
     },
-
   },
   Mutation: {
     placeOrder: placeOrder,

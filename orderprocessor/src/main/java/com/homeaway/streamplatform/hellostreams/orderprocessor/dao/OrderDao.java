@@ -49,6 +49,8 @@ public class OrderDao {
 
         // write to persistent location
         OrderPlaced orderPlaced = createOrderPlaced(customerId, item);
+        Order order = createOrder("ORDERID", customerId, item,"PLACED");
+        TEST_ORDERS.add(order);
         return orderPlaced;
     }
 

@@ -16,6 +16,12 @@ public class CustomerService {
     }
 
     public Customer getCustomer(String customerId) {
-        return customerDao.getCustomer(customerId);
+        Customer customer = customerDao.getCustomer(customerId);
+        if (customer == null) {
+            String username = customerId;
+            customerDao.insertCustomer(customerId, username);
+            customer = customerDao.getCustomer(customerId);
+        }
+        return customer;
     }
 }
