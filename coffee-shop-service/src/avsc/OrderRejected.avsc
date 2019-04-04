@@ -1,0 +1,22 @@
+{
+  "type" : "record",
+  "name" : "OrderRejected",
+  "namespace" : "com.homeaway.streamplatform.hellostreams",
+  "doc" : "Order Rejected events",
+  "fields" : [ {
+    "name" : "id",
+    "type" : "string",
+    "doc" : "the unique id of this command event"
+  }, {
+    "name" : "orderId",
+    "type" : "string",
+    "doc" : "the unique orderId this command event applies to"
+  }, {
+    "name" : "created",
+    "type" : {
+      "type" : "long",
+      "logicalType" : "timestamp-millis"
+    },
+    "doc" : "the timestamp of this event"
+  } ]
+}

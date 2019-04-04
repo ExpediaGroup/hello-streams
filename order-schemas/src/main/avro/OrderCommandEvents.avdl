@@ -1,21 +1,45 @@
-
 @namespace("com.homeaway.streamplatform.hellostreams")
 protocol OrderCommandEvents {
-    /** Order Placed events */
-    record OrderPlacedEvent {
-        /** the unique id of this command event */
-        string id;
+  /** Order Placed events */
+  record OrderPlaced {
+    /** the unique id of this command event */
+    string id;
 
-        /** the unique orderId to be used for the order if it is created */
-        string orderId;
+    /** the unique orderId to be used for the order if it is created */
+    string orderId;
 
-        /** the id of the customer*/
-        string customerId;
+    /** the id of the customer*/
+    string customerId;
 
-        /** the item that is to be ordered */
-        string item;
+    /** the item that is to be ordered */
+    string item;
 
-        /** the timestamp that this order was placed */
-        timestamp_ms created;
-    }
+    /** the timestamp that this order was placed */
+    timestamp_ms created;
+  }
+
+  /** Order Rejected events */
+  record OrderRejected {
+    /** the unique id of this command event */
+    string id;
+
+    /** the unique orderId this command event applies to */
+    string orderId;
+
+    /** the timestamp of this event */
+    timestamp_ms created;
+  }
+
+  /** Order Accepted events */
+  record OrderAccepted {
+    /** the unique id of this command event */
+    string id;
+
+    /** the unique orderId this command event applies to */
+    string orderId;
+
+    /** the timestamp of this event */
+    timestamp_ms created;
+  }
+
 }

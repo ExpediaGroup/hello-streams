@@ -66,12 +66,6 @@
             </dependency>
 
             <dependency>
-                <groupId>org.xerial.snappy</groupId>
-                <artifactId>snappy-java</artifactId>
-                <version>1.1.2.6</version>
-            </dependency>
-
-            <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
                 <version>${junit.version}</version>
@@ -153,6 +147,7 @@
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
                 <version>${slf4j-api.version}</version>
+                <scope>provided</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -163,8 +158,14 @@
             <artifactId>avro</artifactId>
         </dependency>
         <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>2.10.1</version>
+        </dependency>
+        <dependency>
             <groupId>org.apache.avro</groupId>
             <artifactId>avro-tools</artifactId>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -173,6 +174,7 @@
         <dependency>
             <groupId>net.sourceforge.argparse4j</groupId>
             <artifactId>argparse4j</artifactId>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -195,6 +197,30 @@
             <scope>test</scope>
             <classifier>test</classifier>
         </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-yaml</artifactId>
+            <version>2.9.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.9.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.4</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.confluent</groupId>
+            <artifactId>kafka-avro-serializer</artifactId>
+            <version>${confluent.version}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -208,11 +234,11 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.8.0</version>
                     <configuration>
                         <source>11</source>
                         <target>11</target>
                     </configuration>
-                    <version>3.8.0</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -226,14 +252,15 @@
                                 <goal>copy-resources</goal>
                             </goals>
                             <configuration>
-                                <outputDirectory>${project.build.directory}/avro-workdir</outputDirectory>
                                 <resources>
                                     <resource>
                                         <directory>src/main/avro</directory>
                                     </resource>
                                 </resources>
+                                <outputDirectory>${project.build.directory}/avro-workdir</outputDirectory>
                             </configuration>
                         </execution>
+                        <!-- HACK for node!!! This needs to be turned into a real product -->
                         <execution>
                             <id>deploy-node-avsc</id>
                             <phase>install</phase>
@@ -258,26 +285,16 @@
                     <groupId>org.apache.avro</groupId>
                     <artifactId>avro-maven-plugin</artifactId>
                     <version>1.8.2</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>exec-maven-plugin</artifactId>
-                    <version>1.6.0</version>
                     <executions>
                         <execution>
-                            <id>generate-avsc</id>
-                            <phase>process-classes</phase>
+                            <phase>generate-sources</phase>
                             <goals>
-                                <goal>java</goal>
+                                <goal>idl-protocol</goal>
                             </goals>
                             <configuration>
-                                <mainClass>ConvertIdl</mainClass>
-                                <arguments>
-                                    <argument>--inputDir</argument>
-                                    <argument>${project.build.directory}/avro-workdir/</argument>
-                                    <argument>--outputDir</argument>
-                                    <argument>${avro.schema.outputDirectory}</argument>
-                                </arguments>
+                                <sourceDirectory>${project.basedir}/src/main/avro/</sourceDirectory>
+                                <fieldVisibility>PRIVATE</fieldVisibility>
+                                <stringType>String</stringType>
                             </configuration>
                         </execution>
                     </executions>
@@ -290,48 +307,11 @@
                     <configuration>
                         <systemPropertyVariables>
                             <schema.registry.url>${schema.registry.url}</schema.registry.url>
+                            <avro.source.directory>${project.build.directory}/avro-workdir/</avro.source.directory>
                             <avro.schema.directory>${avro.schema.outputDirectory}</avro.schema.directory>
                         </systemPropertyVariables>
                         <skipAfterFailureCount>1</skipAfterFailureCount>
                     </configuration>
-                </plugin>
-                <!-- avro plugin generates java files for imported schemas, but this creates duplicates; remove them! -->
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-antrun-plugin</artifactId>
-                    <version>1.8</version>
-                    <executions>
-                        <execution>
-                            <phase>process-resources</phase>
-                            <goals>
-                                <goal>run</goal>
-                            </goals>
-                            <configuration>
-                                <target>
-                                    <delete file="${project.build.directory}/generated-sources/avro/EventHeader.avsc" />
-                                    <delete file="${project.build.directory}/generated-sources/avro/com/homeaway/streamingplatform/EventHeader.java" />
-                                </target>
-                            </configuration>
-                        </execution>
-                    </executions>
-                    <dependencies>
-                        <dependency>
-                            <groupId>ant-contrib</groupId>
-                            <artifactId>ant-contrib</artifactId>
-                            <version>1.0b3</version>
-                            <exclusions>
-                                <exclusion>
-                                    <groupId>ant</groupId>
-                                    <artifactId>ant</artifactId>
-                                </exclusion>
-                            </exclusions>
-                        </dependency>
-                        <dependency>
-                            <groupId>org.apache.ant</groupId>
-                            <artifactId>ant-nodeps</artifactId>
-                            <version>1.8.1</version>
-                        </dependency>
-                    </dependencies>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -347,10 +327,6 @@
             <plugin>
                 <groupId>org.apache.avro</groupId>
                 <artifactId>avro-maven-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

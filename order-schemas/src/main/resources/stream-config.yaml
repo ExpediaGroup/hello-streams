@@ -1,3 +1,0 @@
-OrderCommandEvent:
-  keySchema: String
-  valueSchema: OrderCommandEvent.avsc

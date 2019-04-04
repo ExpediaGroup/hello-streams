@@ -1,6 +1,6 @@
 {
   "type" : "record",
-  "name" : "OrderPlacedEvent",
+  "name" : "OrderPlaced",
   "namespace" : "com.homeaway.streamplatform.hellostreams",
   "doc" : "Order Placed events",
   "fields" : [ {
