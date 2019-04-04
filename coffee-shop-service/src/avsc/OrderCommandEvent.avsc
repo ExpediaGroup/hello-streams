@@ -1,7 +1,0 @@
-{
-  "type" : "record",
-  "name" : "OrderCommandEvent",
-  "namespace" : "com.homeaway.streamplatform.hellostreams",
-  "doc" : "* Schema for OrderCommandEvents",
-  "fields" : [ ]
-}
