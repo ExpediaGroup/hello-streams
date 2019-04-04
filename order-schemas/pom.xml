@@ -295,35 +295,6 @@
                         <skipAfterFailureCount>1</skipAfterFailureCount>
                     </configuration>
                 </plugin>
-
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>build-helper-maven-plugin</artifactId>
-                    <version>3.0.0</version>
-                    <executions>
-                        <execution>
-                            <id>attach-avsc-avdl</id>
-                            <phase>none</phase>
-                            <goals>
-                                <goal>attach-artifact</goal>
-                            </goals>
-                            <configuration>
-                                <artifacts>
-                                    <artifact>
-                                        <file>${avro.schema.outputDirectory}/${stream-event-name}.avsc</file>
-                                        <classifier>${stream-event-name}</classifier>
-                                        <type>avsc</type>
-                                    </artifact>
-                                    <artifact>
-                                        <file>${project.basedir}/src/main/avro/${stream-event-name}s.avdl</file>
-                                        <classifier>${stream-event-name}</classifier>
-                                        <type>avdl</type>
-                                    </artifact>
-                                </artifacts>
-                            </configuration>
-                        </execution>
-                    </executions>
-                </plugin>
                 <!-- avro plugin generates java files for imported schemas, but this creates duplicates; remove them! -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>

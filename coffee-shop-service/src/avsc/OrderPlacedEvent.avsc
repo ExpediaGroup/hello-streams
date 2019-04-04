@@ -1,0 +1,30 @@
+{
+  "type" : "record",
+  "name" : "OrderPlacedEvent",
+  "namespace" : "com.homeaway.streamplatform.hellostreams",
+  "doc" : "Order Placed events",
+  "fields" : [ {
+    "name" : "id",
+    "type" : "string",
+    "doc" : "the unique id of this command event"
+  }, {
+    "name" : "orderId",
+    "type" : "string",
+    "doc" : "the unique orderId to be used for the order if it is created"
+  }, {
+    "name" : "customerId",
+    "type" : "string",
+    "doc" : "the id of the customer"
+  }, {
+    "name" : "item",
+    "type" : "string",
+    "doc" : "the item that is to be ordered"
+  }, {
+    "name" : "created",
+    "type" : {
+      "type" : "long",
+      "logicalType" : "timestamp-millis"
+    },
+    "doc" : "the timestamp that this order was placed"
+  } ]
+}
