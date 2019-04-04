@@ -234,6 +234,24 @@
                                 </resources>
                             </configuration>
                         </execution>
+                        <execution>
+                            <id>deploy-node-avsc</id>
+                            <phase>install</phase>
+                            <goals>
+                                <goal>copy-resources</goal>
+                            </goals>
+                            <configuration>
+                                <outputDirectory>${project.build.directory}/../../coffee-shop-service/src</outputDirectory>
+                                <resources>
+                                    <resource>
+                                        <directory>${project.build.directory}/generated-sources</directory>
+                                        <includes>
+                                            <include>**/*.avsc</include>
+                                        </includes>
+                                    </resource>
+                                </resources>
+                            </configuration>
+                        </execution>
                     </executions>
                 </plugin>
                 <plugin>
