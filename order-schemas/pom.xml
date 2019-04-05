@@ -258,6 +258,21 @@
                     <groupId>org.apache.avro</groupId>
                     <artifactId>avro-maven-plugin</artifactId>
                     <version>1.8.2</version>
+                    <executions>
+                        <execution>
+                            <phase>generate-sources</phase>
+                            <goals>
+                                <goal>schema</goal>
+                                <goal>protocol</goal>
+                                <goal>idl-protocol</goal>
+                            </goals>
+                            <configuration>
+                                <sourceDirectory>${project.basedir}/src/main/avro/</sourceDirectory>
+                                <outputDirectory>${project.basedir}/src/main/java/</outputDirectory>
+                                <fieldVisibility>PRIVATE</fieldVisibility>
+                            </configuration>
+                        </execution>
+                    </executions>
                 </plugin>
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
@@ -294,44 +309,6 @@
                         </systemPropertyVariables>
                         <skipAfterFailureCount>1</skipAfterFailureCount>
                     </configuration>
-                </plugin>
-                <!-- avro plugin generates java files for imported schemas, but this creates duplicates; remove them! -->
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-antrun-plugin</artifactId>
-                    <version>1.8</version>
-                    <executions>
-                        <execution>
-                            <phase>process-resources</phase>
-                            <goals>
-                                <goal>run</goal>
-                            </goals>
-                            <configuration>
-                                <target>
-                                    <delete file="${project.build.directory}/generated-sources/avro/EventHeader.avsc" />
-                                    <delete file="${project.build.directory}/generated-sources/avro/com/homeaway/streamingplatform/EventHeader.java" />
-                                </target>
-                            </configuration>
-                        </execution>
-                    </executions>
-                    <dependencies>
-                        <dependency>
-                            <groupId>ant-contrib</groupId>
-                            <artifactId>ant-contrib</artifactId>
-                            <version>1.0b3</version>
-                            <exclusions>
-                                <exclusion>
-                                    <groupId>ant</groupId>
-                                    <artifactId>ant</artifactId>
-                                </exclusion>
-                            </exclusions>
-                        </dependency>
-                        <dependency>
-                            <groupId>org.apache.ant</groupId>
-                            <artifactId>ant-nodeps</artifactId>
-                            <version>1.8.1</version>
-                        </dependency>
-                    </dependencies>
                 </plugin>
             </plugins>
         </pluginManagement>

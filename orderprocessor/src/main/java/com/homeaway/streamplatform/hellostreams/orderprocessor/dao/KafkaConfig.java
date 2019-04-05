@@ -11,23 +11,27 @@ import org.springframework.context.annotation.Configuration;
 import java.util.Properties;
 
 import static io.confluent.kafka.serializers.AbstractKafkaAvroSerDeConfig.SCHEMA_REGISTRY_URL_CONFIG;
-import static org.apache.kafka.clients.producer.ProducerConfig.BOOTSTRAP_SERVERS_CONFIG;
-import static org.apache.kafka.clients.producer.ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG;
-import static org.apache.kafka.clients.producer.ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG;
+import static org.apache.kafka.clients.producer.ProducerConfig.*;
 
 /**
  * Configuration for kafka
  */
 @Configuration
 public class KafkaConfig {
-    @Value("${orderprocessor.bootstrap.servers")
+    @Value("${order-processor.bootstrap.servers}")
     private String bootstrapServers;
 
-    @Value("${orderprocessor.schema.registry.url")
+    @Value("${order-processor.schema.registry.url}")
     private String schemaRegistryUrl;
+
+    @Value("${order-processor.order.event.producer.id}")
+    private String orderEventProducerId;
 
     @Bean
     public KafkaProducer<String, SpecificRecord> kafkaOrderEventProducer() {
+        Properties props = getKafkaProperties();
+        props.put(CLIENT_ID_CONFIG, orderEventProducerId);
+        props.put(ACKS_CONFIG, "all");
         return new KafkaProducer<>(getKafkaProperties());
     }
 
@@ -37,6 +41,7 @@ public class KafkaConfig {
         props.put(KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
         props.put(VALUE_SERIALIZER_CLASS_CONFIG, KafkaAvroSerializer.class);
         props.put(SCHEMA_REGISTRY_URL_CONFIG, schemaRegistryUrl);
+        props.put(COMPRESSION_TYPE_CONFIG, "snappy");
         return props;
     }
 }
