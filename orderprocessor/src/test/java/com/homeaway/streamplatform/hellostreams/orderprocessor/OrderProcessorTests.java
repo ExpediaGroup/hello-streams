@@ -36,8 +36,6 @@ public class OrderProcessorTests {
 
         // place Order
         GraphQLResponse response = perform("placeOrder.mutation", vars);
-        assertThat(response.getStatusCode().value(), is(200));
-        assertThat(didGraphQLFail(response), is (false));
         assertThat(response.get("data.placeOrder.customerId", String.class), is(CustomerDao.CUSTOMER_TEST_ID));
     }
 
@@ -51,13 +49,17 @@ public class OrderProcessorTests {
         assertThat(customerDao.getCustomer(NEW_CUSTOMER_ID), is(nullValue()));
 
         GraphQLResponse response = perform("placeOrder.mutation", vars);
-        assertThat(response.getStatusCode().value(), is(200));
-        assertThat(didGraphQLFail(response), is (false));
         assertThat(response.get("data.placeOrder.customerId", String.class), is(NEW_CUSTOMER_ID));
     }
 
     public GraphQLResponse perform(String gqlResource, ObjectNode vars) throws IOException {
-        return graphQLTemplate.perform(gqlResource, vars);
+        GraphQLResponse response = graphQLTemplate.perform(gqlResource, vars);
+        assertThat(response.getStatusCode().value(), is(200));
+        if(didGraphQLFail(response)) {
+            log.error("response={}", response.readTree().toString());
+            throw new IllegalStateException("Did not expect graphQL to fail");
+        }
+        return response;
     }
 
     public ObjectNode getPlaceOrderVars(String customerId, String item) {

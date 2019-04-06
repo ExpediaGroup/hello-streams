@@ -1,0 +1,15 @@
+schema-registry: http://localhost:8081
+# Note: we are outside of the docker network, so we use this so we get the right metadata returned to us
+# See: https://docs.confluent.io/current/kafka/multi-node.html
+bootstrap-servers: PLAINTEXT_HOST://localhost:29092
+streams:
+  - stream-name: order-command-events
+    partitions: 1
+    replication: 1
+    multi-type: True
+    compatibility: FULL_TRANSITIVE
+    types:
+      - OrderPlaced
+      - OrderRejected
+      - OrderAccepted
+

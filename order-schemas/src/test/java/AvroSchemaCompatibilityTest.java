@@ -1,144 +1,179 @@
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+import io.confluent.kafka.schemaregistry.client.CachedSchemaRegistryClient;
+import io.confluent.kafka.schemaregistry.client.SchemaRegistryClient;
+import io.confluent.kafka.schemaregistry.client.rest.RestService;
+import io.confluent.kafka.schemaregistry.client.rest.exceptions.RestClientException;
+import io.confluent.kafka.serializers.subject.TopicNameStrategy;
+import io.confluent.kafka.serializers.subject.TopicRecordNameStrategy;
+import io.confluent.kafka.serializers.subject.strategy.SubjectNameStrategy;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.avro.Schema;
+import org.apache.avro.SchemaParseException;
+import org.apache.commons.io.FilenameUtils;
+import org.apache.kafka.clients.admin.AdminClient;
+import org.apache.kafka.clients.admin.AdminClientConfig;
+import org.apache.kafka.clients.admin.CreateTopicsResult;
+import org.apache.kafka.clients.admin.KafkaAdminClient;
+import org.apache.kafka.clients.admin.ListTopicsResult;
+import org.apache.kafka.clients.admin.NewTopic;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Objects;
+import java.util.Properties;
 
-import org.apache.avro.Schema;
-import org.apache.avro.SchemaParseException;
-import org.apache.commons.io.FilenameUtils;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
-import io.confluent.kafka.schemaregistry.client.CachedSchemaRegistryClient;
-import io.confluent.kafka.schemaregistry.client.SchemaMetadata;
-import io.confluent.kafka.schemaregistry.client.SchemaRegistryClient;
-import io.confluent.kafka.schemaregistry.client.rest.RestService;
-import io.confluent.kafka.schemaregistry.client.rest.exceptions.RestClientException;
-import lombok.extern.slf4j.Slf4j;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.junit.Assert.assertThat;
 
 @Slf4j
 public class AvroSchemaCompatibilityTest {
+    private static Map<String, Schema> LOADED_SCHEMAS;
 
-    private static String schemaRegistryUrl;
+    private static SchemaRegistryClient CLIENT;
 
-    private static String schemaDirectory;
-
-    private static Map<String, Schema> loadedSchemas;
-
-    private static SchemaRegistryClient client;
-
-    private static RestService restService;
+    private static StreamRegistrations STREAM_REGISTRATIONS;
 
     @BeforeClass
-    public static void setup() {
+    public static void setup() throws Exception {
         // Variables read from Maven Profiles & surefire plugin
-        schemaRegistryUrl = System.getProperty("schema.registry.url");
-        schemaDirectory = System.getProperty("avro.schema.directory");
+        String schemaDirectory = System.getProperty("avro.schema.directory");
 
-        loadedSchemas = loadSchemas(schemaDirectory);
+        // Convert idl
+        String avroSrcDir = System.getProperty("avro.source.directory");
+        log.info("[ConvertIdl] converting avdl to avsc from " + avroSrcDir + " to " + schemaDirectory);
+        File inDir = new File(avroSrcDir);
+        File outDir = new File(schemaDirectory);
+        ConvertIdl convertIdl = new ConvertIdl();
+        convertIdl.convertIdl(inDir, outDir);
 
-        restService = new RestService(Arrays.asList(schemaRegistryUrl.split(",")));
-        client = new CachedSchemaRegistryClient(restService, 1000);
+        LOADED_SCHEMAS = loadSchemas(schemaDirectory);
+
+        ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
+
+        // HACK!! -- should probably do this in a better manner
+        File file = new File("src/main/resources/stream-registration.yaml");
+        STREAM_REGISTRATIONS = mapper.readValue(file, StreamRegistrations.class);
+        log.info("streamRegistrations={}", STREAM_REGISTRATIONS);
+
+        RestService restService = new RestService(Arrays.asList(STREAM_REGISTRATIONS.getSchemaRegistry().split(",")));
+        CLIENT = new CachedSchemaRegistryClient(restService, 1000);
     }
 
     @Test
-    public void testSchemaDirectoryReadable() {
-        assertFalse("Schema directory has been defined", schemaDirectory.isEmpty());
+    public void registerStreams() {
+        log.info("Schema Registry URL = {}", STREAM_REGISTRATIONS.getSchemaRegistry());
 
-        File schemataDir = new File(schemaDirectory);
-        final File[] schemaFiles = schemataDir.listFiles();
-        assertNotNull(schemaFiles);
-        assertTrue(schemaFiles.length > 0);
+        STREAM_REGISTRATIONS.getStreams().forEach(this::registerStream);
+    }
+    
+    private void registerStream(StreamRegistration sr) {
+        // ensure topic is created
+        ensureTopicCreated(sr);
 
-        assertEquals("Schemas have been generated and parsed", schemaFiles.length, loadedSchemas.size());
+        final SubjectNameStrategy<Schema> subjectNameStrategy = getSubjectNameStrategy(sr);
+        String compatibility = sr.getCompatibility();
+
+        // check compatibility of type
+        sr.getTypes().forEach(s -> {
+            Schema schema = LOADED_SCHEMAS.get(s);
+            assertThat(schema, is(notNullValue()));
+            checkCompatibilityAndRegister(sr.getStreamName(), schema, subjectNameStrategy, compatibility);
+        });
     }
 
-    @Test
-    public void generatedSchemaIsCompatibleWithExistingRegistry() {
-        assertFalse("Schema registry URL(s) has been defined", schemaRegistryUrl.isEmpty());
-
-        String register = System.getProperty("register");
-
-        Map<String, Schema> incompatibleSchemas = new HashMap<>();
-
-        System.out.println("Schema Registry URL -"+schemaRegistryUrl);
-
-        for (Map.Entry<String, Schema> entry : loadedSchemas.entrySet()) {
-
-            String subject = entry.getKey();
-            Schema schema = entry.getValue();
-            System.out.println("Subject: "+subject+" ,schema:"+schema);
-            if (!safeTestCompatibility(subject, schema)) {
-                incompatibleSchemas.put(subject, schema);
-            } else {
-                // Only register the schemas if this unit test is ran with a -Dregister=true flag
-                //if (register != null && (register.isEmpty() || Boolean.valueOf(register))) {
-                registerSchema(subject, schema);
-                //}
-            }
-        }
-        assertTrue("Generated Schemas are not compatible with Registry", incompatibleSchemas.isEmpty());
-    }
-
-    /**
-     * Registers a schema with the registry
-     *
-     * @param subject Subject name to register under
-     * @param schema Schema object to register for the subject
-     * @return
-     */
-    public boolean registerSchema(String subject, Schema schema) {
+    private void checkCompatibilityAndRegister(String topic, Schema schema, SubjectNameStrategy<Schema> subjectNameStrategy, String compatibility) {
         try {
-            int id = client.register(subject, schema);
-            return id > 0;
-        } catch (IOException e) {
-            log.error("Unable to connect to schema registry", e);
-        } catch (RestClientException e) {
-            log.error("An exception occurred with the RestClient", e);
+            // ensure compatibility level
+            ensureCompatibilityLevelIsSet(topic, schema, subjectNameStrategy, compatibility);
+
+            // ensure compatibility
+            ensureCompatibility(topic, schema, subjectNameStrategy);
+
+            // register schema
+            registerSchema(topic, schema, subjectNameStrategy);
+        } catch (Exception exception) {
+            throw new IllegalStateException("Could not check compatibility.", exception);
         }
-        return false;
     }
 
-    /**
-     * Loops backwards over all versions of a subject to test the compatibility of a schema
-     *
-     * @param subject The Subject in the schema registry
-     * @param schema The schema to test compatibility for
-     * @return True if compatible, or subject not existent
-     */
-    private boolean safeTestCompatibility(String subject, Schema schema) {
-        log.debug("Schema under test for Subject {} is {}", subject, schema);
-        try {
-            SchemaMetadata latestSchemaMetadata = client.getLatestSchemaMetadata(subject);
-            for (int version = latestSchemaMetadata.getVersion(); version > 0; version--) {
-                SchemaMetadata versionMetadata = client.getSchemaMetadata(subject, version);
+    private void registerSchema(String topic, Schema schema, SubjectNameStrategy<Schema> subjectNameStrategy) throws IOException, RestClientException {
+        String subject = subjectNameStrategy.subjectName(topic, false, schema);
+        log.info("[Register Schema] Registering schema for topic={} subject={}", topic, subject);
+        CLIENT.register(subject, schema);
+    }
 
-                log.info("Schema {}", versionMetadata.getSchema());
-                if (!restService.testCompatibility(schema.toString(), subject, Integer.toString(version))) {
-                    log.warn("Generated Schema {} is incompatible with Registered Schema {}", schema, versionMetadata.getSchema());
-                    return false;
-                }
+    private void ensureCompatibilityLevelIsSet(String topic, Schema schema, SubjectNameStrategy<Schema> subjectNameStrategy, String compatibility) throws IOException, RestClientException {
+        String subject = subjectNameStrategy.subjectName(topic, false, schema);
+        String currentCompatibility;
+        try {
+            currentCompatibility = CLIENT.getCompatibility(subject);
+            if(!currentCompatibility.equals(compatibility)) {
+                log.info("[EnsureCompatibility] subject={} current compatibility={} ... setting to compatibility={}", subject, currentCompatibility, compatibility);
+                CLIENT.updateCompatibility(subject, compatibility);
             }
         } catch (RestClientException restClientException) {
-            if (restClientException.getStatus() == 404) {
-                log.info("The Subject {} does not exist. Any Schema should be compatible when registered.", subject);
-                return true;
+            if (restClientException.getErrorCode() != 40401) {
+                throw new IllegalStateException("Could not check compatibility for subject:" + subject, restClientException);
             }
-            log.warn("Something REST-y happened with testing Schema compatibility for Subject {}. Returning 'incompatible': e={}", subject,
-                restClientException);
-            return false;
-        } catch (Exception exception) {
-            throw new IllegalStateException(String.format("Could not safely test compatibility of Schema on Subject. Returning 'compatible': %s %s", subject, schema.toString()), exception);
+            log.info("[EnsureCompatibility] subject={} does not exist. Setting compatibility={}", subject, compatibility);
+            // subject not found this is ok.
+            CLIENT.updateCompatibility(subject, compatibility);
         }
-        return true;
+    }
+
+    private void ensureCompatibility(String topic, Schema schema, SubjectNameStrategy<Schema> subjectNameStrategy) throws IOException {
+        String subject = subjectNameStrategy.subjectName(topic, false, schema);
+        try {
+            if (!CLIENT.testCompatibility(subject, schema)) {
+                throw new IllegalStateException("Schema not valid with subject=" + subject);
+            }
+            log.info("[EnsureCompatibility] Requested schema for Subject={} is compatible. Proceeding.");
+        } catch (RestClientException restClientException) {
+            if(restClientException.getErrorCode()!=40401) {
+                throw new IllegalStateException("Could not test compatibility with subject=" + subject, restClientException);
+            }
+            log.info("[EnsureCompatibility] Subject={} does not exist. Assuming schema is compatible.", subject);
+        }
+    }
+
+    private SubjectNameStrategy<Schema> getSubjectNameStrategy(StreamRegistration sr) {
+        if (sr.isMultiType()) {
+            return new TopicRecordNameStrategy();
+        }
+        return new TopicNameStrategy();
+    }
+
+    private void ensureTopicCreated(StreamRegistration sr) {
+        try {
+            log.info("[EnsureTopicCreated] Initializing kafka admin CLIENT");
+            Properties props = new Properties();
+            props.setProperty(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, STREAM_REGISTRATIONS.getBootstrapServers());
+            props.setProperty(AdminClientConfig.CLIENT_ID_CONFIG, "stream-modeling-pipeline");
+            AdminClient adminClient = KafkaAdminClient.create(props);
+            log.info("[EnsureTopicCreated] ClusterID = {}", adminClient.describeCluster().clusterId().get());
+
+            ListTopicsResult topicResults = adminClient.listTopics();
+            if(topicResults.names().get().contains(sr.getStreamName())) {
+                log.info("[EnsureTopicCreated] Topic={} already exists.", sr.getStreamName());
+                return;
+            }
+            log.info("[EnsureTopicCreated] Creating topic={} partitions={} replicationFactor={}", sr.getStreamName(), sr.getPartitions(), sr.getReplication());
+            CreateTopicsResult result = adminClient.createTopics(
+                    Collections.singletonList(new NewTopic(sr.getStreamName(), sr.getPartitions(), sr.getReplication())));
+            // wait for result
+            result.values().get(sr.getStreamName()).get();
+        } catch (Exception exception) {
+            throw new IllegalStateException("Could not ensure topic created for stream=" + sr.getStreamName(), exception);
+        }
     }
 
     /**
@@ -147,13 +182,13 @@ public class AvroSchemaCompatibilityTest {
      * @param schemaDirectory The file location containing AVSC files
      * @return (SubjectName => Schema) mapping
      */
-    protected static Map<String, Schema> loadSchemas(String schemaDirectory) {
+    private static Map<String, Schema> loadSchemas(String schemaDirectory) {
         File[] schemaFiles = new File(schemaDirectory).listFiles();
 
         int errorCount = 0;
         Map<String, Schema> results = new LinkedHashMap<>();
 
-        for (File schemaFile : schemaFiles) {
+        for (File schemaFile : Objects.requireNonNull(schemaFiles, "No files in schemaDirectory:" + schemaDirectory)) {
             if(!schemaFile.isDirectory()) {
                 Schema.Parser parser = new Schema.Parser();
                 final String fileName = schemaFile.getName();
@@ -164,11 +199,8 @@ public class AvroSchemaCompatibilityTest {
                 try (FileInputStream inputStream = new FileInputStream(schemaFile)) {
                     Schema schema = parser.parse(inputStream);
                     results.put(FilenameUtils.getBaseName(fileName), schema);
-                } catch (IOException ex) {
+                } catch (IOException | SchemaParseException ex) {
                     log.error("Exception thrown while loading " + schemaFile, ex);
-                    errorCount++;
-                } catch (SchemaParseException ex) {
-                    log.error("Exception thrown while parsing " + schemaFile, ex);
                     errorCount++;
                 }
             }
