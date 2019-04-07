@@ -32,38 +32,16 @@ type OrderPlaced implements OrderCommandEvent & CommandEvent {
     created: GraphQLDateTime!
 }
 
-# **BeansSupplied**: the command event that signifies how many beans were added to the coffee bean supply.
-type BeansSupplied implements CommandEvent {
-    # The command event id
-    id: ID!
-    # Number of beans added
-    numBeansAdded: Int!
-    # The timestamp of this command event
-    created: GraphQLDateTime!
-}
-
 # Traditional Domain Objects (nouns)
-
-# The customer domain object
-type Customer {
-    # The unique id of the customer
-    id: String!
-    # The username of the customer
-    username: String!
-    # The list of orders for this customer
-    orders: [Order]
-    # The created datetime of this customer
-    created: GraphQLDateTime!
-    # The updated datetime of this customer
-    updated: GraphQLDateTime!
-}
 
 # The order domain object
 type Order {
-    # The unique id of the order
+    # The unique id of the order event that resulted in this order
     id: ID!
-    # The customer for the order
-    customer: Customer!
+    # The unique id of the order
+    orderId: ID!
+    # The customer id for the order
+    customerId: String!
     # The item that was ordered
     item: String!
     # The state of the order
@@ -79,14 +57,6 @@ type Order {
 type Query {
     # Query to retrieve all orders
     orders: [Order!]!
-
-    # Query to look up customer. May be null
-    customer(
-    # The customerId for this customer
-    id: String!): Customer
-
-    #Query to retrieve number of available beans
-    availableBeans: Int!
 }
 
 type Mutation {
@@ -96,9 +66,4 @@ type Mutation {
     customerId: String!,
     # the item that is being placed for this order
     item: String!) : OrderPlaced!
-
-    # Action for supplying beans.  A **BeanSupplied** command event is returned.
-    supplyBeans(
-    # the number of beans to supply
-    numBeans: Int!) : BeansSupplied!
 }

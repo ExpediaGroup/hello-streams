@@ -26,11 +26,8 @@ import java.util.stream.Collectors;
 @Repository
 @Slf4j
 public class OrderDao {
-    private static final String FIRST_ORDER_ID = "fa7ea064-77f4-4191-ba8a-472fb0e98b03";
-    private static final String SECOND_ORDER_ID = "6bed3d74-f56c-43b8-b099-d80425f2ea1c";
-    private static final List<Order> TEST_ORDERS = Lists.newArrayList(
-            createDummyOrder(UUID.randomUUID().toString(), FIRST_ORDER_ID, CustomerDao.CUSTOMER_TEST_ID, "coffee", "PLACED"),
-            createDummyOrder(UUID.randomUUID().toString(), SECOND_ORDER_ID, CustomerDao.CUSTOMER_TEST_ID, "latte", "PLACED"));
+    // TODO - remove when tied to kafka persistence
+    private static final List<Order> TEST_ORDERS = Lists.newArrayList();
 
     private KafkaProducer<String, SpecificRecord> kafkaOrderEventProducer;
 
@@ -65,8 +62,8 @@ public class OrderDao {
         send(orderPlacedEvent);
 
         // TODO - remove when orderDao is wired up
-        Order order = createDummyOrder(orderPlacedEvent.getId(),
-                orderPlacedEvent.getOrderId(), customerId, item,"PLACED");
+        Order order = createDummyOrder(orderPlacedEvent.getId(), orderPlacedEvent.getOrderId(),
+                customerId, item,"PLACED");
         log.info("Adding order to mock dao. order={}", order.toString());
         TEST_ORDERS.add(order);
         return toDTO(orderPlacedEvent);
@@ -120,5 +117,10 @@ public class OrderDao {
         order.setUpdated(ZonedDateTime.now(OrderProcessorUtils.UTC_ZONE_ID));
         order.setCreated(order.getUpdated());
         return order;
+    }
+
+    public void clearDB() {
+        // TODO - remove when tied to kafka query mechanism
+        TEST_ORDERS.clear();;
     }
 }

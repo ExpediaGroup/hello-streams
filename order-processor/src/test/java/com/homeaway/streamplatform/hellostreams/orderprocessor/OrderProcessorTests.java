@@ -6,13 +6,16 @@ import com.graphql.spring.boot.test.GraphQLResponse;
 import com.graphql.spring.boot.test.GraphQLTest;
 import com.graphql.spring.boot.test.GraphQLTestTemplate;
 import com.homeaway.streamplatform.hellostreams.orderprocessor.dao.CustomerDao;
+import com.homeaway.streamplatform.hellostreams.orderprocessor.dao.OrderDao;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
 import java.io.IOException;
+import java.util.List;
 
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
@@ -27,16 +30,18 @@ public class OrderProcessorTests {
     @Resource
     private GraphQLTestTemplate graphQLTemplate;
 
+    @Resource
+    private OrderDao orderDao;
+
+    @Resource
+    private CustomerDao customerDao;
+
     private ObjectMapper mapper = new ObjectMapper();
 
-    @Test
-    public void placeOrderValidCustomer() throws Exception {
-        // setup variables
-        ObjectNode vars = getPlaceOrderVars(CustomerDao.CUSTOMER_TEST_ID, "Latte");
-
-        // place Order
-        GraphQLResponse response = perform("placeOrder.mutation", vars);
-        assertThat(response.get("data.placeOrder.customerId", String.class), is(CustomerDao.CUSTOMER_TEST_ID));
+    @Before
+    public void resetDao() {
+        orderDao.clearDB();
+        customerDao.clearDB();
     }
 
     @Test
@@ -52,24 +57,41 @@ public class OrderProcessorTests {
         assertThat(response.get("data.placeOrder.customerId", String.class), is(NEW_CUSTOMER_ID));
     }
 
-    public GraphQLResponse perform(String gqlResource, ObjectNode vars) throws IOException {
+    @Test
+    public void verifyOrderQuery() throws Exception {
+        GraphQLResponse response = perform("getOrders.query", null);
+        assertThat(response.get( "data.orders", List.class).size(), is(0));
+
+        // create order
+        ObjectNode vars = getPlaceOrderVars(NEW_CUSTOMER_ID, "Latte");
+        response = perform("placeOrder.mutation", vars);
+        assertThat(response.get("data.placeOrder.customerId", String.class), is(NEW_CUSTOMER_ID));
+
+        // verify order is in the list
+        response = perform("getOrders.query", null);
+        assertThat(response.get( "data.orders", List.class).size(), is(1));
+        assertThat(response.get( "data.orders[0].item", String.class), is("Latte"));
+        assertThat(response.get( "data.orders[0].state", String.class), is("PLACED"));
+    }
+
+    private GraphQLResponse perform(String gqlResource, ObjectNode vars) throws IOException {
         GraphQLResponse response = graphQLTemplate.perform(gqlResource, vars);
         assertThat(response.getStatusCode().value(), is(200));
         if(didGraphQLFail(response)) {
-            log.error("response={}", response.readTree().toString());
+            log.error("GraphQL failed. response={}", response.readTree().toString());
             throw new IllegalStateException("Did not expect graphQL to fail");
         }
         return response;
     }
 
-    public ObjectNode getPlaceOrderVars(String customerId, String item) {
+    private ObjectNode getPlaceOrderVars(String customerId, String item) {
         ObjectNode vars = mapper.createObjectNode();
         vars.put("customerId", customerId);
         vars.put( "item", item);
         return vars;
     }
 
-    public boolean didGraphQLFail(GraphQLResponse response) throws IOException {
+    private boolean didGraphQLFail(GraphQLResponse response) throws IOException {
         return response.readTree().get("errors") != null;
     }
 }

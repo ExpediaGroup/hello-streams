@@ -1,11 +1,7 @@
 package com.homeaway.streamplatform.hellostreams.orderprocessor.dao;
 
-import com.google.common.base.Preconditions;
 import com.homeaway.streamplatform.hellostreams.orderprocessor.OrderProcessorUtils;
 import com.homeaway.streamplatform.hellostreams.orderprocessor.model.Customer;
-import org.apache.kafka.clients.producer.KafkaProducer;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import org.springframework.stereotype.Repository;
 
 import java.time.ZonedDateTime;
@@ -39,5 +35,8 @@ public class CustomerDao {
         return customer;
     }
 
+    public void clearDB() {
+        TEST_CUSTOMER_CACHE.clear();
+    }
 }
 
