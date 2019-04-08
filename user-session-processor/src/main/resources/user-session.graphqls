@@ -1,0 +1,96 @@
+# declare our custom scalars
+scalar GraphQLDateTime
+
+# **CommandEvent** the base interface for all command events.
+interface CommandEvent {
+    # The command event id
+    id: ID!
+    # The timestamp of this command event
+    created: GraphQLDateTime!
+}
+
+# **CustomerEvent** events on customers.
+interface CustomerEvent {
+    # The id of the customer for whom the event is being recorded
+    customerId: ID!
+    # The useranme of the customer for whom the event is being recorded
+    username: String!
+}
+
+# "Command Events" ... strictly recordings of actions that have occurred.
+# Verbs in the past tense.
+
+# **LoginRequested**: the command event that signifies that a user wishes to log into the system.
+type LoginRequested implements CommandEvent & CustomerEvent {
+    # The command event id
+    id: ID!
+    # The timestamp of this command event
+    created: GraphQLDateTime!
+    # The username of the customer for whom the event is being recorded
+    customerId: ID!
+    # The useranme of the customer for whom the event is being recorded
+    username: String!
+}
+
+# **LoginAccepted**: the command event that signifies that a user has been logged into the system.
+type LoginAccepted implements CommandEvent & CustomerEvent {
+    # The command event id
+    id: ID!
+    # The timestamp of this command event
+    created: GraphQLDateTime!
+    # The username of the customer for whom the event is being recorded
+    customerId: ID!
+    # The useranme of the customer for whom the event is being recorded
+    username: String!
+}
+
+# **LoginDeclined**: the command event that signifies that a user failed to log into the system.
+type LoginDeclined implements CommandEvent {
+    # The command event id
+    id: ID!
+    # The timestamp of this command event
+    created: GraphQLDateTime!
+    # The useranme of the customer for whom the event is being recorded
+    username: String!
+}
+
+# The customer domain object
+type Customer {
+    # The unique id of the customer
+    id: ID!
+    # The username of the customer
+    username: String!
+    # The created datetime of this customer
+    created: GraphQLDateTime!
+    # The updated datetime of this customer
+    updated: GraphQLDateTime!
+}
+
+type Query {
+    # Lookup by customer id. May be null.
+    customer(
+    # The customerId for this customer
+    id: ID!): Customer
+
+    # Lookup customer by username. May be null.
+    lookupCustomer(
+    # The username of the customer
+    username: String!): Customer
+}
+
+type Mutation {
+    # loginRequested
+    loginRequested(
+    # the username of customer logging in
+    username: String!): LoginRequested!
+
+    # loginAccepted
+    loginAccepted(
+    # the customerId logging in
+    username: String!): LoginAccepted!
+
+    # loginDenied
+    loginDeclined(
+    # the customerId logging in
+    username: String!): LoginDeclined!
+}
