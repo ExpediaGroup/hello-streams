@@ -84,6 +84,7 @@ public class OrderProcessorTests {
         return response;
     }
 
+    @SuppressWarnings("SameParameterValue")
     private ObjectNode getPlaceOrderVars(String customerId, String item) {
         ObjectNode vars = mapper.createObjectNode();
         vars.put("customerId", customerId);

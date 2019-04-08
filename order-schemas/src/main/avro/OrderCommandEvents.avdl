@@ -42,4 +42,28 @@ protocol OrderCommandEvents {
     timestamp_ms created;
   }
 
+  /* Nouns / Domain Objects */
+  /** Orders */
+  record Order {
+    /** the unique id of this command event */
+    string id;
+
+    /** the unique orderId this command event applies to */
+    string orderId;
+
+    /** the id of the customer*/
+    string customerId;
+
+    /** the item that is to be ordered */
+    string item;
+
+    /** the item that is to be ordered */
+    string state;
+
+    /** the timestamp that this order was created */
+    timestamp_ms created;
+
+    /** the timestamp that this order was updated */
+    timestamp_ms updated;
+  }
 }

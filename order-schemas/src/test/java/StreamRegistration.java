@@ -8,6 +8,9 @@ public class StreamRegistration {
     @JsonProperty("stream-name")
     private String streamName;
 
+    @JsonProperty("compaction")
+    private boolean compacted;
+
     @JsonProperty("multi-type")
     private boolean multiType;
 
