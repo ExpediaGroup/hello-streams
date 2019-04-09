@@ -29,7 +29,6 @@ import java.util.Properties;
 @Component
 @Slf4j
 public class OrderStreamProcessor {
-    private static final String BY_ORDER = "byOrder";
     private static final String ORDER_STORE_NAME = "orders";
 
     @Resource
@@ -52,7 +51,7 @@ public class OrderStreamProcessor {
     public OrderStreamProcessor() {}
 
     @SuppressWarnings({"WeakerAccess", "unchecked"})
-    public StreamsBuilder buildStream() {
+    public StreamsBuilder getStreamsBuilder() {
         StreamsBuilder builder = new StreamsBuilder();
 
         // lookup command (orderCommands) and domain (orders) events
@@ -67,7 +66,8 @@ public class OrderStreamProcessor {
 
         // send all the command events (grouped by orderId) to the aggregate function
         orderCommandEvents.groupByKey()
-                .aggregate(() -> null, this::aggregateOrderCommandEvent,
+                .aggregate(() -> null,
+                        (aggKey, orderCommandEvent, aggregate) -> aggregateOrderCommandEvent(orderCommandEvent, aggregate),
                         Materialized.<String, Order, KeyValueStore<Bytes, byte[]>>as(ORDER_STORE_NAME)
                                 .withKeySerde(ordersMeta.getKeySerde())
                                 .withValueSerde(ordersMeta.getValueSerde()));
@@ -75,7 +75,7 @@ public class OrderStreamProcessor {
         return builder;
     }
 
-    private Order aggregateOrderCommandEvent(String aggKey, SpecificRecord orderCommandEvent, Order aggregate) {
+    private Order aggregateOrderCommandEvent(SpecificRecord orderCommandEvent, Order aggregate) {
         if(orderCommandEvent instanceof OrderPlaced) {
             return aggregateOrderPlaced((OrderPlaced)orderCommandEvent, aggregate);
         }
@@ -173,7 +173,7 @@ public class OrderStreamProcessor {
     @PostConstruct
     public void start() {
         // build the topology
-        Topology topology = buildStream().build();
+        Topology topology = getStreamsBuilder().build();
         log.info("Starting {} kstreams", orderProcessorAppId);
         log.info("{}", topology.describe());
 
