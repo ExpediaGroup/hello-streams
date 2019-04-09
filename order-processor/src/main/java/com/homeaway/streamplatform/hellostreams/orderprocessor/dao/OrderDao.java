@@ -82,11 +82,11 @@ public class OrderDao {
 
     private void send(com.homeaway.streamplatform.hellostreams.OrderPlaced orderPlacedEvent) {
         try {
-            log.info("Writing {} to kafka.", orderPlacedEvent.toString());
+            log.info("Writing orderPlaced={} to kafka.", orderPlacedEvent);
             Future<RecordMetadata> resultFuture = kafkaOrderEventProducer.send(new ProducerRecord<>(
                     orderCommandsStream, null,
                     orderPlacedEvent.getCreated().getMillis(),
-                    orderPlacedEvent.getId(),
+                    orderPlacedEvent.getOrderId(), // use order key to make order aggregate easier!!
                     orderPlacedEvent));
             // sync wait for response
             resultFuture.get(writeWaitTimeout, TimeUnit.MILLISECONDS);

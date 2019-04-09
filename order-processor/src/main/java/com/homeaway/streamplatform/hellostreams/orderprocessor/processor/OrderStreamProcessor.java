@@ -4,22 +4,19 @@ import com.homeaway.streamplatform.hellostreams.Order;
 import com.homeaway.streamplatform.hellostreams.OrderAccepted;
 import com.homeaway.streamplatform.hellostreams.OrderPlaced;
 import com.homeaway.streamplatform.hellostreams.OrderRejected;
+import com.homeaway.streamplatform.hellostreams.orderprocessor.processor.StreamRegistry.StreamMetadata;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.avro.specific.SpecificRecord;
 import org.apache.kafka.common.serialization.Serdes;
+import org.apache.kafka.common.utils.Bytes;
 import org.apache.kafka.streams.KafkaStreams;
-import org.apache.kafka.streams.KeyValue;
 import org.apache.kafka.streams.StreamsBuilder;
 import org.apache.kafka.streams.StreamsConfig;
 import org.apache.kafka.streams.Topology;
 import org.apache.kafka.streams.kstream.Consumed;
 import org.apache.kafka.streams.kstream.KStream;
-import org.apache.kafka.streams.kstream.ValueTransformer;
-import org.apache.kafka.streams.processor.ProcessorContext;
-import org.apache.kafka.streams.state.KeyValueBytesStoreSupplier;
+import org.apache.kafka.streams.kstream.Materialized;
 import org.apache.kafka.streams.state.KeyValueStore;
-import org.apache.kafka.streams.state.StoreBuilder;
-import org.apache.kafka.streams.state.Stores;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -32,6 +29,7 @@ import java.util.Properties;
 @Component
 @Slf4j
 public class OrderStreamProcessor {
+    private static final String BY_ORDER = "byOrder";
     private static final String ORDER_STORE_NAME = "orders";
 
     @Resource
@@ -53,170 +51,151 @@ public class OrderStreamProcessor {
 
     public OrderStreamProcessor() {}
 
+    @SuppressWarnings({"WeakerAccess", "unchecked"})
     public StreamsBuilder buildStream() {
         StreamsBuilder builder = new StreamsBuilder();
 
-        // setup order state
-        StreamRegistry.StreamMetadata<String, SpecificRecord> ordersMeta = streamRegistry.lookupStream(ordersStream);
-        KeyValueBytesStoreSupplier orderKeyValueStore = Stores.persistentKeyValueStore(ORDER_STORE_NAME);
-        StoreBuilder orderStoreBuilder =
-                Stores.keyValueStoreBuilder(orderKeyValueStore,
-                        ordersMeta.getKeySerde(), ordersMeta.getValueSerde());
-        builder.addStateStore(orderStoreBuilder);
+        // lookup command (orderCommands) and domain (orders) events
+        StreamMetadata<String, SpecificRecord> orderCommandsMeta = streamRegistry.lookupStream(orderCommandsStream);
+        StreamMetadata<String, Order> ordersMeta = streamRegistry.lookupStream(ordersStream);
 
-        // setup input events
-        StreamRegistry.StreamMetadata<String, SpecificRecord> orderCommandsMeta = streamRegistry.lookupStream(orderCommandsStream);
+        // setup input events - multi-type
         KStream<String, SpecificRecord> orderCommandEvents =
                 builder.stream(orderCommandsMeta.getName(),
-                        Consumed.with(orderCommandsMeta.getKeySerde(), orderCommandsMeta.getValueSerde()));
+                        Consumed.with(orderCommandsMeta.getKeySerde(),
+                                orderCommandsMeta.getValueSerde()));
 
-        // order placed
-        orderCommandEvents.filter((k,event) -> event instanceof OrderPlaced)
-                .map((k,event) -> KeyValue.pair(k, (OrderPlaced)event))
-                .selectKey((k,event) -> event.getOrderId())
-                .transformValues(OrderPlacedTransformer::new, ORDER_STORE_NAME);
-
-        // order rejected
-        orderCommandEvents.filter((k,event) -> event instanceof OrderRejected)
-                .map((k,event) -> KeyValue.pair(k, (OrderRejected)event))
-                .selectKey((k,event) -> event.getOrderId())
-                .transformValues(OrderRejectedTransformer::new, ORDER_STORE_NAME);
-
-        // order rejected
-        orderCommandEvents.filter((k,event) -> event instanceof OrderAccepted)
-                .map((k,event) -> KeyValue.pair(k, (OrderAccepted)event))
-                .selectKey((k,event) -> event.getOrderId())
-                .transformValues(OrderAcceptedTransformer::new, ORDER_STORE_NAME);
-
-        orderCommandEvents.filter((k,event) -> notCommandEvent(event))
-                .foreach((k,event) -> warnAndIgnore(event));
+        // send all the command events (grouped by orderId) to the aggregate function
+        orderCommandEvents.groupByKey()
+                .aggregate(() -> null, this::aggregateOrderCommandEvent,
+                        Materialized.<String, Order, KeyValueStore<Bytes, byte[]>>as(ORDER_STORE_NAME)
+                                .withKeySerde(ordersMeta.getKeySerde())
+                                .withValueSerde(ordersMeta.getValueSerde()));
 
         return builder;
     }
 
-    private void warnAndIgnore(SpecificRecord record) {
-        log.warn("Unexpected type={} for record={}. Ignoring.", record.getClass().getName(), record.toString());
+    private Order aggregateOrderCommandEvent(String aggKey, SpecificRecord orderCommandEvent, Order aggregate) {
+        if(orderCommandEvent instanceof OrderPlaced) {
+            return aggregateOrderPlaced((OrderPlaced)orderCommandEvent, aggregate);
+        }
+        if(orderCommandEvent instanceof OrderRejected) {
+            return aggregateOrderRejected((OrderRejected)orderCommandEvent, aggregate);
+        }
+        if(orderCommandEvent instanceof OrderAccepted) {
+            return aggregateOrderAccepted((OrderAccepted)orderCommandEvent, aggregate);
+        }
+        // else not expected
+        log.warn("Unexpected commandEvent={} of type={}", orderCommandEvent, orderCommandEvent == null ? null : orderCommandEvent.getClass().getName());
+        return aggregate;
     }
 
-    private boolean notCommandEvent(SpecificRecord record) {
-        return !(record instanceof OrderPlaced) &&
-                !(record instanceof OrderRejected) &&
-                !(record instanceof OrderAccepted);
+    private Order aggregateOrderPlaced(OrderPlaced orderPlaced, Order oldOrder) {
+        // check to see if aggregate already created
+        if(oldOrder != null) {
+            log.warn("Received duplicate orderPlaced event={} for an existing order={}. Ignoring orderPlaced.",
+                    orderPlaced, oldOrder);
+            // return old order
+            return oldOrder;
+        }
+
+        // aggregate did not exist. return new Order
+        Order order = createOrder(orderPlaced);
+        log.info("Received orderPlaced={}", orderPlaced);
+        log.info("Created order={}", order);
+        return order;
+    }
+
+    private Order aggregateOrderRejected(OrderRejected orderRejected, Order oldOrder) {
+        // check to see if aggregate doesn't exist
+        if( oldOrder == null ) {
+            log.warn("Received orderRejected event={} for a non-existent orderId. Ignoring orderRejected.", orderRejected);
+            // return null
+            return null;
+        }
+
+        // aggregate does exist, verify state
+        if( !"PLACED".equals(oldOrder.getState()) ) {
+            log.warn("Received orderRejected event={} for order in unexpected state={}. Ignoring orderRejected.", orderRejected, oldOrder.getState());
+            return oldOrder;
+        }
+
+        // we got here, oldOrder.state === "PLACED" ... safely change state
+        Order order = updateOrderState(oldOrder, "REJECTED");
+        log.info("Received orderRejected={}", orderRejected);
+        log.info("Updated order={}", order);
+        return order;
+    }
+
+    private Order aggregateOrderAccepted(OrderAccepted orderAccepted, Order oldOrder) {
+        // check to see if aggregate doesn't exist
+        if( oldOrder == null ) {
+            log.warn("Received orderAccepted event={} for a non-existent orderId. Ignoring orderAccepted.", orderAccepted);
+            // return null
+            return null;
+        }
+
+        // aggregate does exist, verify state
+        if( !"PLACED".equals(oldOrder.getState()) ) {
+            log.warn("Received orderAccepted event={} for order in unexpected state={}. Ignoring orderAccepted.", orderAccepted, oldOrder.getState());
+            return oldOrder;
+        }
+
+        // we got here, oldOrder.state === "PLACED" ... safely change state
+        Order order = updateOrderState(oldOrder, "ACCEPTED");
+        log.info("Received orderAccepted={}", orderAccepted);
+        log.info("Updated order={}", order);
+        return order;
+    }
+
+    private Order createOrder(OrderPlaced orderPlaced) {
+        DateTime now = DateTime.now();
+        Order order = Order.newBuilder()
+                .setOrderId(orderPlaced.getOrderId())
+                .setId(orderPlaced.getId())
+                .setCustomerId(orderPlaced.getCustomerId())
+                .setItem(orderPlaced.getItem())
+                .setState("PLACED")
+                .setCreated(now)
+                .setUpdated(now)
+                .build();
+        log.info("Received orderPlaced={}, order created={}", orderPlaced, order);
+        return order;
+    }
+
+    private Order updateOrderState(Order order, String state) {
+        DateTime now = DateTime.now();
+        order.setState(state);
+        order.setUpdated(now);
+        return order;
     }
 
     @PostConstruct
     public void start() {
-        // kstreams config
-        Properties props = new Properties();
-        props.setProperty(StreamsConfig.APPLICATION_ID_CONFIG, orderProcessorAppId);
-        props.setProperty(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
-        props.setProperty(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());
-
         // build the topology
         Topology topology = buildStream().build();
-        log.info("Topology");
+        log.info("Starting {} kstreams", orderProcessorAppId);
         log.info("{}", topology.describe());
 
         // create our processor
-        orderStreamProcessor = new KafkaStreams(topology, props);
+        orderStreamProcessor = new KafkaStreams(topology, getKStreamConfig());
 
         // start your engines
         orderStreamProcessor.start();
     }
 
+    private Properties getKStreamConfig() {
+        Properties props = new Properties();
+        props.setProperty(StreamsConfig.APPLICATION_ID_CONFIG, orderProcessorAppId);
+        props.setProperty(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
+        props.setProperty(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());
+        props.setProperty(StreamsConfig.TOPOLOGY_OPTIMIZATION, StreamsConfig.OPTIMIZE);
+        props.setProperty(StreamsConfig.COMMIT_INTERVAL_MS_CONFIG, "100");
+        return props;
+    }
+
     @PreDestroy
     public void stop() {
         orderStreamProcessor.close();
-    }
-
-    public static abstract class OrderCommandEventTransformer<V> implements ValueTransformer<V,Order> {
-        protected KeyValueStore<String, Order> orderStore;
-
-        @Override
-        public void init(ProcessorContext context) {
-            orderStore = (KeyValueStore<String, Order>) context.getStateStore(ORDER_STORE_NAME);
-        }
-
-        @Override
-        public void close() { }
-    }
-
-    public static class OrderPlacedTransformer extends OrderCommandEventTransformer<OrderPlaced> {
-        @Override
-        public Order transform(OrderPlaced orderPlaced) {
-            log.info("Looking up Order key={}", orderPlaced.getOrderId());
-            Order oldOrder = orderStore.get(orderPlaced.getOrderId());
-            if(oldOrder != null) {
-                log.warn("Received orderPlaced event={} for an existing order={}. Ignoring orderPlaced.");
-                // return old order
-                return oldOrder;
-            }
-            // did not exist. return new Order
-            DateTime now = DateTime.now();
-            Order order = Order.newBuilder()
-                    .setOrderId(orderPlaced.getOrderId())
-                    .setId(orderPlaced.getId())
-                    .setCustomerId(orderPlaced.getCustomerId())
-                    .setItem(orderPlaced.getItem())
-                    .setState("PLACED")
-                    .setCreated(now)
-                    .setUpdated(now)
-                    .build();
-            log.info("Received orderPlaced={}, order created={}", orderPlaced, order);
-            orderStore.put(order.getOrderId(), order);
-
-            return order;
-        }
-    }
-
-    public static class OrderRejectedTransformer extends OrderCommandEventTransformer<OrderRejected> {
-
-        @Override
-        public Order transform(OrderRejected orderRejected) {
-            log.info("Looking up Order key={}", orderRejected.getOrderId());
-            Order order = orderStore.get(orderRejected.getOrderId());
-            if(order == null) {
-                log.error("Could not find order with orderId={}. Dropping orderRejected={}", orderRejected.getOrderId(), orderRejected);
-                return null;
-            }
-            if(!order.getState().equals("PLACED")) {
-                log.error("Received orderRejected event={} but existing order has state={}, expected state=\"PLACED\". Ignoring orderRejected.",
-                        orderRejected, order.getState());
-                return null;
-            }
-
-            order.setId(orderRejected.getId());
-            order.setState("REJECTED");
-            order.setUpdated(DateTime.now());
-            log.info("Received orderRejected={}, order rejected={}", orderRejected, order);
-            orderStore.put(order.getOrderId(), order);
-
-            return order;
-        }
-    }
-
-    public static class OrderAcceptedTransformer extends OrderCommandEventTransformer<OrderAccepted> {
-        @Override
-        public Order transform(OrderAccepted orderAccepted) {
-            log.info("Looking up Order key={}", orderAccepted.getOrderId());
-            Order order = orderStore.get(orderAccepted.getOrderId());
-            if(order == null) {
-                log.error("Could not find order with orderId={}. Dropping orderAccepted={}", orderAccepted.getOrderId(), orderAccepted);
-                return null;
-            }
-            if(!order.getState().equals("PLACED")) {
-                log.error("Received orderAccepted event={} but existing order has state={}, expected state=\"PLACED\". Ignoring orderAccepted.",
-                        orderAccepted, order.getState());
-                return null;
-            }
-
-            order.setId(orderAccepted.getId());
-            order.setState("ACCEPTED");
-            order.setUpdated(DateTime.now());
-            log.info("Received orderAccepted={}, order accepted={}", orderAccepted, order);
-            orderStore.put(order.getOrderId(), order);
-
-            return order;
-        }
     }
 }
