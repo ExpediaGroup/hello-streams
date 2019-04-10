@@ -7,6 +7,13 @@ $ cd confluent-stack
 $ docker-compose up -d
 ```
 
+## Register Streams (requires confluent stack)
+```
+# from top level directory
+$ cd order-schemas
+$ make build
+```
+
 ## Build
 
 ```
