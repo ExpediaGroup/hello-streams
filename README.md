@@ -12,3 +12,4 @@ To provide insight into an opinionated solution using NodeJS, Java, GraphQL, Kaf
 
 - OpenJDK
 - Node + YARN
+- docker + docker-compose
