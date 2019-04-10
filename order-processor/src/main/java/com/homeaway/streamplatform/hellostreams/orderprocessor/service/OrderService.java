@@ -16,7 +16,6 @@ import java.util.List;
 public class OrderService {
     private static HashMap<String,String> VALID_INVENTORY = new HashMap<>();
     private CustomerDao customerDao;
-    private CustomerService customerService;
     private OrderDao orderDao;
 
     static {
@@ -33,8 +32,6 @@ public class OrderService {
 
         this.customerDao = customerDao;
         this.orderDao = orderDao;
-
-        this.customerService = new CustomerService(customerDao);
     }
 
     public List<Order> getOrders() {
@@ -45,7 +42,7 @@ public class OrderService {
         // Business Logic goes here
 
         // verify customerId is correct
-        Customer customer = customerService.getCustomer(customerId);
+        Customer customer = customerDao.getCustomer(customerId);
         Preconditions.checkState(customer != null, "customerId=%s is non-existent", customerId);
 
         // verify item is correct

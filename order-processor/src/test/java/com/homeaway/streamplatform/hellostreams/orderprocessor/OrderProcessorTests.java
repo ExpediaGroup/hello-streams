@@ -18,7 +18,6 @@ import java.io.IOException;
 import java.util.List;
 
 import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertThat;
 
 @GraphQLTest
@@ -50,9 +49,6 @@ public class OrderProcessorTests {
         ObjectNode vars = getPlaceOrderVars(NEW_CUSTOMER_ID, "Latte");
 
         // place Order
-        CustomerDao customerDao = new CustomerDao();
-        assertThat(customerDao.getCustomer(NEW_CUSTOMER_ID), is(nullValue()));
-
         GraphQLResponse response = perform("placeOrder.mutation", vars);
         assertThat(response.get("data.placeOrder.customerId", String.class), is(NEW_CUSTOMER_ID));
     }
