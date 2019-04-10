@@ -45,22 +45,27 @@ async function getOrders() {
   let orders = result.data.orders.map(order => {
    return {
       id: order.id,
-      customerId: order.customer.id,
+      customerId: order.customerId,
       item: order.item,
       state: order.state,
-      updated: order.updated
+      updated: order.updated,
+      created: order.created
     }
   });
 
  return orders;
 }
 
-async function getAvailableBeans() {
+// hack until supply-processor available
+/* async */ function getAvailableBeans() {
+  /*
   let result = await client.query({
     query: queries.GET_AVAILABLE_BEANS
   });
 
   return result.data.availableBeans;
+  */
+  return availableBeans;
 }
 
 async function createOrderPlaced(customerId, item) {
@@ -77,7 +82,9 @@ async function createOrderPlaced(customerId, item) {
   return { id: result.id, orderId: result.orderId, customerId: result.customerId, item: result.item, created: result.created };
 }
 
-async function createBeansSupplied(numBeans) {
+// hack until supply-processor in place
+/* async */ function createBeansSupplied(numBeans) {
+  /*
   let result = await client.mutate({
     mutation: queries.SUPPLY_BEAN,
     variables: {numBeans},
@@ -87,6 +94,12 @@ async function createBeansSupplied(numBeans) {
   });
 
   return result.data.supplyBeans
+  */
+  availableBeans = availableBeans + numBeans;
+  let id = uuidv4(); // uuid
+  let numBeansAdded = numBeans;
+  let created = createDate();
+  return { id, numBeansAdded, created };
 }
 
 function placeOrder(_, {customerId, item}) {
@@ -119,9 +132,9 @@ const resolvers = {
   },
   Customer: {
     async orders(customer) {
-       let orders = await getOrders()
+      let orders = await getOrders();
       return orders.filter( order => order.customerId===customer.id);
-    },
+    }
   },
   Order: {
     customer: (order) => {

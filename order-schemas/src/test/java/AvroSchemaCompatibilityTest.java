@@ -17,6 +17,7 @@ import org.apache.kafka.clients.admin.CreateTopicsResult;
 import org.apache.kafka.clients.admin.KafkaAdminClient;
 import org.apache.kafka.clients.admin.ListTopicsResult;
 import org.apache.kafka.clients.admin.NewTopic;
+import org.apache.kafka.common.config.TopicConfig;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -166,9 +167,15 @@ public class AvroSchemaCompatibilityTest {
                 log.info("[EnsureTopicCreated] Topic={} already exists.", sr.getStreamName());
                 return;
             }
-            log.info("[EnsureTopicCreated] Creating topic={} partitions={} replicationFactor={}", sr.getStreamName(), sr.getPartitions(), sr.getReplication());
-            CreateTopicsResult result = adminClient.createTopics(
-                    Collections.singletonList(new NewTopic(sr.getStreamName(), sr.getPartitions(), sr.getReplication())));
+            NewTopic newTopic = new NewTopic(sr.getStreamName(), sr.getPartitions(), sr.getReplication());
+            if(sr.isCompacted()) {
+                // set to compacted
+                newTopic.configs(Collections.singletonMap(TopicConfig.CLEANUP_POLICY_CONFIG, TopicConfig.CLEANUP_POLICY_COMPACT));
+            }
+            log.info("[EnsureTopicCreated] Creating topic={} partitions={} replicationFactor={} compaction={}",
+                    sr.getStreamName(), sr.getPartitions(), sr.getReplication(), sr.isCompacted());
+            CreateTopicsResult result = adminClient.createTopics(Collections.singletonList(newTopic));
+
             // wait for result
             result.values().get(sr.getStreamName()).get();
         } catch (Exception exception) {

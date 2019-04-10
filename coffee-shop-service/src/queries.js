@@ -28,12 +28,11 @@ module.exports = {
         query getOrders {
             orders {
                 id
-                customer {
-                    id
-                }
+                customerId
                 item
                 state
                 updated
+                created
             }
         }`,
     GET_AVAILABLE_BEANS: gql`query getAvailableBeans { availableBeans }`

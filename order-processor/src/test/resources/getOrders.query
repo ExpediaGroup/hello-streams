@@ -1,0 +1,11 @@
+query getOrders {
+  orders {
+    id
+    orderId
+    customerId
+    item
+    state
+    updated
+    created
+  }
+}

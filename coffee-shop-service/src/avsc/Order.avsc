@@ -1,0 +1,41 @@
+{
+  "type" : "record",
+  "name" : "Order",
+  "namespace" : "com.homeaway.streamplatform.hellostreams",
+  "doc" : "Orders",
+  "fields" : [ {
+    "name" : "id",
+    "type" : "string",
+    "doc" : "the unique id of this command event"
+  }, {
+    "name" : "orderId",
+    "type" : "string",
+    "doc" : "the unique orderId this command event applies to"
+  }, {
+    "name" : "customerId",
+    "type" : "string",
+    "doc" : "the id of the customer"
+  }, {
+    "name" : "item",
+    "type" : "string",
+    "doc" : "the item that is to be ordered"
+  }, {
+    "name" : "state",
+    "type" : "string",
+    "doc" : "the item that is to be ordered"
+  }, {
+    "name" : "created",
+    "type" : {
+      "type" : "long",
+      "logicalType" : "timestamp-millis"
+    },
+    "doc" : "the timestamp that this order was created"
+  }, {
+    "name" : "updated",
+    "type" : {
+      "type" : "long",
+      "logicalType" : "timestamp-millis"
+    },
+    "doc" : "the timestamp that this order was updated"
+  } ]
+}
