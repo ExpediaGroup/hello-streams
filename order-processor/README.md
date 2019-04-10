@@ -1,11 +1,18 @@
 # hello-streams :: orderprocessor
 
+## Start Confluent Stack
+```
+# from top level directory
+$ cd confluent-stack
+$ docker-compose up -d
+```
+
 ## Build
 
 ```
 # from top level directory
 $ cd orderprocessor
-$ ./mvnw clean install
+$ make build
 ```
 
 ## Run
