@@ -37,10 +37,6 @@ public class OrderService {
         this.customerService = new CustomerService(customerDao);
     }
 
-    public List<Order> getOrdersByCustomerId(String customerId) {
-        return orderDao.findOrderByCustomerId(customerId);
-    }
-
     public List<Order> getOrders() {
         return orderDao.findAllOrders();
     }

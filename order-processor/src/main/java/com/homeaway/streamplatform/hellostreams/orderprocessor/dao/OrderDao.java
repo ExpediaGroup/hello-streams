@@ -5,31 +5,37 @@ import com.google.common.collect.Lists;
 import com.homeaway.streamplatform.hellostreams.orderprocessor.OrderProcessorUtils;
 import com.homeaway.streamplatform.hellostreams.orderprocessor.model.Order;
 import com.homeaway.streamplatform.hellostreams.orderprocessor.model.OrderPlaced;
+import com.homeaway.streamplatform.hellostreams.orderprocessor.processor.OrderStreamProcessor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.avro.specific.SpecificRecord;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.clients.producer.RecordMetadata;
+import org.apache.kafka.streams.state.KeyValueIterator;
+import org.apache.kafka.streams.state.ReadOnlyKeyValueStore;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Repository;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import java.time.Duration;
 import java.time.Instant;
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
 
 @Repository
+@DependsOn("orderStreamProcessor")
 @Slf4j
 public class OrderDao {
-    // TODO - remove when tied to kafka persistence
-    private static final List<Order> TEST_ORDERS = Lists.newArrayList();
-
     private KafkaProducer<String, SpecificRecord> kafkaOrderEventProducer;
+    private final OrderStreamProcessor orderStreamProcessor;
+    private ReadOnlyKeyValueStore<String, com.homeaway.streamplatform.hellostreams.Order> orderStore;
 
     @Value("${order-processor.order.commands.stream}")
     private String orderCommandsStream;
@@ -37,20 +43,33 @@ public class OrderDao {
     @Value("${order-processor.write.wait.timeout}")
     private long writeWaitTimeout;
 
-    public OrderDao(@Autowired KafkaProducer<String, SpecificRecord> kafkaOrderEventProducer) {
+    public OrderDao(@Autowired KafkaProducer<String, SpecificRecord> kafkaOrderEventProducer,
+                    @Autowired OrderStreamProcessor orderStreamProcessor) {
         Preconditions.checkNotNull(kafkaOrderEventProducer, "kafkaOrderEventProducer cannot be null");
+        Preconditions.checkNotNull(orderStreamProcessor, "orderStreamProcessor cannot be null");
         this.kafkaOrderEventProducer = kafkaOrderEventProducer;
+        this.orderStreamProcessor = orderStreamProcessor;
     }
 
-    public List<Order> findOrderByCustomerId(String customerId) {
-        Preconditions.checkNotNull(customerId, "customerId cannot be null");
-        return TEST_ORDERS.stream()
-                .filter(order -> customerId.equals(order.getCustomerId()))
-                .collect(Collectors.toList());
+    @PostConstruct
+    public void init() {
+        orderStore = orderStreamProcessor.getOrderStore();
+    }
+
+    @PreDestroy
+    public void close() {
+        log.info("Shutting down kafkaOrderEventProducer");
+        kafkaOrderEventProducer.flush();
+        kafkaOrderEventProducer.close(Duration.ofSeconds(30));
     }
 
     public List<Order> findAllOrders() {
-        return TEST_ORDERS;
+        List<Order> orders = Lists.newArrayList();
+        try ( KeyValueIterator<String, com.homeaway.streamplatform.hellostreams.Order> rawOrders
+                      = orderStore.all() ) {
+            rawOrders.forEachRemaining( keyValue -> orders.add(toDTO(keyValue.value)) );
+        }
+        return orders;
     }
 
     public OrderPlaced placeOrder(String customerId, String item) {
@@ -61,23 +80,47 @@ public class OrderDao {
         com.homeaway.streamplatform.hellostreams.OrderPlaced orderPlacedEvent = createOrderPlaced(customerId, item);
         send(orderPlacedEvent);
 
-        // TODO - remove when orderDao is wired up
-        Order order = createDummyOrder(orderPlacedEvent.getId(), orderPlacedEvent.getOrderId(),
-                customerId, item,"PLACED");
-        log.info("Adding order to mock dao. order={}", order.toString());
-        TEST_ORDERS.add(order);
         return toDTO(orderPlacedEvent);
     }
 
-    private OrderPlaced toDTO(com.homeaway.streamplatform.hellostreams.OrderPlaced orderPlaced) {
-        OrderPlaced orderPlacedDTO = new OrderPlaced();
-        orderPlacedDTO.setId(orderPlaced.getId());
-        orderPlacedDTO.setOrderId(orderPlaced.getOrderId());
-        orderPlacedDTO.setCustomerId(orderPlaced.getCustomerId());
-        orderPlacedDTO.setItem(orderPlaced.getItem());
-        orderPlacedDTO.setCreated(ZonedDateTime.ofInstant(Instant.ofEpochMilli(orderPlaced.getCreated().getMillis()),
-                OrderProcessorUtils.UTC_ZONE_ID));
-        return orderPlacedDTO;
+    private void waitForWrite(String id, String orderId) {
+        // TODO - move hardcode wait time into property
+        long timeout = System.currentTimeMillis() + 30000;
+        boolean found;
+        do {
+            com.homeaway.streamplatform.hellostreams.Order order = orderStore.get(orderId);
+            found = order!=null
+                    && order.getId().equals(id);
+        } while(System.currentTimeMillis() < timeout && !found);
+    }
+
+    private Order toDTO(com.homeaway.streamplatform.hellostreams.Order orderAvro) {
+        Order order = new Order();
+
+        order.setOrderId(orderAvro.getOrderId());
+        order.setId(orderAvro.getId());
+        order.setCustomerId(orderAvro.getCustomerId());
+        order.setItem(orderAvro.getItem());
+        order.setState(orderAvro.getState());
+        order.setCreated(toDTOTime(orderAvro.getCreated()));
+        order.setUpdated(toDTOTime(orderAvro.getUpdated()));
+
+        return order;
+    }
+
+    private OrderPlaced toDTO(com.homeaway.streamplatform.hellostreams.OrderPlaced orderPlacedAvro) {
+        OrderPlaced orderPlaced = new OrderPlaced();
+        orderPlaced.setId(orderPlacedAvro.getId());
+        orderPlaced.setOrderId(orderPlacedAvro.getOrderId());
+        orderPlaced.setCustomerId(orderPlacedAvro.getCustomerId());
+        orderPlaced.setItem(orderPlacedAvro.getItem());
+        orderPlaced.setCreated(toDTOTime(orderPlacedAvro.getCreated()));
+        return orderPlaced;
+    }
+
+    private ZonedDateTime toDTOTime(DateTime avroTime) {
+        return ZonedDateTime.ofInstant(Instant.ofEpochMilli(avroTime.getMillis()),
+                OrderProcessorUtils.UTC_ZONE_ID);
     }
 
     private void send(com.homeaway.streamplatform.hellostreams.OrderPlaced orderPlacedEvent) {
@@ -90,6 +133,9 @@ public class OrderDao {
                     orderPlacedEvent));
             // sync wait for response
             resultFuture.get(writeWaitTimeout, TimeUnit.MILLISECONDS);
+
+            // read your writes!!
+            waitForWrite(orderPlacedEvent.getId(), orderPlacedEvent.getOrderId());
         } catch (Exception e) {
             throw new IllegalStateException("Could not write to kafka.", e);
         }
@@ -105,22 +151,7 @@ public class OrderDao {
                 .build();
     }
 
-    /** Used temporarily until we have persistence wired up */
-    @SuppressWarnings("SameParameterValue")
-    private static Order createDummyOrder(String id, String orderId, String customerId, String item, String state) {
-        Order order = new Order();
-        order.setId(id);
-        order.setOrderId(orderId);
-        order.setCustomerId(customerId);
-        order.setItem(item);
-        order.setState(state);
-        order.setUpdated(ZonedDateTime.now(OrderProcessorUtils.UTC_ZONE_ID));
-        order.setCreated(order.getUpdated());
-        return order;
-    }
-
     public void clearDB() {
-        // TODO - remove when tied to kafka query mechanism
-        TEST_ORDERS.clear();;
+        // TODO - implement
     }
 }

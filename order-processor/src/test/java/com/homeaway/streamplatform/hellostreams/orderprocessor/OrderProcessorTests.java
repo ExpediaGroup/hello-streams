@@ -60,7 +60,7 @@ public class OrderProcessorTests {
     @Test
     public void verifyOrderQuery() throws Exception {
         GraphQLResponse response = perform("getOrders.query", null);
-        assertThat(response.get( "data.orders", List.class).size(), is(0));
+        int currentSize = response.get( "data.orders", List.class).size();
 
         // create order
         ObjectNode vars = getPlaceOrderVars(NEW_CUSTOMER_ID, "Latte");
@@ -69,7 +69,7 @@ public class OrderProcessorTests {
 
         // verify order is in the list
         response = perform("getOrders.query", null);
-        assertThat(response.get( "data.orders", List.class).size(), is(1));
+        assertThat(response.get( "data.orders", List.class).size(), is(currentSize + 1));
         assertThat(response.get( "data.orders[0].item", String.class), is("Latte"));
         assertThat(response.get( "data.orders[0].state", String.class), is("PLACED"));
     }

@@ -17,6 +17,8 @@ import org.apache.kafka.streams.kstream.Consumed;
 import org.apache.kafka.streams.kstream.KStream;
 import org.apache.kafka.streams.kstream.Materialized;
 import org.apache.kafka.streams.state.KeyValueStore;
+import org.apache.kafka.streams.state.QueryableStoreTypes;
+import org.apache.kafka.streams.state.ReadOnlyKeyValueStore;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -24,6 +26,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
+import java.time.Duration;
 import java.util.Properties;
 
 @Component
@@ -182,6 +185,25 @@ public class OrderStreamProcessor {
 
         // start your engines
         orderStreamProcessor.start();
+
+        waitForStart();
+    }
+
+    public void waitForStart() {
+        // hardcode wait for 60 seconds
+        log.info("Waiting for orderStreamProcessor to start");
+        long timeout = System.currentTimeMillis() + 60000;
+        while(!orderStreamProcessor.state().isRunning() && System.currentTimeMillis() <= timeout) {
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException interruptedException) {
+                throw new IllegalStateException("Interruped", interruptedException);
+            }
+        }
+    }
+
+    public ReadOnlyKeyValueStore<String, Order> getOrderStore() {
+        return orderStreamProcessor.store(ORDER_STORE_NAME, QueryableStoreTypes.keyValueStore());
     }
 
     private Properties getKStreamConfig() {
@@ -189,13 +211,13 @@ public class OrderStreamProcessor {
         props.setProperty(StreamsConfig.APPLICATION_ID_CONFIG, orderProcessorAppId);
         props.setProperty(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
         props.setProperty(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());
-        props.setProperty(StreamsConfig.TOPOLOGY_OPTIMIZATION, StreamsConfig.OPTIMIZE);
         props.setProperty(StreamsConfig.COMMIT_INTERVAL_MS_CONFIG, "100");
         return props;
     }
 
     @PreDestroy
     public void stop() {
-        orderStreamProcessor.close();
+        log.info("Shutting down orderStreamProcessor");
+        orderStreamProcessor.close(Duration.ofSeconds(30));
     }
 }
