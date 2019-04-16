@@ -4,10 +4,19 @@
 - docker
 - docker-compose
 
+## Build
+```bash
+$ make build
+```
 
 ## To run Confluent stack
+```bash
+$ make run
 ```
-$ docker-compose up -d
+
+## To stop Confluent stack
+```bash
+$ make stop
 ```
 
 This will start up the following:
@@ -24,4 +33,4 @@ Creating control-center  ... done
 
 ## To verify Confluent stack
 
-Open a browser to [http://localhost:9021](http://localhost:9021)
+Open a browser to Confluent Command Center - [http://localhost:9021](http://localhost:9021)
