@@ -38,7 +38,7 @@ public class OrderCleanerTask {
     public void start() {
         // run now
         log.info("Starting order cleaner");
-        nextStartTime += cleanIntervalMillis;
+        nextStartTime = System.currentTimeMillis() + cleanIntervalMillis;
         runOnce();
         log.info("Order cleaner started");
     }

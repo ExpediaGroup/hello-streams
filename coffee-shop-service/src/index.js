@@ -39,7 +39,8 @@ function lookupCustomer(customerId) {
 async function getOrders() {
 
   let result = await client.query({
-    query: queries.GET_ORDERS
+    query: queries.GET_ORDERS,
+    fetchPolicy: "network-only"
   });
 
   let orders = result.data.orders.map(order => {
