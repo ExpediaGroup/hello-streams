@@ -2,6 +2,7 @@ package com.homeaway.streamplatform.hellostreams.orderprocessor.processor;
 
 import com.homeaway.streamplatform.hellostreams.Order;
 import com.homeaway.streamplatform.hellostreams.OrderAccepted;
+import com.homeaway.streamplatform.hellostreams.OrderDeleted;
 import com.homeaway.streamplatform.hellostreams.OrderPlaced;
 import com.homeaway.streamplatform.hellostreams.OrderRejected;
 import com.homeaway.streamplatform.hellostreams.orderprocessor.processor.StreamRegistry.StreamMetadata;
@@ -88,6 +89,9 @@ public class OrderStreamProcessor {
         if(orderCommandEvent instanceof OrderAccepted) {
             return aggregateOrderAccepted((OrderAccepted)orderCommandEvent, aggregate);
         }
+        if(orderCommandEvent instanceof OrderDeleted) {
+            return aggregateOrderDeleted((OrderDeleted)orderCommandEvent, aggregate);
+        }
         // else not expected
         log.warn("Unexpected commandEvent={} of type={}", orderCommandEvent, orderCommandEvent == null ? null : orderCommandEvent.getClass().getName());
         return aggregate;
@@ -150,6 +154,21 @@ public class OrderStreamProcessor {
         log.info("Updated order={}", order);
         return order;
     }
+
+    private Order aggregateOrderDeleted(OrderDeleted orderDeleted, Order oldOrder) {
+        // check to see if aggregate does exist
+        if( oldOrder == null) {
+            log.warn("Received orderDeleted event={} for a non-existent orderId. Ignoring orderDeleted.", orderDeleted);
+            // return null
+            return null;
+        }
+
+        // aggregate does exist, delete it!
+        log.info("Deleting order={}", oldOrder);
+        return null;
+    }
+
+
 
     private Order createOrder(OrderPlaced orderPlaced) {
         DateTime now = DateTime.now();

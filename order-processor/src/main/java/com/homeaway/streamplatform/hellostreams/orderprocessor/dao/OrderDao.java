@@ -88,12 +88,14 @@ public class OrderDao {
         long timeout = System.currentTimeMillis() + 30000;
         boolean found;
         do {
+            try { Thread.sleep(10); } catch (InterruptedException ignored) {}
             com.homeaway.streamplatform.hellostreams.Order order = orderStore.get(orderId);
             found = order!=null
                     && order.getId().equals(id);
         } while(System.currentTimeMillis() < timeout && !found);
     }
 
+    @SuppressWarnings("Duplicates")
     private Order toDTO(com.homeaway.streamplatform.hellostreams.Order orderAvro) {
         Order order = new Order();
 
@@ -149,9 +151,5 @@ public class OrderDao {
                 .setItem(item)
                 .setCreated(DateTime.now())
                 .build();
-    }
-
-    public void clearDB() {
-        // TODO - implement
     }
 }

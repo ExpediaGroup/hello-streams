@@ -6,7 +6,6 @@ import com.graphql.spring.boot.test.GraphQLResponse;
 import com.graphql.spring.boot.test.GraphQLTest;
 import com.graphql.spring.boot.test.GraphQLTestTemplate;
 import com.homeaway.streamplatform.hellostreams.orderprocessor.dao.CustomerDao;
-import com.homeaway.streamplatform.hellostreams.orderprocessor.dao.OrderDao;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,16 +29,12 @@ public class OrderProcessorTests {
     private GraphQLTestTemplate graphQLTemplate;
 
     @Resource
-    private OrderDao orderDao;
-
-    @Resource
     private CustomerDao customerDao;
 
     private ObjectMapper mapper = new ObjectMapper();
 
     @Before
     public void resetDao() {
-        orderDao.clearDB();
         customerDao.clearDB();
     }
 

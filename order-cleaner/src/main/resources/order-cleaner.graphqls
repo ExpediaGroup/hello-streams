@@ -1,0 +1,34 @@
+# declare our custom scalars
+scalar GraphQLDateTime
+
+# The order domain object
+type Order {
+    # The unique id of the order event that resulted in this order
+    id: ID!
+    # The unique id of the order
+    orderId: ID!
+    # The customer id for the order
+    customerId: String!
+    # The item that was ordered
+    item: String!
+    # The state of the order
+    state: String!
+    # The create datetime of the order
+    created: GraphQLDateTime!
+    # The updated datetime of the order
+    updated: GraphQLDateTime!
+}
+
+type Query {
+    # Query to determine next clean time
+    nextCleanTime: GraphQLDateTime!
+}
+
+type Mutation {
+    # Action for cleaning stale orders
+    cleanOrders : [Order!]!
+    # Action for deleting a single order
+    deleteOrder(
+    # The order to delete
+    orderId: String!) : Order!
+}
