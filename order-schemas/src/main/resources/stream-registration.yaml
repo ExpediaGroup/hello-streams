@@ -5,6 +5,7 @@ schema-registry: http://localhost:8081
 bootstrap-servers: PLAINTEXT_HOST://localhost:29092
 
 streams:
+  # order-processor schemas
   - stream-name: order-command-events
     partitions: 1
     replication: 1
@@ -23,4 +24,23 @@ streams:
     compatibility: FULL_TRANSITIVE
     types:
       - Order
+  # bean-processor schemas
+  - stream-name: bean-command-events
+    partitions: 1
+    replication: 1
+    compaction: False
+    multi-type: True
+    compatibility: FULL_TRANSITIVE
+    types:
+      - BeanSupplyRequested
+      - BeanSupplyRejected
+      - BeanSupplyAccepted
+  - stream-name: beans
+    partitions: 1
+    replication: 1
+    compaction: True
+    multi-type: False
+    compatibility: FULL_TRANSITIVE
+    types:
+      - BeanSupply
 

@@ -6,5 +6,5 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper=true)
 public class BeanSupplied extends CommandEvent {
-   private Integer numBeansAdded;
+   private int beansSupplied;
 }
