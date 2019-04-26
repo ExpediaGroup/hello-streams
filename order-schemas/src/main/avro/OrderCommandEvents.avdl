@@ -32,17 +32,29 @@ protocol OrderCommandEvents {
 
   /** Order Accepted events */
   record OrderAccepted {
-    /** the unique id of this command event */
+  /** the unique id of this command event */
     string id;
 
-    /** the unique orderId this command event applies to */
+  /** the unique orderId this command event applies to */
     string orderId;
 
-    /** the timestamp of this event */
+  /** the timestamp of this event */
     timestamp_ms created;
   }
 
-  /* Nouns / Domain Objects */
+  /** Order Deleted events */
+  record OrderDeleted {
+  /** the unique id of this command event */
+    string id;
+
+  /** the unique orderId this command event applies to */
+    string orderId;
+
+  /** the timestamp of this event */
+    timestamp_ms created;
+  }
+
+/* Nouns / Domain Objects */
   /** Orders */
   record Order {
     /** the unique id of this command event */

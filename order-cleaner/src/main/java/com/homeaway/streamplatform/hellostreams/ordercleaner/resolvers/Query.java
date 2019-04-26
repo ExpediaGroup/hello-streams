@@ -2,23 +2,26 @@ package com.homeaway.streamplatform.hellostreams.ordercleaner.resolvers;
 
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
 import com.google.common.base.Preconditions;
-import com.homeaway.streamplatform.hellostreams.orderprocessor.model.Order;
-import com.homeaway.streamplatform.hellostreams.orderprocessor.service.OrderService;
+import com.homeaway.streamplatform.hellostreams.ordercleaner.OrderCleanerUtils;
+import com.homeaway.streamplatform.hellostreams.ordercleaner.service.OrderCleanerTask;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
+import java.time.Instant;
+import java.time.ZonedDateTime;
 
 @SuppressWarnings("unused")
 @Component
 public class Query implements GraphQLQueryResolver {
-    private OrderService orderService;
+    private OrderCleanerTask orderCleanerTask;
 
-    public Query(@Autowired OrderService orderService) {
-        Preconditions.checkNotNull(orderService, "orderService cannot be null");
+    public Query(@Autowired OrderCleanerTask orderCleanerTask) {
+        Preconditions.checkNotNull(orderCleanerTask, "orderCleanerTask cannot be null");
 
-        this.orderService = orderService;
+        this.orderCleanerTask = orderCleanerTask;
     }
 
-    public List<Order> getOrders() { return orderService.getOrders(); }
+    public ZonedDateTime getNextCleanTime() {
+        return ZonedDateTime.ofInstant(Instant.ofEpochMilli(orderCleanerTask.getNextStartTime().toInstant().getMillis()), OrderCleanerUtils.UTC_ZONE_ID);
+    }
 }

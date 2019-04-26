@@ -4,4 +4,4 @@ build:
 	./mvnw clean install
 
 run:
-	java -jar target/order-processor-*-SNAPSHOT.jar
+	java -jar target/*-SNAPSHOT.jar

@@ -1,37 +1,6 @@
 # declare our custom scalars
 scalar GraphQLDateTime
 
-# **CommandEvent** the base interface for all command events.
-interface CommandEvent {
-    # The command event id
-    id: ID!
-    # The timestamp of this command event
-    created: GraphQLDateTime!
-}
-
-# **OrderCommandEvent** is the base interface for all order command events.
-interface OrderCommandEvent {
-    # The order event id
-    orderId: ID!
-}
-
-# "Command Events" ... strictly recordings of actions that have occurred.
-# Verbs in the past tense.
-
-# **OrderDeleted**: Signifies the order has been deleted
-type OrderDeleted implements OrderCommandEvent & CommandEvent {
-    # The command event id
-    id: ID!
-    # The order event id
-    orderId: ID!
-    # The actor id who deleted the order, may be a machine
-    actorId: String!
-    # The timestamp of this command event
-    created: GraphQLDateTime!
-}
-
-# Traditional Domain Objects (nouns)
-
 # The order domain object
 type Order {
     # The unique id of the order event that resulted in this order
@@ -57,9 +26,9 @@ type Query {
 
 type Mutation {
     # Action for cleaning stale orders
-    cleanOrders() : [Order!]!
+    cleanOrders : [Order!]!
     # Action for deleting a single order
     deleteOrder(
     # The order to delete
-    orderId:ID!) : Order!
+    orderId: String!) : Order!
 }
