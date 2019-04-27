@@ -10,7 +10,8 @@ import org.springframework.stereotype.Service;
 public class BeanService {
     private BeanDao beanDao;
 
-    public BeanService(@Autowired BeanDao beanDao) {
+    @Autowired
+    public BeanService(BeanDao beanDao) {
         Preconditions.checkNotNull(beanDao, "beanDao cannot be null");
 
         this.beanDao = beanDao;
@@ -20,7 +21,7 @@ public class BeanService {
         return beanDao.getNumBeans();
     }
 
-    public BeanSupplied supplyBeans(int numBeans) {
-        return beanDao.supplyBeans(numBeans);
+    public BeanSupplied supplyBeans(String actorId, int numBeans) {
+        return beanDao.supplyBeans(actorId, numBeans);
     }
 }

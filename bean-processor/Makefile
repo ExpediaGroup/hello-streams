@@ -3,5 +3,5 @@
 build:
 	./mvnw clean install
 
-run: build
+run:
 	java -jar target/bean-processor-*-SNAPSHOT.jar

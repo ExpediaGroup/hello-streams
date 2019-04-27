@@ -11,7 +11,8 @@ import org.springframework.stereotype.Component;
 public class Query implements GraphQLQueryResolver {
     private final BeanService beanService;
 
-    public Query(@Autowired BeanService beanService) {
+    @Autowired
+    public Query(BeanService beanService) {
         Preconditions.checkNotNull(beanService, "beanService cannot be null");
 
         this.beanService = beanService;

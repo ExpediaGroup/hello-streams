@@ -1,0 +1,26 @@
+{
+  "type" : "record",
+  "name" : "BeanSupplied",
+  "namespace" : "com.homeaway.streamplatform.hellostreams",
+  "doc" : "BeanSupplied",
+  "fields" : [ {
+    "name" : "id",
+    "type" : "string",
+    "doc" : "the unique id of this command event"
+  }, {
+    "name" : "actorId",
+    "type" : "string",
+    "doc" : "the unique id of the actor that orginated this command event"
+  }, {
+    "name" : "beansSupplied",
+    "type" : "int",
+    "doc" : "number of beans supplied"
+  }, {
+    "name" : "created",
+    "type" : {
+      "type" : "long",
+      "logicalType" : "timestamp-millis"
+    },
+    "doc" : "the timestamp of this event"
+  } ]
+}

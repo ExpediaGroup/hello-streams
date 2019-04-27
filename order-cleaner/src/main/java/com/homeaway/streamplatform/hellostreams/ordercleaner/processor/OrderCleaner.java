@@ -84,6 +84,7 @@ public class OrderCleaner {
         return readOnlyStore.get(orderId);
     }
 
+    @SuppressWarnings("Duplicates")
     @PostConstruct
     public synchronized void start() {
         // build the topology
@@ -100,6 +101,7 @@ public class OrderCleaner {
         waitForStart();
     }
 
+    @SuppressWarnings("Duplicates")
     private void waitForStart() {
         Optional<String> notRunning = streamProcessor.localThreadsMetadata().stream()
                 .map(m -> m.threadState())
@@ -137,6 +139,7 @@ public class OrderCleaner {
         readOnlyStore = null;
     }
 
+    @SuppressWarnings("Duplicates")
     private Properties getKStreamConfig() {
         Properties props = new Properties();
         props.setProperty(StreamsConfig.APPLICATION_ID_CONFIG, processorAppId);

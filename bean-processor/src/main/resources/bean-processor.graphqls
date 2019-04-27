@@ -39,5 +39,7 @@ type Mutation {
     # Action for supplying beans. An **BeanSupplied** command event is returned.
     supplyBeans(
     # the customerId placing this order
+    actorId: String!
+    # the num beans to supply
     numBeans: Int!) : BeansSupplied!
 }
