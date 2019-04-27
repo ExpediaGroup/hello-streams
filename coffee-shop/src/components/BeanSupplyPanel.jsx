@@ -11,11 +11,14 @@ import { withStyles } from '@material-ui/core/styles';
 import './BeanSupplyPanel.css'
 
 const GET_AVAILABLE_BEANS = gql`query getAvailableBeans { availableBeans }`;
-const SUPPLY_BEANS = gql`mutation supplyBeans($numBeans:Int!) { supplyBeans(numBeans: $numBeans) {
-  id
-  numBeansAdded
-  created
-}}`;
+const SUPPLY_BEANS = gql`mutation supplyBeans($numBeans:Int!, $actorId:String!) { 
+  supplyBeans(numBeans: $numBeans, actorId: $actorId) {
+    id
+    actorId
+    beansSupplied
+    created
+  }
+}`;
 
 const styles = theme => ({
   // no customizations
@@ -27,6 +30,7 @@ class BeanSupplyPanel extends React.Component {
     this.classes = props.classes;
     this.state = {
       numbeans: 10,
+      username: props.username
     };
   }
 
@@ -38,7 +42,7 @@ class BeanSupplyPanel extends React.Component {
         </div>
         <div className="supply-grid">
           <div className="supply-img"><img src={beans} className="supply-image" alt="coffee beans"/></div>
-          <Query query={GET_AVAILABLE_BEANS}>
+          <Query query={GET_AVAILABLE_BEANS} fetchPolicy={"network-only"} pollInterval={1000}>
             { ({data}) => {
                 var availableBeans = data.availableBeans;
                 console.log("[INFO] AVAILABLE_BEANS = "+ availableBeans);
@@ -47,7 +51,7 @@ class BeanSupplyPanel extends React.Component {
                 );
             }}
           </Query>
-          <Mutation mutation={SUPPLY_BEANS} variables={ {numBeans: this.state.numbeans} } refetchQueries={ [{query:GET_AVAILABLE_BEANS, variables:{}}] }>
+          <Mutation mutation={SUPPLY_BEANS} variables={ {numBeans: this.state.numbeans, actorId: this.state.username} } refetchQueries={ [{query:GET_AVAILABLE_BEANS, variables:{}, fetchPolicy:"no-cache"}] }>
               {(supplyBeans, { data }) => (
                 <div className="supply-action">
                   <Button variant="outlined" onClick={(event) => {
