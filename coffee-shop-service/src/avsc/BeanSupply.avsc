@@ -1,0 +1,29 @@
+{
+  "type" : "record",
+  "name" : "BeanSupply",
+  "namespace" : "com.homeaway.streamplatform.hellostreams",
+  "doc" : "BeanSupply",
+  "fields" : [ {
+    "name" : "id",
+    "type" : "string",
+    "doc" : "the unique id of this command event"
+  }, {
+    "name" : "beansAvailable",
+    "type" : "int",
+    "doc" : "current number of beans"
+  }, {
+    "name" : "created",
+    "type" : {
+      "type" : "long",
+      "logicalType" : "timestamp-millis"
+    },
+    "doc" : "the timestamp that this order was created"
+  }, {
+    "name" : "updated",
+    "type" : {
+      "type" : "long",
+      "logicalType" : "timestamp-millis"
+    },
+    "doc" : "the timestamp that this order was updated"
+  } ]
+}

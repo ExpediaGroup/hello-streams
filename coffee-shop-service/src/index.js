@@ -13,8 +13,11 @@ const client = new ApolloClient({
   uri: "http://localhost:5000/graphql",
 });
 
+const beanClient = new ApolloClient({
+  uri: "http://localhost:5100/graphql",
+});
+
 let customers = {};
-let availableBeans = 50;
 
 function createDate() {
   return new Date().toISOString();
@@ -57,16 +60,13 @@ async function getOrders() {
  return orders;
 }
 
-// hack until supply-processor available
-/* async */ function getAvailableBeans() {
-  /*
-  let result = await client.query({
+async  function getAvailableBeans() {
+
+  let result = await beanClient.query({
     query: queries.GET_AVAILABLE_BEANS
   });
 
   return result.data.availableBeans;
-  */
-  return availableBeans;
 }
 
 async function createOrderPlaced(customerId, item) {
@@ -84,31 +84,29 @@ async function createOrderPlaced(customerId, item) {
 }
 
 // hack until supply-processor in place
-/* async */ function createBeansSupplied(numBeans) {
-  /*
-  let result = await client.mutate({
+async function createBeansSupplied(numBeans, actorId) {
+  let result = await beanClient.mutate({
     mutation: queries.SUPPLY_BEAN,
-    variables: {numBeans},
+    variables: {numBeans, actorId},
     refetchQueries: [{
       query: queries.GET_AVAILABLE_BEANS, // cache rules everything around me
     }],
   });
 
   return result.data.supplyBeans
-  */
-  availableBeans = availableBeans + numBeans;
-  let id = uuidv4(); // uuid
-  let numBeansAdded = numBeans;
-  let created = createDate();
-  return { id, numBeansAdded, created };
+  // availableBeans = availableBeans + numBeans;
+  // let id = uuidv4(); // uuid
+  // let numBeansAdded = numBeans;
+  // let created = createDate();
+  // return { id, numBeansAdded, created };
 }
 
 function placeOrder(_, {customerId, item}) {
   return createOrderPlaced(customerId, item);
 }
 
-function supplyBeans(_, {numBeans}) {
-  return createBeansSupplied(numBeans);
+function supplyBeans(_, {numBeans, actorId}) {
+  return createBeansSupplied(numBeans, actorId);
 }
 
 const resolvers = {

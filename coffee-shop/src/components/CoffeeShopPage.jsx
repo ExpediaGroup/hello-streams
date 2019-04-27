@@ -36,7 +36,7 @@ class CoffeeShopPage extends React.Component {
             <BaristaPanel />
           </div>
           <div className="bottom-right">
-            <BeanSupplyPanel />
+            <BeanSupplyPanel username={this.state.username}/>
           </div>
         </div>
       </div>

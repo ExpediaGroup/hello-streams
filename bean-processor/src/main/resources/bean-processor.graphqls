@@ -1,0 +1,45 @@
+# declare our custom scalars
+scalar GraphQLDateTime
+
+# **CommandEvent** the base interface for all command events.
+interface CommandEvent {
+    # The command event id
+    id: ID!
+    # The timestamp of this command event
+    created: GraphQLDateTime!
+}
+
+# **BeanCommandEvent** the base interface for all command events.
+interface BeanCommandEvent {
+    # The actor id that originated this command event
+    actorId: ID!
+}
+
+# "Command Events" ... strictly recordings of actions that have occurred.
+# Verbs in the past tense.
+
+# **BeansSupplied**: the command event that signifies the beginning of an order.
+type BeansSupplied implements CommandEvent & BeanCommandEvent {
+    # The command event id
+    id: ID!
+    # The actor id that originated this command event
+    actorId: ID!
+    # The number of beans supplied
+    beansSupplied: Int!
+    # The timestamp of this command event
+    created: GraphQLDateTime!
+}
+
+type Query {
+    # Query to retrieve available beans
+    availableBeans: Int!
+}
+
+type Mutation {
+    # Action for supplying beans. An **BeanSupplied** command event is returned.
+    supplyBeans(
+    # the customerId placing this order
+    actorId: String!
+    # the num beans to supply
+    numBeans: Int!) : BeansSupplied!
+}
