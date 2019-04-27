@@ -14,11 +14,10 @@ const client = new ApolloClient({
 });
 
 const beanClient = new ApolloClient({
-  uri: "http://localhost:5001/graphql",
+  uri: "http://localhost:5100/graphql",
 });
 
 let customers = {};
-let availableBeans = 50;
 
 function createDate() {
   return new Date().toISOString();
@@ -85,10 +84,10 @@ async function createOrderPlaced(customerId, item) {
 }
 
 // hack until supply-processor in place
-async function createBeansSupplied(numBeans) {
+async function createBeansSupplied(numBeans, actorId) {
   let result = await beanClient.mutate({
     mutation: queries.SUPPLY_BEAN,
-    variables: {numBeans},
+    variables: {numBeans, actorId},
     refetchQueries: [{
       query: queries.GET_AVAILABLE_BEANS, // cache rules everything around me
     }],
@@ -106,8 +105,8 @@ function placeOrder(_, {customerId, item}) {
   return createOrderPlaced(customerId, item);
 }
 
-function supplyBeans(_, {numBeans}) {
-  return createBeansSupplied(numBeans);
+function supplyBeans(_, {numBeans, actorId}) {
+  return createBeansSupplied(numBeans, actorId);
 }
 
 const resolvers = {

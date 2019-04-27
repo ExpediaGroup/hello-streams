@@ -1,0 +1,75 @@
+@namespace("com.homeaway.streamplatform.hellostreams")
+protocol BeanSupplyCommandEvents {
+  /** BeanSupplyRequestedEvents */
+  record BeanSupplyRequested {
+    /** the unique id of this command event */
+    string id;
+
+    /** the unique orderId to be used for the order if it is created */
+    string orderId;
+
+    /** number of beans requested */
+    int beansRequested;
+
+    /** the timestamp that this order was placed */
+    timestamp_ms created;
+  }
+
+  /** BeanSupplyRejected events */
+  record BeanSupplyRejected {
+    /** the unique id of this command event */
+    string id;
+
+    /** the unique orderId this command event applies to */
+    string orderId;
+
+    /** number of beans rejected */
+    int beansRejected;
+
+    /** the timestamp of this event */
+    timestamp_ms created;
+  }
+
+  /** BeanSupplyAccepted events */
+  record BeanSupplyAccepted {
+    /** the unique id of this command event */
+    string id;
+
+    /** the unique orderId this command event applies to */
+    string orderId;
+
+    /** number of beans accepted */
+    int beansAccepted;
+
+    /** the timestamp of this event */
+    timestamp_ms created;
+  }
+
+  /** BeanSupplied */
+  record BeanSupplied {
+    /** the unique id of this command event */
+    string id;
+    /** the unique id of the actor that orginated this command event */
+    string actorId;
+    /** number of beans supplied */
+    int beansSupplied;
+    /** the timestamp of this event */
+    timestamp_ms created;
+  }
+
+/* Nouns / Domain Objects */
+  /** BeanSupply */
+  record BeanSupply {
+    /** the unique id of this command event */
+    string id;
+
+    /** current number of beans */
+    int beansAvailable;
+
+    /** the timestamp that this order was created */
+    timestamp_ms created;
+
+    /** the timestamp that this order was updated */
+    timestamp_ms updated;
+  }
+}

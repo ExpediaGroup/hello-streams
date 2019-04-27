@@ -12,12 +12,13 @@ import org.springframework.stereotype.Component;
 public class Mutation implements GraphQLMutationResolver {
     private final BeanService beanService;
 
-    public Mutation(@Autowired BeanService beanService) {
+    @Autowired
+    public Mutation(BeanService beanService) {
         Preconditions.checkNotNull(beanService, "beanService cannot be null");
         this.beanService = beanService;
     }
 
-    public BeanSupplied supplyBeans(Integer numBeans) {
-        return beanService.supplyBeans(numBeans);
+    public BeanSupplied supplyBeans(String actorId, int numBeans) {
+        return beanService.supplyBeans(actorId, numBeans);
     }
 }

@@ -1,0 +1,26 @@
+{
+  "type" : "record",
+  "name" : "BeanSupplyAccepted",
+  "namespace" : "com.homeaway.streamplatform.hellostreams",
+  "doc" : "BeanSupplyAccepted events",
+  "fields" : [ {
+    "name" : "id",
+    "type" : "string",
+    "doc" : "the unique id of this command event"
+  }, {
+    "name" : "orderId",
+    "type" : "string",
+    "doc" : "the unique orderId this command event applies to"
+  }, {
+    "name" : "beansAccepted",
+    "type" : "int",
+    "doc" : "number of beans accepted"
+  }, {
+    "name" : "created",
+    "type" : {
+      "type" : "long",
+      "logicalType" : "timestamp-millis"
+    },
+    "doc" : "the timestamp of this event"
+  } ]
+}

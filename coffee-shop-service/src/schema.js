@@ -40,8 +40,10 @@ export const typeDefs = gql`
   type BeansSupplied implements CommandEvent {
     "The command event id"
     id: ID!
+    "The actor id"
+    actorId: String!
     "Number of beans added"
-    numBeansAdded: Int!
+    beansSupplied: Int!
     "The timestamp of this command event"
     created: GraphQLDateTime!
   }
@@ -101,6 +103,9 @@ export const typeDefs = gql`
     "Action for supplying beans.  A **BeanSupplied** command event is returned."
     supplyBeans(
       "the number of beans to supply"
-      numBeans: Int!) : BeansSupplied!
+      numBeans: Int!
+      "the actorId"
+      actorId: String!
+    ) : BeansSupplied!
   }
 `;
