@@ -18,6 +18,7 @@ import static org.apache.kafka.clients.producer.ProducerConfig.*;
 /**
  * Configuration for kafka
  */
+@SuppressWarnings("Duplicates")
 @Configuration
 public class KafkaConfig {
     @Value("${order-processor.bootstrap.servers}")

@@ -110,11 +110,10 @@ public class BeanProcessor {
                 .aggregate(this::initBeanSupply,
                         this::aggregateBeanCommandEvent,
                         getMaterializedWith(beansMeta, BEAN_STORE_NAME))
-;
- /*               // write to domain events
+                // write to domain events
                 .toStream()
                 .to(beansMeta.getName(),getProducedWith(beansMeta));
-                */
+
 
         return builder;
     }

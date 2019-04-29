@@ -35,6 +35,7 @@ streams:
       - BeanSupplyRequested
       - BeanSupplyRejected
       - BeanSupplyAccepted
+      - BeanSupplied
   - stream-name: beans
     partitions: 1
     replication: 1
