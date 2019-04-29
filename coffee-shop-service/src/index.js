@@ -63,7 +63,8 @@ async function getOrders() {
 async  function getAvailableBeans() {
 
   let result = await beanClient.query({
-    query: queries.GET_AVAILABLE_BEANS
+    query: queries.GET_AVAILABLE_BEANS,
+    fetchPolicy: "network-only"
   });
 
   return result.data.availableBeans;
