@@ -45,7 +45,7 @@
         </dependency>
         <dependency>
             <groupId>com.homeaway.streamplatform.hellostreams</groupId>
-            <artifactId>order-schemas</artifactId>
+            <artifactId>stream-models</artifactId>
             <version>0.1-SNAPSHOT</version>
             <exclusions>
                 <exclusion>
