@@ -14,7 +14,7 @@ To provide insight into an opinionated solution using NodeJS, Java, GraphQL, Kaf
 
 ### Pre-Requisites:
 
-- OpenJDK
+- OpenJDK11 <-- really, you need this!!
 - Node + YARN
 - docker + docker-compose
 
