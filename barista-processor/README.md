@@ -1,6 +1,6 @@
-# Bean Processor 
+# Barista Processor 
 
-A processor for... beans
+A processor for processing accepted coffee orders. 
 
 ## How do I use this?
 
