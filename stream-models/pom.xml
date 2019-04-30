@@ -4,13 +4,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.homeaway.streamplatform.hellostreams</groupId>
-    <artifactId>order-schemas</artifactId>
+    <artifactId>stream-models</artifactId>
     <version>0.1-SNAPSHOT</version> <!-- http://semver.org -->
     <packaging>jar</packaging>
 
-    <name>order-schemas</name>
+    <name>stream-models</name>
 
-    <description>Streaming :: OrderCommandEvent</description>
+    <description>Stream Models for hello-streams</description>
 
     <properties>
         <stream-event-name>OrderCommandEvent</stream-event-name>
