@@ -1,0 +1,4 @@
+type Query {
+    # determing if barista is processing or not
+    isProcessing: Boolean!
+}

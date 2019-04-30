@@ -8,6 +8,7 @@ import com.homeaway.streamplatform.hellostreams.BeanSupplyRejected;
 import com.homeaway.streamplatform.hellostreams.BeanSupplyRequested;
 import com.homeaway.streamplatform.hellostreams.Order;
 import com.homeaway.streamplatform.hellostreams.OrderAccepted;
+import com.homeaway.streamplatform.hellostreams.OrderCompleted;
 import com.homeaway.streamplatform.hellostreams.OrderDeleted;
 import com.homeaway.streamplatform.hellostreams.OrderPlaced;
 import com.homeaway.streamplatform.hellostreams.OrderRejected;
@@ -186,6 +187,9 @@ public class OrderStreamProcessor {
         if(orderCommandEvent instanceof OrderAccepted) {
             return aggregateOrderAccepted((OrderAccepted)orderCommandEvent, aggregate);
         }
+        if(orderCommandEvent instanceof OrderCompleted) {
+            return aggregateOrderCompleted((OrderCompleted)orderCommandEvent, aggregate);
+        }
         if(orderCommandEvent instanceof OrderDeleted) {
             return aggregateOrderDeleted((OrderDeleted)orderCommandEvent, aggregate);
         }
@@ -249,6 +253,27 @@ public class OrderStreamProcessor {
         // we got here, oldOrder.state === "PLACED" ... safely change state
         Order order = updateOrderState(oldOrder, "ACCEPTED");
         log.info("Received orderAccepted={}", orderAccepted);
+        log.info("Updated order={}", order);
+        return order;
+    }
+
+    private Order aggregateOrderCompleted(OrderCompleted orderCompleted, Order oldOrder) {
+        // check to see if aggregate doesn't exist
+        if( oldOrder == null ) {
+            log.warn("Received orderCompleted event={} for a non-existent orderId. Ignoring orderCompleted.", orderCompleted);
+            // return null
+            return null;
+        }
+
+        // aggregate does exist, verify state
+        if( !"ACCEPTED".equals(oldOrder.getState()) ) {
+            log.warn("Received orderCompleted event={} for order in unexpected state={}. Ignoring orderCompleted.", orderCompleted, oldOrder.getState());
+            return oldOrder;
+        }
+
+        // we got here, oldOrder.state === "ACCEPTED" ... safely change state
+        Order order = updateOrderState(oldOrder, "COMPLETED");
+        log.info("Received orderCompleted={}", orderCompleted);
         log.info("Updated order={}", order);
         return order;
     }
