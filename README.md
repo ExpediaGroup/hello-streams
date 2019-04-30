@@ -13,3 +13,28 @@ To provide insight into an opinionated solution using NodeJS, Java, GraphQL, Kaf
 - OpenJDK
 - Node + YARN
 - docker + docker-compose
+
+### To Build everything:
+- Ensure confluent stack is running
+
+```bash
+make start-confluent
+```
+
+- Build everything
+
+```bash
+make build
+```
+
+### To Run everything:
+
+- Run each following line in a separate terminal window:
+```bash
+(cd order-processor && make run)
+(cd bean-processor && make run)
+(cd barista-processor && make run)
+(cd order-cleaner && make run)
+(cd coffee-shop-service && make run)
+(cd coffee-shop && make run)
+```
