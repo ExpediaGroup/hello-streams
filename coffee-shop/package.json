@@ -24,6 +24,6 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
-    "querystringify": "^2.0.0"
+    "querystringify": ">=2.0.0"
   }
 }
