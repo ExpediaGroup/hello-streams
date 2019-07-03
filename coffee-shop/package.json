@@ -10,13 +10,15 @@
     "eslint": "^4.18.2",
     "graphql": "^14.1.1",
     "handlebars": "^4.1.2",
+    "js-yaml": "^3.13.1",
     "querystringify": "^2.0.1",
     "react": "^16.5.2",
     "react-apollo": "^2.5.2",
     "react-dom": "^16.5.2",
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.5",
-    "react-widgets": "^4.4.5"
+    "react-widgets": "^4.4.5",
+    "webpack-dev-server": "^3.1.11"
   },
   "scripts": {
     "start": "react-scripts start",
