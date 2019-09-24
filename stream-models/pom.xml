@@ -207,7 +207,8 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>${jackson.version}</version>
+            <!-- FIXME! update this when something larger is available for jackson-dataformat-yaml -->
+            <version>2.9.9.2</version>
             <scope>test</scope>
         </dependency>
         <dependency>

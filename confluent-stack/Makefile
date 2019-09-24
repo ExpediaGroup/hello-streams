@@ -1,10 +1,7 @@
-.PHONY: run build stop
+.PHONY: start stop
 
-build:
-	docker-compose build
-
-run:
-	docker-compose up -d
+start:
+	confluent local start
 
 stop:
-	docker-compose stop
+	confluent local stop

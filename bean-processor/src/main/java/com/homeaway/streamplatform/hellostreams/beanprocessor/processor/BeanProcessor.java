@@ -134,9 +134,16 @@ public class BeanProcessor {
         Preconditions.checkState(beanSupply!=null, "Unexpected beanSupply==null");
         BeanSupplyRequested beanSupplyRequested = (BeanSupplyRequested) beanCommandEvent;
         int requestedBeans = beanSupplyRequested.getBeansRequested();
+
+        // TODO - BUG there is a race condition here ... if there are several beanRequests in a row,
+        // and the processor has not been able to process the beanSupplyAccepted request,
+        // beanSupply will not be updated appropriately
+        // Recommend - separating out state of beanAccepted from beanAdded and only send beanAccepted
+        // when confirmation of withdrawal has occurred
+
         if(beanSupply.getBeansAvailable() >= requestedBeans) {
             log.info("Accepting beanSupplyRequested event of {} beans", requestedBeans);
-            return buildBeanSupplyAccepted(beanSupplyRequested);
+            BeanSupplyAccepted supplyAccepted = buildBeanSupplyAccepted(beanSupplyRequested);
         }
         log.info("Rejecting beanSupplyRequested event of {} beans", requestedBeans);
         return buildBeanSupplyRejected(beanSupplyRequested);

@@ -2,7 +2,7 @@ schema-registry: http://localhost:8081
 
 # Note: we are outside of the docker network, so we use this so we get the right metadata returned to us
 # See: https://docs.confluent.io/current/kafka/multi-node.html
-bootstrap-servers: PLAINTEXT_HOST://localhost:29092
+bootstrap-servers: PLAINTEXT://localhost:9092
 
 streams:
   # order-processor schemas
@@ -44,4 +44,3 @@ streams:
     compatibility: FULL_TRANSITIVE
     types:
       - BeanSupply
-
