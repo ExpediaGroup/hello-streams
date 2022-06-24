@@ -16,7 +16,7 @@
     "babel-polyfill": "^6.26.0",
     "graphql": "^14.2.1",
     "graphql-iso-date": "^3.6.1",
-    "node-fetch": "^2.6.1",
+    "node-fetch": "^2.6.7",
     "uuid": "^3.3.2"
   },
   "devDependencies": {
